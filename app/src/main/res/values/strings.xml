@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">FoodNFit</string>
+
+    <!--    Login-->
+    <string name="singin">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_pass">Forgot password?</string>
+    <string name="or">OR</string>
+    <string name="sign_in_with">Sign In With</string>
+    <string name="sign_up_with">Sign Up With</string>
+    <string name="have_not_account">Don\'t have an account?</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm password</string>
 </resources>

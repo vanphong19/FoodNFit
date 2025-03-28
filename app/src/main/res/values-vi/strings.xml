@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FoodNFit</string>
+    <!--    Login-->
+    <string name="singin">Đăng nhập</string>
+    <string name="sign_up">Đăng ký</string>
+    <string name="email">Email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="forgot_pass">Quên mật khẩu?</string>
+    <string name="or">Hoặc</string>
+    <string name="sign_in_with">Đăng nhập bằng</string>
+    <string name="sign_up_with">Đăng ký bằng</string>
+    <string name="have_not_account">Không có tài khoản?</string>
+    <string name="have_account">Đã có tài khoản?</string>
+    <string name="name">Tên</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+
+</resources>
