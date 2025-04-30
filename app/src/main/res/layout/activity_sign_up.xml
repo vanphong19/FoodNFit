@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.SignUpActivity"
+    tools:context=".activity.SignUpActivity"
     >
 
     <ScrollView
@@ -179,7 +179,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="@string/singin"
+                android:text="@string/sign_in"
                 android:background="@drawable/bg_button_signin"
                 android:padding="14dp"
                 android:textSize="22sp"
@@ -198,7 +198,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1"
-                    app:dividerColor="9900a6ff"/>
+                    app:dividerColor="#9900a6ff"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -209,7 +209,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1"
-                    app:dividerColor="9900a6ff"/>
+                    app:dividerColor="#9900a6ff"/>
             </LinearLayout>
 
             <TextView
@@ -257,7 +257,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:textSize="16sp"
-                    android:text="@string/singin"
+                    android:text="@string/sign_in"
                     android:textColor="#00a6ff"/>
             </LinearLayout>
         </LinearLayout>

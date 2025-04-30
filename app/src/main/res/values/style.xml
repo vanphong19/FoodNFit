@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textStyle">bold</item>
+        <!-- Có thể thêm các thuộc tính khác như textSize, textColor, ... -->
+    </style>
+    <style name="OtpBoxStyle">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">@drawable/bg_otp_item</item> <!-- sử dụng selector ở trên -->
+        <item name="android:maxLength">1</item>
+        <item name="android:inputType">number</item>
+    </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@android:color/transparent</item> <!-- Màu sáng cho thanh toolbar -->
+        <item name="colorPrimaryDark">@android:color/white</item> <!-- Màu tối hơn cho thanh điều hướng -->
+        <item name="android:textColorPrimary">@color/toolbar_text_color</item> <!-- Màu chữ sáng cho các item -->
+    </style>
+    <style name="toolbarTextSize" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">24sp</item>
+    </style>
+</resources>

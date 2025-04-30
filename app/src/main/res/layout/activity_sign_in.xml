@@ -1,190 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activity.SignInActivity"
-    android:orientation="vertical"
-    android:padding="24dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/singin"
-        android:textSize="34sp"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold">
-    </TextView>
+>
 
+    <data>
+        <variable
+            name="loginViewModel"
+            type="com.vanphong.foodnfit.viewModel.LoginViewModel" />
+    </data>
     <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_email"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_height="match_parent"
+        tools:context=".activity.SignInActivity"
+        android:orientation="vertical"
+        android:padding="24dp">
 
-        <!-- Icon Email -->
-        <ImageView
-            android:id="@+id/icon_email"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="12dp"
-            android:src="@drawable/ic_email" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in"
+            android:textSize="34sp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold">
+        </TextView>
 
-        <!-- Ô nhập Email -->
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxBackgroundMode="none"
-            android:layout_gravity="center"
-            style="@style/TextAppearance.Material3.BodyLarge"
-            android:hint="@string/email"
-            android:paddingBottom="10dp"
-            android:layout_marginStart="5dp"
-            >
-            <com.google.android.material.textfield.TextInputEditText
+            android:background="@drawable/bg_email"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/icon_email"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/ic_email" />
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                app:boxBackgroundMode="none"
+                android:layout_gravity="center"
+                style="@style/TextAppearance.Material3.BodyLarge"
+                android:hint="@string/email"
+                android:paddingBottom="10dp"
+                android:layout_marginStart="5dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/edit_email"
+                    android:inputType="textEmailAddress"
+                    android:text="@{loginViewModel.email}"
+                    android:afterTextChanged="@{(text) -> loginViewModel.onEmailChanged(text)}">
 
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_email"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-
-        <!-- Icon Email -->
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="12dp"
-            android:src="@drawable/ic_password" />
-
-        <!-- Ô nhập Email -->
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxBackgroundMode="none"
-            android:layout_gravity="center"
-            style="@style/TextAppearance.Material3.BodyLarge"
-            android:hint="@string/password"
-            android:paddingBottom="10dp"
-            android:layout_marginStart="5dp"
-            >
-            <com.google.android.material.textfield.TextInputEditText
+            android:background="@drawable/bg_email"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/ic_password" />
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                app:boxBackgroundMode="none"
+                android:layout_gravity="center"
+                style="@style/TextAppearance.Material3.BodyLarge"
+                android:hint="@string/password"
+                android:paddingBottom="10dp"
+                android:layout_marginStart="5dp"
+                app:passwordToggleEnabled="true"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/edit_password"
+                    android:inputType="textPassword"
+                    android:text="@{loginViewModel.password}"
+                    android:afterTextChanged="@{(text) -> loginViewModel.onPasswordChanged(text)}">
 
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
-    <TextView
-        android:id="@+id/forgot_pass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="10dp"
-        android:text="@string/forgot_pass"
-        android:gravity="end"
-        />
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="@string/singin"
-        android:background="@drawable/bg_button_signin"
-        android:padding="14dp"
-        android:textSize="22sp"
-        android:gravity="center"
-        android:textColor="@color/white"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="48dp"
-        android:gravity="center"
-
-        android:layout_marginHorizontal="30dp">
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            app:dividerColor="9900a6ff"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp"
-            android:textSize="24sp"
-            android:text="@string/or"/>
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            app:dividerColor="9900a6ff"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="26dp"
-        android:text="@string/sign_in_with"
-        android:textSize="18sp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="24dp"
-        android:gravity="center">
-
-        <ImageView
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:src="@drawable/ic_google"
-            android:layout_marginEnd="10dp"/>
-
-        <ImageView
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:src="@drawable/ic_facebook"
-            android:layout_marginStart="10dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/have_not_account"
-            android:textSize="16sp"/>
+            android:text="Password is incorrect"
+            android:textColor="#FF0000"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:text="@string/sign_up"
             android:textColor="#00a6ff"
-            android:textSize="16sp" />
+            android:id="@+id/forgot_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:text="@string/forgot_pass"
+            android:gravity="end"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="@string/sign_in"
+            android:padding="14dp"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:background="@drawable/bg_button_signin"
+            android:onClick="@{() -> loginViewModel.onClickLogin()}"
+            android:textColor="@color/white"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="48dp"
+            android:gravity="center"
+
+            android:layout_marginHorizontal="30dp">
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                app:dividerColor="#9900a6ff"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:textSize="24sp"
+                android:text="@string/or"/>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                app:dividerColor="#9900a6ff"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="26dp"
+            android:text="@string/sign_in_with"
+            android:textSize="18sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/btn_google"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_google"
+                android:layout_marginEnd="10dp"/>
+
+            <ImageView
+                android:id="@+id/btn_facebook"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_facebook" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dont_have_account"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/tv_to_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:text="@string/sign_up"
+                android:textColor="#00a6ff"
+                android:textSize="16sp"
+                android:onClick="@{() -> loginViewModel.onClickSignUp()}"/>
+        </LinearLayout>
     </LinearLayout>
-
-
-</LinearLayout>
+</layout>

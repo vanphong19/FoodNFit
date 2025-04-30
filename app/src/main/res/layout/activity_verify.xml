@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    tools:context=".activity.VerifyActivity">
+
+    <data>
+        <variable
+            name="verifyViewModel"
+            type="com.vanphong.foodnfit.viewModel.OtpViewModel" />
+    </data>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tv_verify_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/verify_account"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            android:layout_marginTop="32dp"/>
+
+        <TextView
+            android:id="@+id/tv_verify_text"
+            android:layout_below="@id/tv_verify_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/verify_text"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:layout_marginEnd="32dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+            <LinearLayout
+                android:id="@+id/otp_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <!-- Dùng layout_weight chia đều -->
+                <com.vanphong.foodnfit.component.OtpEditText
+                    android:id="@+id/otp1"
+                    style="@style/OtpBoxStyle"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:layout_marginEnd="6dp"/>
+
+                <com.vanphong.foodnfit.component.OtpEditText
+                    android:id="@+id/otp2"
+                    style="@style/OtpBoxStyle"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:layout_marginEnd="6dp"/>
+
+                <com.vanphong.foodnfit.component.OtpEditText
+                    android:id="@+id/otp3"
+                    style="@style/OtpBoxStyle"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:layout_marginEnd="6dp"/>
+
+                <com.vanphong.foodnfit.component.OtpEditText
+                    android:id="@+id/otp4"
+                    style="@style/OtpBoxStyle"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:layout_marginEnd="6dp"/>
+
+                <com.vanphong.foodnfit.component.OtpEditText
+                    android:id="@+id/otp5"
+                    style="@style/OtpBoxStyle"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:layout_marginEnd="6dp"/>
+
+                <com.vanphong.foodnfit.component.OtpEditText
+                    android:id="@+id/otp6"
+                    style="@style/OtpBoxStyle"
+                    android:maxLength="1"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cornerRadius="10dp"
+                android:text="@string/verify"
+                android:backgroundTint="#00a6ff"
+                android:id="@+id/btnVerify"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_centerHorizontal="true">
+
+                    <TextView
+                        android:id="@+id/have_not_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/have_not_code"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/resend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/resend"
+                        android:textStyle="bold"
+                        android:layout_marginStart="4dp"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

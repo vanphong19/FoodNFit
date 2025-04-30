@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="md_theme_inverseOnSurface_mediumContrast">#EDF2EC</color>
+    <color name="md_theme_onSurface_mediumContrast">#171D1A</color>
+    <color name="md_theme_onSurfaceVariant">#404943</color>
+    <color name="toolbar_text_color">#000000</color>
+    <color name="color_carbs">#33FF00</color>
+    <color name="color_protein">#F45C21</color>
+    <color name="color_fat">#FFCCFF</color>
 </resources>

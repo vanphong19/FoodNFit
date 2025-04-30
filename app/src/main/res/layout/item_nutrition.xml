@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+<!--    <data>-->
+<!--        <variable-->
+<!--            name="nutritionData"-->
+<!--            type="com.vanphong.foodnfit.Model.FoodItem" />-->
+<!--    </data>-->
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:elevation="8dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <ImageView
+                    android:id="@+id/img_nutrition"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_calories"/>
+                <TextView
+                    android:id="@+id/tv_nutrition_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Calory gained"
+                    android:textSize="24sp"
+                    android:layout_marginStart="5dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_nutrition_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="10"
+                android:layout_marginTop="10dp"
+                android:textSize="40sp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

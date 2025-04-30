@@ -13,11 +13,29 @@
         android:theme="@style/Theme.FoodNFit"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.SignUpActivity"
-            android:exported="false" />
+            android:name=".activity.VerifyActivity"
+            android:exported="true" />
         <activity
-            android:name=".Activity.SignInActivity"
-            android:exported="false" />
+            android:name=".activity.OnboardingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.SetupActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.FoodDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.SignUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.SignInActivity"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

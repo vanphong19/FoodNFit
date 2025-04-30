@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Màu chính của đường kẻ dọc (hồng nhạt trong hình) -->
+    <solid android:color="#FFCDD2"/> <!-- Màu hồng nhạt, điều chỉnh nếu cần -->
+
+    <!-- Kích thước của đường kẻ -->
+    <size
+        android:width="3dp"
+        android:height="24dp"/> <!-- Chiều cao lớn hơn chiều cao track một chút -->
+
+    <!-- Bo góc nhẹ cho đẹp -->
+    <corners android:radius="1dp"/>
+
+    <!-- Thêm viền nếu muốn (tùy chọn, giống trong hình) -->
+    <stroke android:width="0.5dp" android:color="#E57373" /> <!-- Viền màu đậm hơn -->
+
+</shape>

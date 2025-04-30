@@ -2,7 +2,7 @@
     <string name="app_name">FoodNFit</string>
 
     <!--    Login-->
-    <string name="singin">Sign In</string>
+    <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -10,8 +10,87 @@
     <string name="or">OR</string>
     <string name="sign_in_with">Sign In With</string>
     <string name="sign_up_with">Sign Up With</string>
-    <string name="have_not_account">Don\'t have an account?</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
     <string name="have_account">Already have an account?</string>
     <string name="name">Name</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="password_incorrect">Password is incorrect</string>
+    <string name="verify_account">Verify Account</string>
+    <string name="verify_text">Verify your account by entering verification code we sent to</string>
+    <string name="verify">Verify</string>
+    <string name="have_not_code">Didn\'t receive the code?</string>
+    <string name="resend">Resend</string>
+
+    <!--    menu-->
+    <string name="home_menu">Home</string>
+    <string name="food_menu">Food</string>
+    <string name="exercise_menu">Exercise</string>
+    <string name="statistic_menu">Statistic</string>
+    <string name="setting_menu">Setting</string>
+    <string name="profile_menu">Profile</string>
+    <string name="search_menu">Search</string>
+    <string name="filter_menu">Filter</string>
+    <string name="view_menu">View</string>
+
+
+    <!--    setup-->
+    <string name="what_name">What is your name?</string>
+    <string name="your_birth">Your date of birth?</string>
+    <string name="your_gender">What is your gender?</string>
+    <string name="your_tall">How tall are you?</string>
+    <string name="your_weight">Current weight?</string>
+    <string name="personalize_experience">We use this data to provide you with the best possible experience while using the app</string>
+    <string name="input_name">Input your name</string>
+    <string name="your_goal">What is your goal?</string>
+    <string name="lose_weight">Lose weight</string>
+    <string name="gain_weight">Gain weight</string>
+    <string name="stay_healthy">Stay healthy</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <!--    setting-->
+    <string name="setting_display">Display</string>
+    <string name="change_language">App language</string>
+    <string name="notification_title">Notification</string>
+    <string name="notification_reminder">Reminder</string>
+    <string name="security_title">Security</string>
+    <string name="reset_password">Reset password</string>
+    <string name="feedback_title">Feedback</string>
+    <!--    person-->
+    <string name="account">Account</string>
+    <string name="help">Help</string>
+    <string name="your_info">Your information</string>
+    <string name="age">Age</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="gender">Gender</string>
+    <!--    menu-home-->
+    <string name="activity">Activity</string>
+    <string name="calo_nutrition">Calories &amp; Nutrition</string>
+    <string name="intake">Intake</string>
+    <string name="burned">Burned</string>
+    <string name="required">Required</string>
+    <string name="movement">Movement</string>
+    <string name="step">Step</string>
+    <string name="distance">Distance</string>
+    <string name="detail">Detail</string>
+    <string name="drink_water">Drink water</string>
+    <string name="bmi">Body Mask Index (BMI)</string>
+    <!--    bmi-->
+    <string name="underweight">Underweight</string>
+    <string name="normal">Normal</string>
+    <string name="overweight">Overweight</string>
+    <string name="severe_obesity">Severe obesity</string>
+    <string name="morbid_obesity">Morbid obesity</string>
+    <string name="super_obesity">Super obesity</string>
+    <!--    nutrition-->
+    <string name="carbs">Carbs</string>
+    <string name="fat">Fat</string>
+    <string name="protein">Protein</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="recipe">Recipe</string>
+    <string name="nutrients">Nutrients</string>
+    <string name="food_detail">Food Detail</string>
+    <!--    food-->
+    <string name="more_detail">More details</string>
+    <string name="add_food">Add food</string>
 </resources>

@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">FoodNFit</string>
     <!--    Login-->
-    <string name="singin">Đăng nhập</string>
+    <string name="sign_in">Đăng nhập</string>
     <string name="sign_up">Đăng ký</string>
     <string name="email">Email</string>
     <string name="password">Mật khẩu</string>
@@ -10,9 +10,87 @@
     <string name="or">Hoặc</string>
     <string name="sign_in_with">Đăng nhập bằng</string>
     <string name="sign_up_with">Đăng ký bằng</string>
-    <string name="have_not_account">Không có tài khoản?</string>
+    <string name="dont_have_account">Bạn chưa có tài khoản?</string>
     <string name="have_account">Đã có tài khoản?</string>
     <string name="name">Tên</string>
     <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="password_incorrect">Mật khẩu không đúng</string>
+    <string name="verify_account">Xác minh tài khoản</string>
+    <string name="verify_text">Xác minh tài khoản của bạn bằng cách nhập mã xác minh chúng tôi đã gửi đến</string>
+    <string name="verify">Xác nhận</string>
+    <string name="have_not_code">Không nhận được mã?</string>
+    <string name="resend">Gửi lại</string>
 
+    <!--    menu-->
+    <string name="home_menu">Trang chủ</string>
+    <string name="food_menu">Bữa ăn</string>
+    <string name="exercise_menu">Luyện tập</string>
+    <string name="statistic_menu">Thống kê</string>
+    <string name="setting_menu">Cài đặt</string>
+    <string name="profile_menu">Cá nhân</string>
+    <string name="search_menu">Tìm kiếm</string>
+    <string name="filter_menu">Lọc</string>
+    <string name="view_menu">Chế độ xem</string>
+
+    <!--    setup-->
+    <string name="what_name">Bạn tên gì?</string>
+    <string name="your_birth">Ngày sinh của bạn?</string>
+    <string name="your_gender">Giới tính của bạn?</string>
+    <string name="your_tall">Bạn cao bao nhiêu?</string>
+    <string name="your_weight">Cân nặng hiện tại?</string>
+    <string name="personalize_experience">Chúng tôi sử dụng dữ liệu này để mang đến cho bạn trải nghiệm tốt nhất khi sử dụng ứng dụng</string>
+    <string name="input_name">Nhập tên của bạn</string>
+    <string name="your_goal">Mục tiêu của bạn?</string>
+    <string name="lose_weight">Giảm cân</string>
+    <string name="gain_weight">Tăng câm</string>
+    <string name="stay_healthy">Giữ sức khỏe</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <!--    setting-->
+    <string name="setting_display">Giao diện</string>
+    <string name="change_language">Ngôn ngữ ứng dụng</string>
+    <string name="notification_title">Thông báo</string>
+    <string name="notification_reminder">Nhắc nhở</string>
+    <string name="security_title">Bảo mật</string>
+    <string name="reset_password">Đổi mật khẩu</string>
+    <string name="feedback_title">Phản hồi</string>
+
+    <!--    person-->
+    <string name="account">Tài khoản</string>
+    <string name="help">Giúp đỡ</string>
+    <string name="your_info">Thông tin của bạn</string>
+    <string name="age">Tuổi</string>
+    <string name="height">Chiều cao</string>
+    <string name="weight">Cân nặng</string>
+    <string name="gender">Giới tính</string>
+    <!--    menu-home-->
+    <string name="activity">Hoạt động</string>
+    <string name="calo_nutrition">Calo &amp; Dinh dưỡng</string>
+    <string name="intake">Nạp vào</string>
+    <string name="burned">Tiêu hao</string>
+    <string name="required">Cần nạp</string>
+    <string name="movement">Di chuyển</string>
+    <string name="step">Bước</string>
+    <string name="distance">Quãng đường</string>
+    <string name="detail">Chi tiết</string>
+    <string name="drink_water">Uống nước</string>
+    <string name="bmi">Chỉ số khối cơ thể (BMI)</string>
+    <!--    bmi-->
+    <string name="underweight">Thiếu cân</string>
+    <string name="normal">Bình thường</string>
+    <string name="overweight">Thừa cân</string>
+    <string name="severe_obesity">Béo phì loại I</string>
+    <string name="morbid_obesity">Béo phì loại II</string>
+    <string name="super_obesity">Béo phì loại III</string>
+    <!--    nutrition-->
+    <string name="carbs">Carbs</string>
+    <string name="fat">Chất béo</string>
+    <string name="protein">Chất đạm</string>
+    <string name="ingredients">Thành phần</string>
+    <string name="recipe">Công thức</string>
+    <string name="nutrients">Chất dinh dưỡng</string>
+    <string name="food_detail">Chi tiết món ăn</string>
+    <!--    food-->
+    <string name="more_detail">Xem chi tiết</string>
+    <string name="add_food">Thêm món</string>
 </resources>
