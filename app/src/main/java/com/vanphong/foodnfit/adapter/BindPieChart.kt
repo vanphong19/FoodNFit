@@ -1,6 +1,5 @@
 package com.vanphong.foodnfit.adapter
 
-import android.content.Context
 import android.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
