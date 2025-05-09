@@ -31,6 +31,8 @@
     <string name="search_menu">Tìm kiếm</string>
     <string name="filter_menu">Lọc</string>
     <string name="view_menu">Chế độ xem</string>
+    <string name="meal_reminder">Nhắc nhở ăn uống</string>
+    <string name="exercise_reminder">Nhắc nhở luyện tập</string>
 
     <!--    setup-->
     <string name="what_name">Bạn tên gì?</string>
@@ -54,7 +56,8 @@
     <string name="security_title">Bảo mật</string>
     <string name="reset_password">Đổi mật khẩu</string>
     <string name="feedback_title">Phản hồi</string>
-
+    <string name="vietnamese">Tiếng Việt</string>
+    <string name="english">Tiếng Anh</string>
     <!--    person-->
     <string name="account">Tài khoản</string>
     <string name="help">Giúp đỡ</string>
@@ -75,6 +78,11 @@
     <string name="detail">Chi tiết</string>
     <string name="drink_water">Uống nước</string>
     <string name="bmi">Chỉ số khối cơ thể (BMI)</string>
+    <!--    menu_food-->
+    <string name="day_meal">Bữa ăn trong ngày</string>
+    <string name="forward">&gt;</string> <!-- > -->
+    <string name="backward">&lt;</string> <!-- < -->
+    <string name="logs">Nhật ký</string>
     <!--    bmi-->
     <string name="underweight">Thiếu cân</string>
     <string name="normal">Bình thường</string>
@@ -83,14 +91,68 @@
     <string name="morbid_obesity">Béo phì loại II</string>
     <string name="super_obesity">Béo phì loại III</string>
     <!--    nutrition-->
-    <string name="carbs">Carbs</string>
+    <string name="calories_gained">Calo đã nạp</string>
+    <string name="calories">Calories</string>
+    <string name="carbs">Tinh bột</string>
     <string name="fat">Chất béo</string>
     <string name="protein">Chất đạm</string>
+    <string name="total_protein">Tổng lượng đạm</string>
+    <string name="total_fat">Tổng lượng chất béo</string>
+    <string name="total_carb">Tổng lượng tinh bột</string>
     <string name="ingredients">Thành phần</string>
     <string name="recipe">Công thức</string>
     <string name="nutrients">Chất dinh dưỡng</string>
     <string name="food_detail">Chi tiết món ăn</string>
+    <string name="breakfast_log">Nhật ký bữa sáng</string>
+    <string name="lunch_log">Nhật ký bữa trưa</string>
+    <string name="dinner_log">Nhật ký bữa tối</string>
+    <string name="breakfast">Bữa sáng</string>
+    <string name="lunch">Bữa trưa</string>
+    <string name="dinner">Bữa tối</string>
+    <string name="snack">Bữa phụ</string>
+    <string name="snack_log">Nhật ký bữa phụ</string>
+
     <!--    food-->
     <string name="more_detail">Xem chi tiết</string>
     <string name="add_food">Thêm món</string>
+    <string name="kcal">kcal</string>
+    <string name="g">g</string>
+    <string name="selected_meal">Món ăn được chọn</string>
+    <string name="all_meal">Tất cả món ăn</string>
+    <string name="zero">0</string>
+    <string name="food">Món</string>
+    <string name="add_meal">Thêm bữa ăn</string>
+    <!--    calendar-->
+    <string name="sun">SUN</string>
+    <string name="mon">MON</string>
+    <string name="tue">TUE</string>
+    <string name="wed">WED</string>
+    <string name="thu">THU</string>
+    <string name="fri">FRI</string>
+    <string name="sat">SAT</string>
+    <!--    exercise-->
+    <string name="minute">Phút</string>
+    <string name="hour">Giờ</string>
+    <string name="kcal_burnt">Kcal đốt cháy</string>
+    <string name="em_dash">	\u2014 </string>
+    <string name="reps">Lần</string>
+    <string name="sets">Hiệp</string>
+    <string name="seconds">Giây</string>
+    <string name="confirm_exercise">Hoàn thành luyện tập</string>
+    <string name="confirm_content">Bạn có chắc chắn muốn đánh dấu bài tập là đã hoàn thành? Hành động này sẽ được lưu lại trong lịch sử luyện tập của bạn</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+    <string name="add_exercise">Thêm bài tập</string>
+    <string name="description">Mô tả: </string>
+    <string name="type">Loại: </string>
+    <string name="level">Mức độ: </string>
+    <string name="muscleGroup">Nhóm cơ chính: </string>
+    <string name="equipment">Thiết bị: </string>
+    <string name="note">Lưu ý: </string>
+    <string name="find_exercise">Tìm kiếm bài tập</string>
+    <string name="all_exercise">Tất cả bài tập</string>
+    <string name="selected_exercise">Bài tập được chọn</string>
+    <string name="make_plan">Lên kế hoach</string>
+    <string name="stay_active">Hãy năng động lên – buổi tập hôm nay đang chờ bạn đấy!</string>
+    <string name="information">Thông tin</string>
 </resources>

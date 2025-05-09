@@ -1,6 +1,7 @@
 package com.vanphong.foodnfit.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ import com.vanphong.foodnfit.Model.FoodItem
 import com.vanphong.foodnfit.R
 import de.hdodenhof.circleimageview.CircleImageView
 
-class FoodAdapter(private var isGridView: Boolean) :
+class FoodAdapter(private var isGridView: Boolean, private val onAddFoodClick: (FoodItem) -> Unit) :
     ListAdapter<FoodItem, RecyclerView.ViewHolder>(FoodDiffCallback()) {
 
     companion object {
@@ -28,7 +29,7 @@ class FoodAdapter(private var isGridView: Boolean) :
         val tvFoodName: TextView = itemView.findViewById(R.id.tv_food_name)
         val tvSizeCalo: TextView = itemView.findViewById(R.id.tv_recipe_calo)
         val lnMoreDetail: ImageView = itemView.findViewById(R.id.btn_more_detail)
-        val tvAddFood: CircleImageView = itemView.findViewById(R.id.btn_add)
+        val btnAddFood: CircleImageView = itemView.findViewById(R.id.btn_add)
     }
 
     // List/Vertical ViewHolder
@@ -65,10 +66,16 @@ class FoodAdapter(private var isGridView: Boolean) :
                 holder.tvFoodName.text = food.name
                 holder.tvSizeCalo.text = recipeCalo
                 holder.imgFood.setImageResource(R.drawable.thit_bo) // TODO: load image from URL later
+                holder.btnAddFood.setOnClickListener {
+                    onAddFoodClick(food)
+                }
             }
             is FoodListViewHolder -> {
                 holder.tvFoodName.text = food.name
                 holder.tvSizeCalo.text = recipeCalo
+                holder.btnAddFood.setOnClickListener{
+                    onAddFoodClick(food)
+                }
             }
         }
     }

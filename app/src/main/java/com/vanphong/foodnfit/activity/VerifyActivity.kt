@@ -11,12 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import com.vanphong.foodnfit.BaseActivity
 import com.vanphong.foodnfit.R
 import com.vanphong.foodnfit.component.OtpEditText
 import com.vanphong.foodnfit.databinding.ActivityVerifyBinding
 import com.vanphong.foodnfit.viewModel.OtpViewModel
 
-class VerifyActivity : AppCompatActivity() {
+class VerifyActivity : BaseActivity() {
     private lateinit var binding: ActivityVerifyBinding
     private val viewModel: OtpViewModel by viewModels()
     private lateinit var otpFields: List<OtpEditText>

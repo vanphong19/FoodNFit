@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.vanphong.foodnfit.Fragment.HomeFragment"
+        android:name="com.vanphong.foodnfit.fragment.HomeFragment"
         android:label="@string/home_menu"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/food"
-        android:name="com.vanphong.foodnfit.Fragment.FoodFragment"
+        android:name="com.vanphong.foodnfit.fragment.FoodFragment"
         android:label="@string/food_menu"
         tools:layout="@layout/fragment_food" />
     <fragment
         android:id="@+id/exercise"
-        android:name="com.vanphong.foodnfit.Fragment.ExerciseFragment"
+        android:name="com.vanphong.foodnfit.fragment.ExerciseFragment"
         android:label="@string/exercise_menu"
         tools:layout="@layout/fragment_exercise" />
     <fragment
         android:id="@+id/statistic"
-        android:name="com.vanphong.foodnfit.Fragment.StatisticFragment"
+        android:name="com.vanphong.foodnfit.fragment.StatisticFragment"
         android:label="@string/statistic_menu"
         tools:layout="@layout/fragment_statistic" />
     <fragment
         android:id="@+id/profile"
-        android:name="com.vanphong.foodnfit.Fragment.PersonFragment"
+        android:name="com.vanphong.foodnfit.fragment.PersonFragment"
         android:label="@string/profile_menu"
         tools:layout="@layout/fragment_person" />
 </navigation>

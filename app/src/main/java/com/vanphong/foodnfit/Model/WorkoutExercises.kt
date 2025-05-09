@@ -5,10 +5,16 @@ import java.time.LocalDateTime
 data class WorkoutExercises (
     val id: Int,
     val exerciseId: Int,
-    val sets: Int,
-    val reps: Int,
-    val restTimeSeconds: Int,
+    val name: String,
+    val imageUrl: String,
+    val sets: Int?,
+    val reps: Int?,
+    val restTimeSeconds: Int?,
+    val minute: Int?,
+    val caloriesBurnt: Float,
     val startTime: LocalDateTime?,
-    val endTimeL: LocalDateTime?,
-    val planId: Int
+    val endTime: LocalDateTime?,
+    val planId: Int,
+    val type: String,
+    val isCompleted: Boolean
 )

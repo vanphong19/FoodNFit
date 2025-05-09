@@ -31,6 +31,8 @@
     <string name="search_menu">Search</string>
     <string name="filter_menu">Filter</string>
     <string name="view_menu">View</string>
+    <string name="meal_reminder">Meal reminder</string>
+    <string name="exercise_reminder">Exercise reminder</string>
 
 
     <!--    setup-->
@@ -55,6 +57,8 @@
     <string name="security_title">Security</string>
     <string name="reset_password">Reset password</string>
     <string name="feedback_title">Feedback</string>
+    <string name="vietnamese">Vietnamese</string>
+    <string name="english">English</string>
     <!--    person-->
     <string name="account">Account</string>
     <string name="help">Help</string>
@@ -75,6 +79,11 @@
     <string name="detail">Detail</string>
     <string name="drink_water">Drink water</string>
     <string name="bmi">Body Mask Index (BMI)</string>
+    <!--    menu_food-->
+    <string name="day_meal">Day\'s meals</string>
+    <string name="forward">&gt;</string> <!-- > -->
+    <string name="backward">&lt;</string> <!-- < -->
+    <string name="logs">Logs</string>
     <!--    bmi-->
     <string name="underweight">Underweight</string>
     <string name="normal">Normal</string>
@@ -83,14 +92,67 @@
     <string name="morbid_obesity">Morbid obesity</string>
     <string name="super_obesity">Super obesity</string>
     <!--    nutrition-->
+    <string name="calories_gained">Calories gained</string>
+    <string name="calories">Calories</string>
     <string name="carbs">Carbs</string>
     <string name="fat">Fat</string>
     <string name="protein">Protein</string>
+    <string name="total_protein">Total protein</string>
+    <string name="total_fat">Total fat</string>
+    <string name="total_carb">Total carb</string>
     <string name="ingredients">Ingredients</string>
     <string name="recipe">Recipe</string>
     <string name="nutrients">Nutrients</string>
     <string name="food_detail">Food Detail</string>
+    <string name="breakfast_log">Breakfast log</string>
+    <string name="lunch_log">Lunch log</string>
+    <string name="dinner_log">Dinner log</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="dinner">Dinner</string>
+    <string name="snack">Snack</string>
+    <string name="snack_log">Snack log</string>
     <!--    food-->
     <string name="more_detail">More details</string>
     <string name="add_food">Add food</string>
+    <string name="kcal">kcal</string>
+    <string name="g">g</string>
+    <string name="selected_meal">Selected meal</string>
+    <string name="all_meal">All meal</string>
+    <string name="zero">0</string>
+    <string name="food">Foods</string>
+    <string name="add_meal">Add meal</string>
+    <!--    calendar-->
+    <string name="sun">SUN</string>
+    <string name="mon">MON</string>
+    <string name="tue">TUE</string>
+    <string name="wed">WED</string>
+    <string name="thu">THU</string>
+    <string name="fri">FRI</string>
+    <string name="sat">SAT</string>
+    <!--    exercise-->
+    <string name="minute">Minutes</string>
+    <string name="hour">Hours</string>
+    <string name="kcal_burnt">Kcal burnt</string>
+    <string name="em_dash">	\u2014 </string>
+    <string name="reps">Reps</string>
+    <string name="sets">Sets</string>
+    <string name="seconds">Seconds</string>
+    <string name="confirm_exercise">Complete Exercise</string>
+    <string name="confirm_content">Are you sure you want to mark this exercise as completed? This action will be saved in your workout history</string>
+    <string name="yes">Yes</string>
+    <string name="no">No, thanks</string>
+    <string name="add_exercise">Add exercise</string>
+    <string name="description">Description: </string>
+    <string name="type">Type: </string>
+    <string name="level">Level: </string>
+    <string name="muscleGroup">Muscle Group: </string>
+    <string name="equipment">Equipment: </string>
+    <string name="note">Note: </string>
+    <string name="find_exercise">Search for exercises</string>
+    <string name="all_exercise">All exercise</string>
+    <string name="selected_exercise">Selected exercise</string>
+    <string name="make_plan">Make a plan</string>
+    <string name="stay_active">Stay active – today’s workout is waiting!</string>
+    <string name="information">Information</string>
 </resources>

@@ -4,6 +4,7 @@ data class FoodLogDetail (
     val id: Int,
     val logId: Int,
     val foodId: Int,
+    val foodName: String,
     val servingSize: String,
     val calories: Double,
     val protein: Double,

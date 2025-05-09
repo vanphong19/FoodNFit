@@ -79,6 +79,8 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="15dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/ic_plus_gray" />
 
             <ImageView
@@ -87,6 +89,8 @@
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="15dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/baseline_info_24" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

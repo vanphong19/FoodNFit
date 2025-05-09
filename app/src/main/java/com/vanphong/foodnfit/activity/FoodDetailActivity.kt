@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.common.util.DataUtils
+import com.vanphong.foodnfit.BaseActivity
 import com.vanphong.foodnfit.Model.FoodItem
 import com.vanphong.foodnfit.Model.Ingredient
 import com.vanphong.foodnfit.R
@@ -19,7 +20,7 @@ import com.vanphong.foodnfit.adapter.RecipeAdapter
 import com.vanphong.foodnfit.databinding.ActivityFoodDetailBinding
 import com.vanphong.foodnfit.viewModel.FoodDetailViewModel
 
-class FoodDetailActivity : AppCompatActivity() {
+class FoodDetailActivity : BaseActivity() {
     private val viewModel: FoodDetailViewModel by viewModels()
     private lateinit var ingredientAdapter: IngredientAdapter
     private lateinit var binding: ActivityFoodDetailBinding

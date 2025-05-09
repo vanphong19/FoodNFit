@@ -12,7 +12,7 @@ import com.vanphong.foodnfit.Model.FoodItem
 import com.vanphong.foodnfit.R
 
 @BindingAdapter("pieChartData")
-fun bindPieChart(pieChart: PieChart, foodItem: FoodItem){
+fun bindPieChart(pieChart: PieChart, foodItem: FoodItem?){
     val data = foodItem?: return
 
     val entries = listOf(

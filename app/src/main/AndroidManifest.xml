@@ -6,12 +6,30 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_app_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodNFit"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.UpdateInfoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ScanFoodActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ExerciseInformationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ExerciseListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ChooseFoodActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.MealInformationActivity"
+            android:exported="true" />
         <activity
             android:name=".activity.VerifyActivity"
             android:exported="true" />

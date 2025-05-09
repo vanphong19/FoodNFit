@@ -113,7 +113,7 @@
             android:visibility="gone"/>
 
         <TextView
-            android:textColor="#00a6ff"
+            android:textColor="#22CC10"
             android:id="@+id/forgot_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -211,7 +211,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
                 android:text="@string/sign_up"
-                android:textColor="#00a6ff"
+                android:textColor="#22CC10"
                 android:textSize="16sp"
                 android:onClick="@{() -> loginViewModel.onClickSignUp()}"/>
         </LinearLayout>

@@ -6,7 +6,19 @@
     <color name="md_theme_onSurface_mediumContrast">#171D1A</color>
     <color name="md_theme_onSurfaceVariant">#404943</color>
     <color name="toolbar_text_color">#000000</color>
-    <color name="color_carbs">#33FF00</color>
-    <color name="color_protein">#F45C21</color>
-    <color name="color_fat">#FFCCFF</color>
+    <color name="color_calories">#00FF00</color>
+    <color name="color_carbs">#FF4040</color>
+    <color name="color_protein">#A020F0</color>
+    <color name="color_fat">#FF1493</color>
+    <color name="breakfast">#7CFC00</color>
+    <color name="bg_breakfast">#90EE90</color>
+    <color name="lunch">#EEB422</color>
+    <color name="bg_lunch">#90FFD700</color>
+    <color name="dinner">#EE1289</color>
+    <color name="bg_dinner">#90FF3030</color>
+    <color name="snack">#79CDCD</color>
+    <color name="bg_snack">#97FFFF</color>
+    <color name="selected_color">#99FF33</color>
+    <color name="green_corner">#65F627</color>
+    <color name="floatButton">#5CFA19</color>
 </resources>
