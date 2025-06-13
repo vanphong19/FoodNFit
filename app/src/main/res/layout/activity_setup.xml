@@ -1,48 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".activity.SetupActivity">
 
-    <TextView
-        android:id="@+id/tvProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="1/8"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_continue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProgress" />
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_continue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="Continue"
-        app:layout_constraintBottom_toTopOf="@+id/btn_maybe"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <!-- Nút Back (bên trái) -->
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_circle_button"
+                android:backgroundTint="#EEEEEE"
+                android:padding="10dp"
+                android:scaleType="center"
+                android:src="@drawable/ic_chevron_left_24" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_maybe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Maybe Later"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:backgroundTint="#EEEEEE"
+                android:paddingHorizontal="36dp"
+                android:paddingVertical="20dp"
+                android:text="@string/skip"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerSetup"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/relativeLayout2" />
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/setupProgressBar"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:cpb_background_progressbar_color="#EFEFEF"
+            app:cpb_background_progressbar_width="5dp"
+            app:cpb_progress="1"
+            app:cpb_progress_direction="to_right"
+            app:cpb_progress_max="6"
+            app:cpb_progressbar_color="#00CCCC"
+            app:cpb_progressbar_width="5dp"
+            app:cpb_round_border="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="20dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="90dp"
+            android:layout_height="100dp"
+            app:layout_constraintTop_toTopOf="@id/setupProgressBar"
+            app:layout_constraintBottom_toBottomOf="@id/setupProgressBar"
+            app:layout_constraintStart_toStartOf="@id/setupProgressBar"
+            app:layout_constraintEnd_toEndOf="@id/setupProgressBar"
+            app:cornerRadius="50dp"
+            app:icon="@drawable/ic_play_arrow"
+            app:iconTint="@android:color/white"
+            app:iconGravity="textEnd"
+            app:iconSize="30dp"
+            android:id="@+id/btnNextSetup"
+            android:backgroundTint="@color/black"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

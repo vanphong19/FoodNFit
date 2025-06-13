@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FoodNFit</string>
+    <string name="gmail">22521083@gm.uit.edu.vn</string>
     <!--    Login-->
     <string name="sign_in">Đăng nhập</string>
     <string name="sign_up">Đăng ký</string>
@@ -20,11 +21,16 @@
     <string name="verify">Xác nhận</string>
     <string name="have_not_code">Không nhận được mã?</string>
     <string name="resend">Gửi lại</string>
+    <string name="otp_success">Xác minh thành công!</string>
+    <string name="otp_incomplete">Nhập đủ 6 số OTP</string>
+    <string name="otp_invalid">Mã OTP không hợp lệ!</string>
+    <string name="sending_verification">Đang gửi mã xác minh, vui lòng chờ…</string>
 
     <!--    menu-->
     <string name="home_menu">Trang chủ</string>
     <string name="food_menu">Bữa ăn</string>
     <string name="exercise_menu">Luyện tập</string>
+    <string name="logout_menu">Đăng xuất</string>
     <string name="statistic_menu">Thống kê</string>
     <string name="setting_menu">Cài đặt</string>
     <string name="profile_menu">Cá nhân</string>
@@ -33,7 +39,10 @@
     <string name="view_menu">Chế độ xem</string>
     <string name="meal_reminder">Nhắc nhở ăn uống</string>
     <string name="exercise_reminder">Nhắc nhở luyện tập</string>
-
+    <string name="notification_menu">Thông báo</string>
+    <string name="logging_menu">Ghi log</string>
+    <string name="open_nav">Mở thanh điều hướng</string>
+    <string name="close_nav">Đóng thanh điều hướng</string>
     <!--    setup-->
     <string name="what_name">Bạn tên gì?</string>
     <string name="your_birth">Ngày sinh của bạn?</string>
@@ -52,6 +61,8 @@
     <string name="setting_display">Giao diện</string>
     <string name="change_language">Ngôn ngữ ứng dụng</string>
     <string name="notification_title">Thông báo</string>
+    <string name="step_permission">Quyền theo dõi bước chân</string>
+    <string name="permission">Quyền</string>
     <string name="notification_reminder">Nhắc nhở</string>
     <string name="security_title">Bảo mật</string>
     <string name="reset_password">Đổi mật khẩu</string>
@@ -62,10 +73,14 @@
     <string name="account">Tài khoản</string>
     <string name="help">Giúp đỡ</string>
     <string name="your_info">Thông tin của bạn</string>
+    <string name="your_goal_info">Mục tiêu của bạn</string>
+    <string name="food_goal">Mục tiêu ăn uống</string>
+    <string name="exercise_food">Mục tiêu tập luyện</string>
     <string name="age">Tuổi</string>
     <string name="height">Chiều cao</string>
     <string name="weight">Cân nặng</string>
     <string name="gender">Giới tính</string>
+    <string name="update_info">Cập nhật thông tin</string>
     <!--    menu-home-->
     <string name="activity">Hoạt động</string>
     <string name="calo_nutrition">Calo &amp; Dinh dưỡng</string>
@@ -92,6 +107,7 @@
     <string name="super_obesity">Béo phì loại III</string>
     <!--    nutrition-->
     <string name="calories_gained">Calo đã nạp</string>
+    <string name="calories_burnt">Calo đốt cháy</string>
     <string name="calories">Calories</string>
     <string name="carbs">Tinh bột</string>
     <string name="fat">Chất béo</string>
@@ -155,4 +171,135 @@
     <string name="make_plan">Lên kế hoach</string>
     <string name="stay_active">Hãy năng động lên – buổi tập hôm nay đang chờ bạn đấy!</string>
     <string name="information">Thông tin</string>
+    <string name="activity_log">Nhật ký hoạc động</string>
+    <!--    statistic-->
+    <string name="weight_chart">Biểu đồ cân nặng</string>
+    <string name="exercise_chart">Biểu đồ luyện tập</string>
+    <string name="Initial">Bắt đầu</string>
+    <string name="weight_now">Hiện tại</string>
+    <string name="weight_change">Thay đổi</string>
+    <string name="bmi_index">Chỉ số BMI</string>
+    <string name="your_bmi">Chỉ số BMI của bạn là: </string>
+    <string name="fall_into">bạn được xếp loại </string>
+    <string name="kg">kg</string>
+    <string name="weight_history">Lịch sử cân nặng</string>
+    <string name="sessions">Buổi</string>
+    <string name="number_session">Số buổi tập</string>
+    <string name="total_calo_burnt">Tổng calo đốt cháy</string>
+    <string name="steps_count">Số bước chân</string>
+    <string name="avg_calo">Average calories</string>
+    <string name="best_day">Best day</string>
+    <string name="workout_log">Lịch sử tập luyện</string>
+    <string name="favourite_exercise">Bài tập yêu thích</string>
+    <string name="exercises">Bài</string>
+    <!--    notification-->
+    <string name="view_notification">View previous notifications</string>
+    <!--    onboarding-->
+    <string name="skip">Bỏ qua</string>
+    <string name="onboarding_title_1">Hiểu Rõ Những Gì Bạn Ăn</string>
+    <string name="onboarding_desc_1">Hiểu rõ thói quen dinh dưỡng của bạn qua số liệu chi tiết</string>
+
+    <string name="onboarding_title_2">Theo Dõi Luyện Tập</string>
+    <string name="onboarding_desc_2">Theo dõi tiến trình và lượng calo đã đốt</string>
+
+    <string name="onboarding_title_3">Sống Khỏe Mạnh &amp; Tốt Hơn</string>
+    <string name="onboarding_desc_3">Giữ vững động lực và đạt được mục tiêu của bạn</string>
+    <string name="start">Bắt đầu</string>
+    <!--    admin-->
+
+    <string name="search_account">Tìm kiếm tài khoản…</string>
+    <!--    admin-home-->
+    <string name="stt">STT</string>
+    <string name="fullname">Họ tên</string>
+    <string name="create_account">Tạo tài khoản</string>
+    <string name="birthday">Ngày sinh</string>
+    <string name="delete">Xóa</string>
+    <string name="update">Cập nhật</string>
+    <string name="block">Khóa</string>
+    <!--    admin-exercise-->
+    <string name="choose_image">Chọn ảnh</string>
+    <string name="exercise_image">Hình ảnh bài tập</string>
+    <string name="exercise_info">Thông tin bài tập</string>
+    <string name="exercise_name">Tên bài tập</string>
+    <string name="exercise_description">Mô tả</string>
+    <string name="exercise_video">Video bài tập</string>
+    <string name="difficulty">Độ khó</string>
+    <string name="muscle_group">Nhóm cơ</string>
+    <string name="equipment_required">Yêu cầu thiết bị</string>
+    <string name="exercise_note">Ghi chú</string>
+    <string name="exercise_type">Danh mục</string>
+    <string name="rest_time">Thời gian nghỉ</string>
+    <string name="video_url">Link video</string>
+    <string name="save_exercise">Lưu bài tập</string>
+    <string name="add_first_exercise">Thêm bài tập đầu tiên bằng cách nhấn vào nút + bên dưới</string>
+    <string name="no_exercise">Chưa có bài tập nào</string>
+    <string name="search_exercise">Tìm kiếm bài tập…</string>
+    <string name="calo_info">Thông tin calo</string>
+    <string name="unit">Đơn vị</string>
+    <string name="instructions">Hướng dẫn thực hiện</string>
+    <!--    admin-account-->
+    <string name="all">Tất cả</string>
+    <string name="blocked">Khóa</string>
+    <string name="un_blocked">Không khóa</string>
+    <string name="title_account_management">Quản lý tài khoản</string>
+    <string name="hint_search">Tìm kiếm theo tên, email…</string>
+    <string name="button_add_account">Thêm mới</string>
+    <string name="button_filter_gender">Giới tính</string>
+    <string name="button_filter_status">Trạng thái</string>
+    <string name="button_clear_filter">Xóa lọc</string>
+    <string name="text_no_accounts">Không có tài khoản nào</string>
+    <string name="text_add_account_prompt">Thêm tài khoản mới để bắt đầu quản lý</string>
+    <string name="update_date">Ngày cập nhật: </string>
+    <string name="update_type">Loại cập nhật: </string>
+    <string name="updater">Người cập nhật: </string>
+    <string name="update_history">Lịch sử cập nhật</string>
+    <string name="processing">Đang xử lý…</string>
+    <!--    feedback-->
+    <string name="question_general">Bạn muốn nói gì với chúng tôi?</string>
+    <string name="rbtn_question">Câu hỏi</string>
+    <string name="rbtn_report">Báo cáo lỗi</string>
+    <string name="rbtn_suggestion">Gợi ý</string>
+    <string name="rbtn_compliment">Lời khen</string>
+    <string name="rbtn_others">Khác</string>
+    <string name="contact_question_se">Yêu cầu của bạn là gì?</string>
+    <string name="contact_rbtn_records">Bản ghi</string>
+    <string name="contact_rbtn_migration">Di chuyển dữ liệu</string>
+    <string name="contact_rbtn_features">Tính năng</string>
+    <string name="contact_rbtn_supports">Hỗ trợ</string>
+    <string name="contact_text_hint">Lời nhắn của bạn</string>
+    <string name="contact_content">Nội dung</string>
+    <string name="contact_text_notice">Chú ý</string>
+    <string name="contact_notice_content">• Có thể mất tới 7 ngày để nhóm hỗ trợ của chúng tôi liên hệ lại với bạn.\n• Ngôn ngữ lăng mạ hoặc thư rác sẽ không được chấp nhận.\n• Bằng cách nhấn [Gửi], bạn đồng ý với Điều khoản dịch vụ và Chính sách quyền riêng tư.</string>
+    <string name="contact_rbtn_send">Gửi</string>
+    <string name="contact_title">Liên hệ với chúng tôi</string>
+    <string name="contact_max_image">Bạn đã chọn số ảnh tối đa"</string>
+    <string name="contact_allow_image">Bạn chỉ có thể chọn tối đa 1 ảnh"</string>
+    <!--    food-admin-->
+    <string name="search_food">Tìm kiếm thức ăn…</string>
+    <string name="filter_type">Lọc theo loại: </string>
+    <string name="add_new_food">Thêm món ăn mới</string>
+    <string name="edit_food">Cập nhật thức ăn</string>
+    <string name="serving">Khẩu phần</string>
+    <string name="food_type">Loại thức ăn</string>
+    <string name="save">Lưu</string>
+    <!--    notification-->
+    <string name="permission_deny">Quyền bị từ chối. Thông báo sẽ bị tắt.</string>
+    <string name="permission_denied_title">Quyền bị từ chối</string>
+    <string name="permission_denied_message">Để nhận thông báo, vui lòng bật quyền trong Cài đặt ứng dụng.</string>
+    <string name="open_settings_button">Mở Cài đặt</string>
+    <string name="cancel_button">Hủy</string>
+    <string name="confirm_disable_title">Xác nhận tắt thông báo</string>
+    <string name="confirm_disable_message">Bạn có chắc chắn muốn tắt quyền thông báo không? Bạn có thể thay đổi trong Cài đặt ứng dụng.</string>
+    <!--    step-->
+    <string name="step_permission_title">Yêu cầu quyền đếm bước chân</string>
+    <string name="step_permission_message">Ứng dụng cần quyền nhận diện hoạt động (ACTIVITY_RECOGNITION) để ghi nhận bước chân của bạn.</string>
+    <string name="step_permission_granted">Đã cấp quyền theo dõi bước chân</string>
+    <string name="step_permission_disabled">Bạn đã tắt quyền theo dõi bước chân</string>
+    <string name="step_permission_denied_title">Quyền bị từ chối</string>
+    <string name="step_permission_denied_message">Ứng dụng cần quyền theo dõi bước chân để hoạt động chính xác.</string>
+    <string name="open_settings">Mở cài đặt</string>
+    <string name="ignore">Bỏ qua</string>
+    <string name="permission_granted_msg">Đã cấp quyền theo dõi bước chân</string>
+    <string name="permission_denied_msg">Bạn đã tắt quyền theo dõi bước chân. Một số tính năng có thể không hoạt động.</string>
+
 </resources>

@@ -18,6 +18,8 @@ class FoodViewModel: ViewModel (){
 
     private val _navigateFoodDetail = MutableLiveData<Boolean>()
     val navigationFoodDetail: LiveData<Boolean> get() = _navigateFoodDetail
+    private val _navigateChooseFood = MutableLiveData<Boolean>()
+    val navigationChooseFood: LiveData<Boolean> get() = _navigateChooseFood
 
     fun setAllFoods(data: List<FoodItem>){
         _allFoods.value = data
@@ -66,5 +68,12 @@ class FoodViewModel: ViewModel (){
 
     fun onNavigationComplete() {
         _navigateFoodDetail.value = false
+    }
+    fun onClickNavigateChooseFood(){
+        _navigateChooseFood.value = true
+    }
+
+    fun onChooseFoodComplete() {
+        _navigateChooseFood.value = false
     }
 }

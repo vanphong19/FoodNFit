@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sign_in"
             android:textSize="34sp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:textStyle="bold">
         </TextView>
 
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_email"
             android:orientation="horizontal"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="40dp">
 
             <ImageView
                 android:id="@+id/icon_email"
@@ -51,14 +51,15 @@
                 android:paddingBottom="10dp"
                 android:layout_marginStart="5dp"
                 >
+
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:id="@+id/edit_email"
+                    android:afterTextChanged="@{(text) -> loginViewModel.onEmailChanged(text)}"
                     android:inputType="textEmailAddress"
-                    android:text="@{loginViewModel.email}"
-                    android:afterTextChanged="@{(text) -> loginViewModel.onEmailChanged(text)}">
+                    android:text="@{loginViewModel.email}">
 
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -88,16 +89,16 @@
                 android:hint="@string/password"
                 android:paddingBottom="10dp"
                 android:layout_marginStart="5dp"
-                app:passwordToggleEnabled="true"
-                >
+                app:endIconMode="password_toggle">
+
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:id="@+id/edit_password"
-                    android:inputType="textPassword"
-                    android:text="@{loginViewModel.password}"
-                    android:afterTextChanged="@{(text) -> loginViewModel.onPasswordChanged(text)}">
+                    android:afterTextChanged="@{(text) -> loginViewModel.onPasswordChanged(text)}"
+                    android:inputType="textPassword|textVisiblePassword"
+                    android:text="@{loginViewModel.password}">
 
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -113,7 +114,7 @@
             android:visibility="gone"/>
 
         <TextView
-            android:textColor="#22CC10"
+            android:textColor="@color/status_bar"
             android:id="@+id/forgot_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,13 +129,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
-            android:text="@string/sign_in"
-            android:padding="14dp"
-            android:textSize="22sp"
             android:gravity="center"
-            android:background="@drawable/bg_button_signin"
             android:onClick="@{() -> loginViewModel.onClickLogin()}"
-            android:textColor="@color/white"/>
+            android:padding="14dp"
+            android:text="@string/sign_in"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:backgroundTint="@color/status_bar"
+            app:cornerRadius="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -184,13 +186,6 @@
                 android:src="@drawable/ic_google"
                 android:layout_marginEnd="10dp"/>
 
-            <ImageView
-                android:id="@+id/btn_facebook"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/ic_facebook" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -211,7 +206,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
                 android:text="@string/sign_up"
-                android:textColor="#22CC10"
+                android:textColor="@color/status_bar"
                 android:textSize="16sp"
                 android:onClick="@{() -> loginViewModel.onClickSignUp()}"/>
         </LinearLayout>

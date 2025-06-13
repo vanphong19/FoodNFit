@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".admin.fragment.AdminAccountFragment">
+
+    <data>
+        <variable
+            name="accountViewModel"
+            type="com.vanphong.foodnfit.admin.viewModel.AccountViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Header với title và nút thêm -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            app:elevation="4dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/status_bar"
+                app:title="@string/title_account_management"
+                app:titleTextColor="@android:color/white">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/button_add_account"
+                    android:textSize="12sp"
+                    app:cornerRadius="18dp"
+                    app:icon="@drawable/ic_plus_white"
+                    app:iconSize="16dp"
+                    style="@style/Widget.Material3.Button.TonalButton" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Thanh tìm kiếm và bộ lọc -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@android:color/white"
+            android:elevation="2dp">
+            <!-- Thanh search -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_search"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text="@{accountViewModel.search}"
+                    android:afterTextChanged="@{(text) -> accountViewModel.setSearch(text)}"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Bộ lọc -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFilterGender"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/button_filter_gender"
+                    android:textSize="12sp"
+                    app:cornerRadius="18dp"
+                    app:icon="@drawable/ic_filter"
+                    app:iconSize="14dp"
+                    style="@style/Widget.Material3.Button.OutlinedButton" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:singleSelection="true"
+                    android:layout_marginTop="8dp"
+                    >
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/male"
+                        style="@style/Widget.Material3.Chip.Input" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/female"
+                        style="@style/Widget.Material3.Chip.Input" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAllGender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/all"
+                        style="@style/Widget.Material3.Chip.Input" />
+                </com.google.android.material.chip.ChipGroup>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFilterStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/button_filter_status"
+                    android:textSize="12sp"
+                    app:cornerRadius="18dp"
+                    app:icon="@drawable/ic_filter"
+                    app:iconSize="14dp"
+                    style="@style/Widget.Material3.Button.OutlinedButton" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:singleSelection="true"
+                    android:layout_marginTop="8dp"
+                    >
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipUnBlock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/blocked"
+                        style="@style/Widget.Material3.Chip.Input" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipBlock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/un_blocked"
+                        style="@style/Widget.Material3.Chip.Input" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAllStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/all"
+                        style="@style/Widget.Material3.Chip.Filter" />
+                </com.google.android.material.chip.ChipGroup>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnClearFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/button_clear_filter"
+                    android:textSize="12sp"
+                    app:cornerRadius="18dp"
+                    app:icon="@drawable/ic_clear"
+                    app:iconSize="14dp"
+                    style="@style/Widget.Material3.Button.TextButton" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- RecyclerView hiển thị danh sách account -->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAccounts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:clipToPadding="false"
+                tools:listitem="@layout/item_account" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <!-- Empty state -->
+        <LinearLayout
+            android:id="@+id/layoutEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="32dp">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_empty_exercise"
+                android:alpha="0.3"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_no_accounts"
+                android:textSize="18sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_add_account_prompt"
+                android:textSize="14sp"
+                android:textColor="@color/text_tertiary"
+                android:gravity="center" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

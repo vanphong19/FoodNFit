@@ -5,6 +5,12 @@
     android:id="@+id/main"
     tools:context=".activity.ExerciseInformationActivity">
 
+    <data>
+        <variable
+            name="infoViewModel"
+            type="com.vanphong.foodnfit.viewModel.ExerciseInfoViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +46,7 @@
                     android:id="@+id/youtube_player_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:videoId="RtG0wyr-oXM"
+                    videoId="@{infoViewModel.videoUrl}"
                     app:autoPlay="false" />
 
                 <androidx.cardview.widget.CardView
@@ -61,7 +67,7 @@
                             android:layout_height="80dp"
                             android:layout_centerVertical="true"
                             android:id="@+id/imgExercise"
-                            android:src="@drawable/football"
+                            imageUrlGlide="@{infoViewModel.imageUrl}"
                             android:layout_marginStart="18dp"
                             android:layout_marginVertical="18dp"/>
 
@@ -83,19 +89,20 @@
                                     android:layout_height="wrap_content"
                                     android:textStyle="bold"
                                     android:textSize="20sp"
-                                    android:text="soccer"
+                                    android:text="@{infoViewModel.exerciseName}"
                                     android:id="@+id/tvExerciseName"/>
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
-                                    android:id="@+id/ln_minute_kcal">
+                                    android:id="@+id/ln_minute_kcal"
+                                    app:visibleIfNotNull="@{infoViewModel.minute}">
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="23"
+                                        android:text="@{infoViewModel.minute}"
                                         android:textStyle="bold"
                                         android:textSize="16sp"
                                         android:id="@+id/minute_practice"/>
@@ -116,7 +123,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="234"
+                                        android:text="@{infoViewModel.caloriesPerHour}"
                                         android:textSize="16sp"
                                         android:textColor="@android:color/holo_red_light"
                                         android:textStyle="bold"
@@ -139,14 +146,15 @@
                                     <LinearLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
+                                        android:orientation="horizontal"
+                                        app:visibleIfNotNull="@{infoViewModel.minute}">
 
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:textSize="16sp"
                                             android:textStyle="bold"
-                                            android:text="2"
+                                            android:text="@{infoViewModel.sets}"
                                             android:id="@+id/tvSets"/>
 
                                         <TextView
@@ -167,7 +175,7 @@
                                             android:layout_height="wrap_content"
                                             android:textSize="16sp"
                                             android:textStyle="bold"
-                                            android:text="10"
+                                            android:text="@{infoViewModel.reps}"
                                             android:id="@+id/tvReps"/>
 
                                         <TextView
@@ -189,8 +197,8 @@
                                             android:textSize="16sp"
                                             android:textStyle="bold"
                                             android:textColor="@android:color/holo_red_light"
-                                            android:text="20"
-                                            android:id="@+id/tvKcalBurnt"/>
+                                            android:text="@{infoViewModel.caloriesPerHour}"
+                                            android:id="@+id/tvKcal_Burnt"/>
 
                                         <TextView
                                             android:layout_width="wrap_content"
@@ -244,7 +252,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
-                                android:text="gym"
+                                android:text="@{infoViewModel.category}"
                                 android:textSize="16sp"/>
                         </LinearLayout>
 
@@ -258,7 +266,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="A full-body cardio exercise that increases heart rate and warms up muscles"
+                            android:text="@{infoViewModel.description}"
                             android:textSize="16sp"/>
 
                         <LinearLayout
@@ -277,7 +285,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
-                                android:text="Khó"
+                                android:text="@{infoViewModel.difficulty}"
                                 android:textSize="16sp"/>
                         </LinearLayout>
 
@@ -297,7 +305,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
-                                android:text="Ngực"
+                                android:text="@{infoViewModel.muscleGroup}"
                                 android:textSize="16sp"/>
                         </LinearLayout>
 
@@ -317,7 +325,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
-                                android:text="Không cần"
+                                android:text="@{infoViewModel.equipment}"
                                 android:textSize="16sp"/>
                         </LinearLayout>
 
@@ -331,7 +339,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Bạn nên khởi động kỹ trước khi tập"
+                            android:text="@{infoViewModel.instructions}"
                             android:textSize="16sp"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

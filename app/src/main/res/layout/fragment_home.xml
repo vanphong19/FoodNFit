@@ -308,12 +308,12 @@
                                     android:id="@+id/caloProgressBar"
                                     android:layout_width="140dp"
                                     android:layout_height="140dp"
-                                    app:cpb_background_progressbar_color="#b6bbd8"
+                                    app:cpb_background_progressbar_color="#EFEFEF"
                                     app:cpb_background_progressbar_width="10dp"
                                     app:cpb_progress="30"
                                     app:cpb_progress_direction="to_right"
                                     app:cpb_progress_max="100"
-                                    app:cpb_progressbar_color="#00FF00"
+                                    app:cpb_progressbar_color="@color/blue_pastel"
                                     app:cpb_progressbar_width="10dp"
                                     app:cpb_round_border="true"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -403,7 +403,8 @@
                                     android:progress="60"
                                     android:min="0"
                                     android:max="100"
-                                    android:progressTint="#00FF00"/>
+                                    android:progressTint="@color/color_carbs"
+                                    android:progressBackgroundTint="#99FF33"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -435,7 +436,8 @@
                                     android:progress="60"
                                     android:min="0"
                                     android:max="100"
-                                    android:progressTint="#00FF00"/>
+                                    android:progressTint="@color/color_protein"
+                                    android:progressBackgroundTint="#AB82FF"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -468,7 +470,8 @@
                                     android:progress="60"
                                     android:min="0"
                                     android:max="100"
-                                    android:progressTint="#00FF00"/>
+                                    android:progressTint="@color/color_fat"
+                                    android:progressBackgroundTint="#FF69B4"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -541,10 +544,10 @@
                                 app:layout_constraintTop_toBottomOf="@id/ln_footsteps"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:cpb_background_progressbar_color="#b6bbd8"
+                                app:cpb_background_progressbar_color="#F3F3F3"
                                 app:cpb_background_progressbar_width="15dp"
                                 app:cpb_progress_direction="to_right"
-                                app:cpb_progressbar_color="#00FF00"
+                                app:cpb_progressbar_color="@color/blue_pastel"
                                 app:cpb_progressbar_width="15dp"
                                 app:cpb_round_border="true"
                                 app:cpb_progress_max="100"
@@ -587,6 +590,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="@string/detail"
+                                android:backgroundTint="@color/blue_pastel"
                                 app:layout_constraintTop_toBottomOf="@id/stepProgressBar"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -639,10 +643,10 @@
                                 app:layout_constraintTop_toBottomOf="@id/ln_water_glass"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:cpb_background_progressbar_color="#b6bbd8"
+                                app:cpb_background_progressbar_color="#F3F3F3"
                                 app:cpb_background_progressbar_width="15dp"
                                 app:cpb_progress_direction="to_right"
-                                app:cpb_progressbar_color="#00FF00"
+                                app:cpb_progressbar_color="@color/blue_pastel"
                                 app:cpb_progressbar_width="15dp"
                                 app:cpb_round_border="true"
                                 app:cpb_progress_max="100"

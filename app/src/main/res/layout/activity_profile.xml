@@ -8,8 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/setting_appBarLayout"
@@ -23,251 +22,378 @@
                 android:minHeight="?attr/actionBarSize"
                 app:title="@string/profile_menu"
                 app:titleCentered="true">
-
-                <ImageView
-                    android:id="@+id/img_edit1"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="12dp"
-                    android:src="@drawable/ic_edit_color" />
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
-        <androidx.cardview.widget.CardView
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            android:elevation="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="5dp">
+            android:paddingHorizontal="20dp">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:background="#F5F5DC">
+                android:orientation="vertical">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/cimg_avt"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/male"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/cimg_avt"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:orientation="vertical">
+                    app:cardCornerRadius="20dp"
+                    android:elevation="8dp"
+                    android:layout_marginBottom="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:background="#F5F5DC">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/cimg_avt"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/male"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/cimg_avt"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Đỗ Văn Phong"
+                                android:textStyle="bold"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="abc@gmail.com"
+                                android:layout_marginTop="2dp"
+                                />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Đỗ Văn Phong"
+                        android:text="@string/your_goal_info"
                         android:textStyle="bold"
                         android:textSize="20sp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="abc@gmail.com"
-                        android:layout_marginTop="2dp"
-                        />
-                </LinearLayout>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:id="@+id/img_edit2"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="12dp"
+                        android:src="@drawable/ic_edit_color"
+                        android:layout_centerVertical="true"/>
+                </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/your_info"
-            android:layout_marginTop="32dp"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            android:elevation="8dp"
-            android:layout_marginTop="24dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:background="#F0F0F0">
-
-                <ImageView
-                    android:id="@+id/cimg_age"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_birthday"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/cimg_age"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:orientation="vertical">
+                    app:cardCornerRadius="20dp"
+                    android:elevation="8dp"
+                    android:layout_marginTop="24dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:background="#F0F0F0">
+
+                        <ImageView
+                            android:id="@+id/cimg_food_goal"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_diet"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/cimg_food_goal"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/food_goal"
+                                android:textStyle="bold"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Giảm cân"
+                                android:layout_marginTop="2dp"
+                                />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp"
+                    android:elevation="8dp"
+                    android:layout_marginTop="24dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:background="#F0F0F0">
+
+                        <ImageView
+                            android:id="@+id/cimg_exercise_goal"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_workout"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/cimg_exercise_goal"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/exercise_food"
+                                android:textStyle="bold"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Tăng cơ" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="32dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/age"
+                        android:text="@string/your_info"
                         android:textStyle="bold"
                         android:textSize="20sp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="35 yo"
-                        android:layout_marginTop="2dp"
-                        />
-                </LinearLayout>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            android:elevation="8dp"
-            android:layout_marginTop="12dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:background="#F0F0F0">
-
-                <ImageView
-                    android:id="@+id/cimg_height"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_height"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/img_edit1"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="12dp"
+                        android:src="@drawable/ic_edit_color"
+                        android:layout_centerVertical="true"/>
+                </RelativeLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/cimg_height"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:orientation="vertical">
+                    app:cardCornerRadius="20dp"
+                    android:elevation="8dp"
+                    android:layout_marginTop="24dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/height"
-                        android:textStyle="bold"
-                        android:textSize="20sp"/>
+                        android:padding="20dp"
+                        android:background="#F0F0F0">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="170 cm"
-                        android:layout_marginTop="2dp"
-                        />
-                </LinearLayout>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:id="@+id/cimg_age"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_birthday"/>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            android:elevation="8dp"
-            android:layout_marginTop="12dp">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/cimg_age"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:background="#F0F0F0">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/age"
+                                android:textStyle="bold"
+                                android:textSize="20sp"/>
 
-                <ImageView
-                    android:id="@+id/cimg_weight"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_weight"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="35 yo"
+                                android:layout_marginTop="2dp"
+                                />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/cimg_weight"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:orientation="vertical">
+                    app:cardCornerRadius="20dp"
+                    android:elevation="8dp"
+                    android:layout_marginTop="12dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/weight"
-                        android:textStyle="bold"
-                        android:textSize="20sp"/>
+                        android:padding="20dp"
+                        android:background="#F0F0F0">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="62 kg"
-                        android:layout_marginTop="2dp"
-                        />
-                </LinearLayout>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:id="@+id/cimg_height"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_height"/>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            android:elevation="8dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="5dp">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/cimg_height"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:background="#F0F0F0">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/height"
+                                android:textStyle="bold"
+                                android:textSize="20sp"/>
 
-                <ImageView
-                    android:id="@+id/cimg_gender"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_gender_scale"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="170 cm"
+                                android:layout_marginTop="2dp"
+                                />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/cimg_gender"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_centerVertical="true"
-                    android:orientation="vertical">
+                    app:cardCornerRadius="20dp"
+                    android:elevation="8dp"
+                    android:layout_marginTop="12dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/gender"
-                        android:textStyle="bold"
-                        android:textSize="20sp"/>
+                        android:padding="20dp"
+                        android:background="#F0F0F0">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/cimg_weight"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_weight"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/cimg_weight"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/weight"
+                                android:textStyle="bold"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="62 kg"
+                                android:layout_marginTop="2dp"
+                                />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp"
+                    android:elevation="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/male"
-                        android:layout_marginTop="2dp"
-                        />
-                </LinearLayout>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                        android:padding="20dp"
+                        android:background="#F0F0F0">
+
+                        <ImageView
+                            android:id="@+id/cimg_gender"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_gender_scale"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/cimg_gender"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/gender"
+                                android:textStyle="bold"
+                                android:textSize="20sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/male"
+                                android:layout_marginTop="2dp"
+                                />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </layout>

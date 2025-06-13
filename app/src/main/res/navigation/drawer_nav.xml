@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_nav"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.vanphong.foodnfit.admin.fragment.AdminHomeFragment"
+        android:label="@string/home_menu"
+        tools:layout="@layout/fragment_admin_home" />
+    <fragment
+        android:id="@+id/nav_account"
+        android:name="com.vanphong.foodnfit.admin.fragment.AdminAccountFragment"
+        android:label="@string/account"
+        tools:layout="@layout/fragment_admin_account" />
+    <fragment
+        android:id="@+id/nav_exercise"
+        android:name="com.vanphong.foodnfit.admin.fragment.AdminExerciseFragment"
+        android:label="@string/exercise_menu"
+        tools:layout="@layout/fragment_admin_exercise" />
+    <fragment
+        android:id="@+id/nav_food"
+        android:name="com.vanphong.foodnfit.admin.fragment.AdminFoodFragment"
+        android:label="@string/food_menu"
+        tools:layout="@layout/fragment_admin_food" />
+</navigation>

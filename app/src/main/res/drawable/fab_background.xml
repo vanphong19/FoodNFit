@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="#D84315"/> <!-- Màu nhấn -->
+            <elevation android:shadowColor="#88000000" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#FF5722"/> <!-- Màu mặc định -->
+            <corners android:radius="50dp"/>
+        </shape>
+    </item>
+</selector>

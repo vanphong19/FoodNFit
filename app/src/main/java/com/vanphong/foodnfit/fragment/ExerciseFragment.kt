@@ -54,7 +54,6 @@ class ExerciseFragment : Fragment(), CalendarAdapter.OnItemListener {
         _binding = FragmentExerciseBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
         binding.exerciseViewModel = viewModel
-        binding.date.text = formatDateVietnamese(LocalDate.now())
         previousWeekAction()
         nextWeekAction()
         setWeekView()
@@ -336,7 +335,6 @@ class ExerciseFragment : Fragment(), CalendarAdapter.OnItemListener {
             override fun onItemClick(position: Int, dayText: String, date: LocalDate?) {
                 if (date != null) {
                     CalendarUtils.selectedDate = date
-                    binding.date.text = formatDateVietnamese(date)
                     setWeekView()
                 }
             }

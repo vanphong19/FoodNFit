@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">FoodNFit</string>
-
+    <string name="gmail">22521083@gm.uit.edu.vn</string>
     <!--    Login-->
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
@@ -20,11 +20,16 @@
     <string name="verify">Verify</string>
     <string name="have_not_code">Didn\'t receive the code?</string>
     <string name="resend">Resend</string>
+    <string name="otp_success">Verification successful!</string>
+    <string name="otp_incomplete">Please enter all 6 OTP digits.</string>
+    <string name="otp_invalid">Invalid OTP code!</string>
+    <string name="sending_verification">Sending verification code, please wait…</string>
 
     <!--    menu-->
     <string name="home_menu">Home</string>
     <string name="food_menu">Food</string>
     <string name="exercise_menu">Exercise</string>
+    <string name="logout_menu">Logout</string>
     <string name="statistic_menu">Statistic</string>
     <string name="setting_menu">Setting</string>
     <string name="profile_menu">Profile</string>
@@ -33,8 +38,10 @@
     <string name="view_menu">View</string>
     <string name="meal_reminder">Meal reminder</string>
     <string name="exercise_reminder">Exercise reminder</string>
-
-
+    <string name="notification_menu">Notification</string>
+    <string name="logging_menu">Logging</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
     <!--    setup-->
     <string name="what_name">What is your name?</string>
     <string name="your_birth">Your date of birth?</string>
@@ -53,6 +60,8 @@
     <string name="setting_display">Display</string>
     <string name="change_language">App language</string>
     <string name="notification_title">Notification</string>
+    <string name="step_permission">Step tracking permission</string>
+    <string name="permission">Permission</string>
     <string name="notification_reminder">Reminder</string>
     <string name="security_title">Security</string>
     <string name="reset_password">Reset password</string>
@@ -63,10 +72,14 @@
     <string name="account">Account</string>
     <string name="help">Help</string>
     <string name="your_info">Your information</string>
+    <string name="your_goal_info">Your Goal</string>
+    <string name="food_goal">Food Goal</string>
+    <string name="exercise_food">Exercise Goal</string>
     <string name="age">Age</string>
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="gender">Gender</string>
+    <string name="update_info">Update Information</string>
     <!--    menu-home-->
     <string name="activity">Activity</string>
     <string name="calo_nutrition">Calories &amp; Nutrition</string>
@@ -93,6 +106,7 @@
     <string name="super_obesity">Super obesity</string>
     <!--    nutrition-->
     <string name="calories_gained">Calories gained</string>
+    <string name="calories_burnt">Calories burnt</string>
     <string name="calories">Calories</string>
     <string name="carbs">Carbs</string>
     <string name="fat">Fat</string>
@@ -155,4 +169,135 @@
     <string name="make_plan">Make a plan</string>
     <string name="stay_active">Stay active – today’s workout is waiting!</string>
     <string name="information">Information</string>
+    <string name="activity_log">Activity log</string>
+    <!--    statistic-->
+    <string name="weight_chart">Weight chart</string>
+    <string name="exercise_chart">Exercise Chart</string>
+    <string name="Initial">Initial</string>
+    <string name="weight_now">Current</string>
+    <string name="weight_change">Change</string>
+    <string name="bmi_index">BMI index</string>
+    <string name="your_bmi">Your BMI is: Your BMI is: </string>
+    <string name="fall_into">you fall into the </string>
+    <string name="kg">kg</string>
+    <string name="weight_history">Weight history</string>
+    <string name="sessions">Sessions</string>
+    <string name="number_session">Training sessions</string>
+    <string name="total_calo_burnt">Calories burned</string>
+    <string name="steps_count">Steps count</string>
+    <string name="avg_calo">Average calories</string>
+    <string name="best_day">Best day</string>
+    <string name="workout_log">Workout log</string>
+    <string name="favourite_exercise">Favorite exercises</string>
+    <string name="exercises">Exercises</string>
+    <!--    notification-->
+    <string name="view_notification">View previous notifications</string>
+    <!--    onboarding-->
+    <string name="skip">Skip</string>
+    <string name="onboarding_title_1">Know What You Eat</string>
+    <string name="onboarding_desc_1">Gain insights into your nutritional habits</string>
+
+    <string name="onboarding_title_2">Track Your Workout</string>
+    <string name="onboarding_desc_2">Monitor your progress &amp; calories burnt</string>
+
+    <string name="onboarding_title_3">Live Healthy &amp; Great</string>
+    <string name="onboarding_desc_3">Stay motivated and achieve your goals</string>
+    <string name="start">Start</string>
+    <!--    admin-->
+
+    <string name="search_account">Search account…</string>
+    <!--    admin-home-->
+    <string name="stt">STT</string>
+    <string name="fullname">Full name</string>
+    <string name="create_account">Create account</string>
+    <string name="birthday">Birthday</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
+    <string name="block">Block</string>
+    <!--    admin-exercise-->
+    <string name="choose_image">Choose image</string>
+    <string name="exercise_image">Exercise image</string>
+    <string name="exercise_info">Exercise information</string>
+    <string name="exercise_name">Exercise name</string>
+    <string name="exercise_description">Description</string>
+    <string name="exercise_video">Exercise video</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="muscle_group">Muscle group</string>
+    <string name="equipment_required">Equipment requirement</string>
+    <string name="exercise_note">Note</string>
+    <string name="exercise_type">Type</string>
+    <string name="rest_time">Rest Time</string>
+    <string name="video_url">Video url</string>
+    <string name="save_exercise">Save exercise</string>
+    <string name="add_first_exercise">Add your first exercise by tapping the + button below</string>
+    <string name="no_exercise">No exercises yet</string>
+    <string name="search_exercise">Search exercises…</string>
+    <string name="calo_info">Calories information</string>
+    <string name="unit">Unit</string>
+    <string name="instructions">Instructions</string>
+    <!--    admin-account-->
+    <string name="all">All</string>
+    <string name="blocked">Blocked</string>
+    <string name="un_blocked">Unblocked</string>
+    <string name="title_account_management">Account Management</string>
+    <string name="hint_search">Search by name, email…</string>
+    <string name="button_add_account">Add New</string>
+    <string name="button_filter_gender">Gender</string>
+    <string name="button_filter_status">Status</string>
+    <string name="button_clear_filter">Clear Filters</string>
+    <string name="text_no_accounts">No accounts available</string>
+    <string name="text_add_account_prompt">Add a new account to start managing</string>
+    <string name="update_date">Updated date: </string>
+    <string name="update_type">Updated type: </string>
+    <string name="updater">Updater: </string>
+    <string name="update_history">Update history</string>
+    <string name="processing">Processing…</string>
+    <!--    feedback-->
+    <string name="question_general">What do you want to tell us?</string>
+    <string name="rbtn_question">Question</string>
+    <string name="rbtn_report">Bug report</string>
+    <string name="rbtn_suggestion">Suggestion</string>
+    <string name="rbtn_compliment">Compliment</string>
+    <string name="rbtn_others">Other</string>
+    <string name="contact_question_se">What is your inquiry about?</string>
+    <string name="contact_rbtn_records">Records</string>
+    <string name="contact_rbtn_migration">Migration</string>
+    <string name="contact_rbtn_features">Features</string>
+    <string name="contact_rbtn_supports">Supports</string>
+    <string name="contact_content">Content</string>
+    <string name="contact_text_notice">Notice</string>
+    <string name="contact_notice_content">• It may take up to 7 days for our support team to get back to you.\n• Abusive language or spam will not be tolerated.\n• By pressing [Send], you agree to the Terms of Service and Privacy Policy.</string>
+    <string name="contact_rbtn_send">Send</string>
+    <string name="contact_title">Contact us</string>
+    <string name="contact_text_hint">Your message</string>
+    <string name="contact_max_image">You selected the maximum number of images"</string>
+    <string name="contact_allow_image">You can only select up to 1 image</string>
+    <!--    food-admin-->
+    <string name="search_food">Search food…</string>
+    <string name="filter_type">Filter by type: </string>
+    <string name="add_new_food">Add new meal</string>
+    <string name="edit_food">Edit food</string>
+    <string name="serving">Serving size</string>
+    <string name="food_type">Food type</string>
+    <string name="save">Save</string>
+    <!--    notification-->
+    <string name="permission_deny">Permission denied. Notifications will be turned off.</string>
+    <string name="permission_denied_title">Permission Denied</string>
+    <string name="permission_denied_message">To receive notifications, please enable the permission in App Settings.</string>
+    <string name="open_settings_button">Open Settings</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="confirm_disable_title">Confirm Disable Notifications</string>
+    <string name="confirm_disable_message">Are you sure you want to disable notifications? You can change this in the App Settings.</string>
+    <!--    step-->
+    <string name="step_permission_title">Step Tracking Permission Required</string>
+    <string name="step_permission_message">This app needs the ACTIVITY_RECOGNITION permission to track your steps accurately.</string>
+    <string name="step_permission_granted">Step tracking permission granted</string>
+    <string name="step_permission_disabled">You have disabled step tracking permission</string>
+    <string name="step_permission_denied_title">Permission denied</string>
+    <string name="step_permission_denied_message">The app needs step tracking permission to work properly.</string>
+    <string name="open_settings">Open settings</string>
+    <string name="ignore">Ignore</string>
+    <string name="permission_granted_msg">Step tracking permission granted</string>
+    <string name="permission_denied_msg">You have denied step tracking permission. Some features may not work.</string>
+
 </resources>

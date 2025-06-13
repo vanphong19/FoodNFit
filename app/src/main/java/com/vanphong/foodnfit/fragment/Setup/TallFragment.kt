@@ -1,60 +1,89 @@
 package com.vanphong.foodnfit.fragment.Setup
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.vanphong.foodnfit.R
+import com.vanphong.foodnfit.adapter.NumberPickerAdapter
+import com.vanphong.foodnfit.databinding.FragmentTallBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TallFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TallFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentTallBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tall, container, false)
-    }
+    ): View {
+        _binding = FragmentTallBinding.inflate(inflater)
+        val recyclerView = binding.rvPicker
+        val numbers = (100..220).toList()
+        val initialPos = numbers.indexOf(150)
+        val adapter = NumberPickerAdapter(numbers, initialPos)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TallFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TallFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        recyclerView.adapter = adapter
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager = layoutManager
+
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(recyclerView)
+
+        // Biến lưu vị trí đã toast lần gần nhất
+        var lastCenterPos = -1
+
+        recyclerView.post {
+            val itemWidth = recyclerView.context.resources.displayMetrics.density * 80 // 80dp từ XML
+            val rvWidth = recyclerView.width
+            val offset = (rvWidth / 2) - (itemWidth / 2)
+            layoutManager.scrollToPositionWithOffset(initialPos, offset.toInt())
+
+            // Lấy snapView và centerPos ngay sau khi canh giữa
+            recyclerView.post {
+                val snapView = snapHelper.findSnapView(recyclerView.layoutManager)
+                snapView?.let {
+                    val centerPos = recyclerView.getChildAdapterPosition(it)
+                    if (centerPos != RecyclerView.NO_POSITION) {
+                        adapter.updateCenterPosition(centerPos)
+                        if (centerPos != lastCenterPos) {
+                            val value = numbers[centerPos]
+                            Toast.makeText(requireContext(), "Bạn chọn: $value", Toast.LENGTH_SHORT).show()
+                            lastCenterPos = centerPos
+                        }
+                    }
                 }
             }
+        }
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    val snapView = snapHelper.findSnapView(recyclerView.layoutManager)
+                    snapView?.let {
+                        val centerPos = recyclerView.getChildAdapterPosition(it)
+                        if (centerPos != RecyclerView.NO_POSITION) {
+                            adapter.updateCenterPosition(centerPos)
+                            if (centerPos != lastCenterPos) {
+                                val value = numbers[centerPos]
+                                Toast.makeText(requireContext(), "Bạn chọn: $value", Toast.LENGTH_SHORT).show()
+                                lastCenterPos = centerPos
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

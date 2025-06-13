@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     kotlin("kapt")
     alias(libs.plugins.androidxNavigationSafeargs)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -84,4 +85,16 @@ dependencies {
     implementation ("androidx.camera:camera-core:1.4.2")
     implementation ("androidx.camera:camera-camera2:1.4.2")
     implementation ("androidx.camera:camera-lifecycle:1.4.2")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
+    implementation("io.github.ShawnLin013:number-picker:2.4.13")
+    implementation("io.coil-kt:coil:2.4.0")
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.14.0"))
+    implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.android.gms:play-services-fitness:21.2.0")
+    implementation ("androidx.work:work-runtime:2.7.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+    implementation ("com.google.android.gms:play-services-auth:20.7.0")
 }

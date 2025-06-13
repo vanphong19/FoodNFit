@@ -9,5 +9,6 @@ data class Reminder (
     val reminderType: String?,
     val message: String?,
     val scheduledTime: LocalDateTime?,
-    val isActive: Boolean
+    val isActive: Boolean,
+    val isRead: Boolean
 )

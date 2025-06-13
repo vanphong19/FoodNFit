@@ -35,18 +35,19 @@
                     app:cardCornerRadius="45dp"
                     android:layout_marginEnd="10dp"
                     android:padding="10dp"
-                    android:elevation="8dp">
+                    android:elevation="8dp"
+                    android:id="@+id/logoutButton">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <ImageView
-                            android:layout_width="30dp"
+                            android:layout_width="29dp"
                             android:layout_height="30dp"
                             android:layout_centerInParent="true"
                             android:layout_marginEnd="10dp"
-                            android:src="@drawable/ic_logout"
-                            />
+                            android:src="@drawable/ic_logout" />
                     </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -193,7 +194,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:onClick="@{() -> personViewModel.onCLickNavigateProfile()}">
 
                     <ImageView
                         android:layout_width="32dp"

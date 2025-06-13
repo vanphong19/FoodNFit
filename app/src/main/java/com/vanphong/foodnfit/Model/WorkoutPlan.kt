@@ -7,5 +7,6 @@ data class WorkoutPlan (
     val id: Int,
     val userId: UUID,
     val exerciseCount: Int,
-    val date: LocalDate
+    val date: LocalDate,
+    val caloriesBurnt: Float
 )

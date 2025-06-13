@@ -7,12 +7,49 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="70dp">
 
+        <!-- Tiêu đề chính -->
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        
+            android:layout_height="wrap_content"
+            android:text="@string/your_tall"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:textColor="#00CC99"/>
+
+        <!-- Mô tả phụ -->
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personalize_experience"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="50dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_down_arrows"
+            android:layout_marginTop="80dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPicker"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"/>
     </LinearLayout>
 
 </layout>

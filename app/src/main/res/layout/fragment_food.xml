@@ -347,7 +347,7 @@
                                 android:max="100"
                                 android:min="0"
                                 android:progress="20"
-                                android:progressBackgroundTint="#FA8072"
+                                android:progressBackgroundTint="#99FF33"
                                 android:progressTint="@color/color_carbs" />
                         </LinearLayout>
                     </GridLayout>
@@ -373,7 +373,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="32dp"
-                        android:background="#99EEEEEE">
+                        android:background="#99EEEEEE"
+                        android:id="@+id/breakfast"
+                        android:onClick="@{() -> foodViewModel.onClickNavigateChooseFood()}">
 
                         <ImageView
                             android:layout_width="52dp"
@@ -395,8 +397,6 @@
                                 android:textSize="24sp"
                                 android:text="@string/breakfast"/>
 
-
-
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -406,11 +406,13 @@
                         </LinearLayout>
                         
                         <ImageView
+                            android:id="@+id/img_next1"
                             android:layout_width="24dp"
                             android:layout_height="36dp"
                             android:layout_centerVertical="true"
                             android:layout_alignParentEnd="true"
-                            android:src="@drawable/right_arrow_green"/>
+                            android:src="@drawable/right_arrow_green"
+                            android:onClick="@{() -> foodViewModel.onClickNavigateFoodDetail()}"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -426,7 +428,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="32dp"
-                        android:background="#99EEEEEE">
+                        android:background="#99EEEEEE"
+                        android:id="@+id/lunch"
+                        android:onClick="@{() -> foodViewModel.onClickNavigateChooseFood()}">
 
                         <ImageView
                             android:layout_width="52dp"
@@ -459,11 +463,13 @@
                         </LinearLayout>
 
                         <ImageView
+                            android:id="@+id/img_next2"
                             android:layout_width="24dp"
                             android:layout_height="36dp"
                             android:layout_centerVertical="true"
                             android:layout_alignParentEnd="true"
-                            android:src="@drawable/right_arrow_green"/>
+                            android:src="@drawable/right_arrow_green"
+                            android:onClick="@{() -> foodViewModel.onClickNavigateFoodDetail()}"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -479,7 +485,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="32dp"
-                        android:background="#99EEEEEE">
+                        android:background="#99EEEEEE"
+                        android:id="@+id/dinner"
+                        android:onClick="@{() -> foodViewModel.onClickNavigateChooseFood()}">
 
                         <ImageView
                             android:layout_width="52dp"
@@ -512,11 +520,13 @@
                         </LinearLayout>
 
                         <ImageView
+                            android:id="@+id/img_next3"
                             android:layout_width="24dp"
                             android:layout_height="36dp"
                             android:layout_centerVertical="true"
                             android:layout_alignParentEnd="true"
-                            android:src="@drawable/right_arrow_green"/>
+                            android:src="@drawable/right_arrow_green"
+                            android:onClick="@{() -> foodViewModel.onClickNavigateFoodDetail()}"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -533,7 +543,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="32dp"
-                        android:background="#99EEEEEE">
+                        android:background="#99EEEEEE"
+                        android:id="@+id/snack"
+                        android:onClick="@{() -> foodViewModel.onClickNavigateChooseFood()}">
 
                         <ImageView
                             android:layout_width="52dp"
@@ -566,11 +578,13 @@
                         </LinearLayout>
 
                         <ImageView
+                            android:id="@+id/img_next4"
                             android:layout_width="24dp"
                             android:layout_height="36dp"
                             android:layout_centerVertical="true"
                             android:layout_alignParentEnd="true"
-                            android:src="@drawable/right_arrow_green"/>
+                            android:src="@drawable/right_arrow_green"
+                            android:onClick="@{() -> foodViewModel.onClickNavigateFoodDetail()}"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>

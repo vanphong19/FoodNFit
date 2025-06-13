@@ -1,5 +1,6 @@
 package com.vanphong.foodnfit.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,6 +20,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vanphong.foodnfit.R
+import com.vanphong.foodnfit.activity.ChooseFoodActivity
+import com.vanphong.foodnfit.activity.MealInformationActivity
 import com.vanphong.foodnfit.adapter.CalendarAdapter
 import com.vanphong.foodnfit.adapter.FoodAdapter
 import com.vanphong.foodnfit.databinding.FragmentFoodBinding
@@ -38,13 +41,36 @@ class FoodFragment : Fragment(), CalendarAdapter.OnItemListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_food,container, false)
+        binding.lifecycleOwner = this
+        binding.foodViewModel = viewModel
         previousWeekAction()
         nextWeekAction()
         setWeekView()
         setUpMenu()
+        foodClick()
+        foodDetailClick()
         return binding.root
     }
 
+
+    private fun foodClick(){
+        viewModel.navigationChooseFood.observe(requireActivity()){navigateChooseFood ->
+            if(navigateChooseFood){
+                val intent = Intent(requireContext(), ChooseFoodActivity::class.java)
+                startActivity(intent)
+                viewModel.onChooseFoodComplete()
+            }
+        }
+    }
+    private fun foodDetailClick(){
+        viewModel.navigationFoodDetail.observe(requireActivity()){navigateFoodDetail ->
+            if(navigateFoodDetail){
+                val intent = Intent(requireContext(), MealInformationActivity::class.java)
+                startActivity(intent)
+                viewModel.onNavigationComplete()
+            }
+        }
+    }
     private fun setUpMenu(){
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbarFood)
 

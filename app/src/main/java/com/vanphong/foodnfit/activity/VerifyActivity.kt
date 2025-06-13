@@ -1,5 +1,6 @@
 package com.vanphong.foodnfit.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,39 +17,52 @@ import com.vanphong.foodnfit.R
 import com.vanphong.foodnfit.component.OtpEditText
 import com.vanphong.foodnfit.databinding.ActivityVerifyBinding
 import com.vanphong.foodnfit.viewModel.OtpViewModel
-
 class VerifyActivity : BaseActivity() {
     private lateinit var binding: ActivityVerifyBinding
     private val viewModel: OtpViewModel by viewModels()
     private lateinit var otpFields: List<OtpEditText>
+    private lateinit var email: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_verify)
-        otpFields = listOf(binding.otp1,binding.otp2,binding.otp3,binding.otp4,binding.otp5,binding.otp6)
+        email = intent.getStringExtra("email") ?: ""
+
+        otpFields = listOf(binding.otp1, binding.otp2, binding.otp3, binding.otp4, binding.otp5, binding.otp6)
 
         setupOtpInputs()
 
-        viewModel.otpCode.observe(this) { otp ->
-            if (otp.length == 6) {
-                viewModel.verifyOtp("email@example.com", otp)
-                Toast.makeText(this, "Đang xác minh OTP: $otp", Toast.LENGTH_SHORT).show()
+        viewModel.verificationResult.observe(this) { success ->
+            if (success) {
+                Toast.makeText(this, getString(R.string.otp_success), Toast.LENGTH_SHORT).show()
+                // Chuyển sang màn hình tiếp theo (ví dụ LoginActivity)
+                val intent = Intent(this, SignInActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
+
+        viewModel.errorMessage.observe(this) { msg ->
+            msg?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.resend.setOnClickListener {
-            Toast.makeText(this, "Gửi lại mã OTP", Toast.LENGTH_SHORT).show()
+            viewModel.resendOtp(email)
         }
 
         binding.btnVerify.setOnClickListener {
             val otp = getOtp()
             if (otp.length == 6) {
-                viewModel.verifyOtp("email@example.com", otp)
+                viewModel.verifyOtp(email, otp)
             } else {
-                Toast.makeText(this, "Nhập đủ 6 số OTP", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.otp_incomplete), Toast.LENGTH_SHORT).show()
             }
         }
     }
+
     private fun setupOtpInputs() {
         for (i in otpFields.indices) {
             otpFields[i].addTextChangedListener(object : TextWatcher {
@@ -58,24 +72,22 @@ class VerifyActivity : BaseActivity() {
                     } else if (s?.isEmpty() == true && i > 0) {
                         otpFields[i - 1].requestFocus()
                     }
-
                     viewModel.updateOtp(getOtp())
                 }
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int)
-                {
-                }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
         }
+
         otpFields[0].setOnPasteListener { pastedText ->
-                if (pastedText.length == 6 && pastedText.all { it.isDigit() }) {
+            if (pastedText.length == 6 && pastedText.all { it.isDigit() }) {
                 for (i in otpFields.indices) {
                     otpFields[i].setText(pastedText[i].toString())
                 }
                 otpFields.last().requestFocus()
             } else {
-                Toast.makeText(this, "Mã OTP không hợp lệ!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.otp_invalid), Toast.LENGTH_SHORT).show()
             }
         }
     }

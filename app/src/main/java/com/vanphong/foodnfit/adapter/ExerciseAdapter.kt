@@ -26,7 +26,7 @@ class ExerciseAdapter(private val onClick: (exerciseId: Int) -> Unit,
         val tv_kcalBurnt: TextView = itemView.findViewById(R.id.tv_kcalBurnt)
         val tvSets: TextView = itemView.findViewById(R.id.tvSets)
         val tvReps: TextView = itemView.findViewById(R.id.tvReps)
-        val tvKcalBurnt: TextView = itemView.findViewById(R.id.tvKcalBurnt)
+        val tvKcalBurnt: TextView = itemView.findViewById(R.id.tvkcalBurnt)
         val imgCheck: ImageView = itemView.findViewById(R.id.img_check)
         val lnSetRep: LinearLayout = itemView.findViewById(R.id.ln_set_rep)
     }

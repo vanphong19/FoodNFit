@@ -90,7 +90,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_gravity="end"
                     android:text="@string/add_meal"
-                    android:backgroundTint="@android:color/transparent"
+                    android:backgroundTint="@color/blue_pastel"
                     android:textColor="@color/black"/>
 
                 <TextView

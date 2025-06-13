@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="22/2"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/tvWorkoutDate"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:id="@+id/tvExerciseCount"
+            android:text="4"
+            android:textColor="@android:color/holo_green_dark"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/tvExerciseCount"
+            android:textSize="16sp"
+            android:text="@string/exercises"
+            android:layout_marginStart="3dp"
+            android:layout_alignBaseline="@+id/tvExerciseCount"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textSize="16sp"
+            android:text="@string/kcal_burnt"
+            android:id="@+id/tvKcalBurnt"
+            android:layout_alignBaseline="@id/tvExerciseCount"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="555"
+            android:layout_toStartOf="@id/tvKcalBurnt"
+            android:layout_marginEnd="3dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_light"
+            android:layout_alignBaseline="@id/tvExerciseCount"
+            android:id="@+id/tvExerciseBurnt"/>
+    </RelativeLayout>
+</LinearLayout>
