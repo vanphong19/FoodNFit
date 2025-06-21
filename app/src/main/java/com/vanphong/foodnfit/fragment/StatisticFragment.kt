@@ -12,7 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
-import com.vanphong.foodnfit.Model.UserProfiles
 import com.vanphong.foodnfit.R
 import com.vanphong.foodnfit.adapter.StatisticViewPagerAdapter
 import com.vanphong.foodnfit.databinding.FragmentStatisticBinding

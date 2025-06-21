@@ -3,11 +3,13 @@ package com.vanphong.foodnfit
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.ViewModelProvider
 import com.vanphong.foodnfit.activity.SignInActivity
+import com.vanphong.foodnfit.util.ColdStartHelper
 import com.vanphong.foodnfit.util.LanguagePreferenceHelper
 import com.vanphong.foodnfit.util.LanguageUtils
 import com.vanphong.foodnfit.viewModel.AuthViewModel
@@ -37,6 +39,26 @@ abstract class BaseActivity: AppCompatActivity(){
                 finish()
             }
         }
+        ColdStartHelper.recordActivity(this)
+    }
+    override fun onResume() {
+        super.onResume()
+        // ✅ THÊM: Record activity khi user quay lại
+        ColdStartHelper.recordActivity(this)
     }
 
+    // ✅ THÊM: Helper method để các activity con dùng
+    protected fun checkServerAndMakeApiCall(apiCall: () -> Unit) {
+        ColdStartHelper.warmUpIfNeeded(this) { success ->
+            if (success) {
+                apiCall()
+            } else {
+                showError("Server không phản hồi, vui lòng thử lại")
+            }
+        }
+    }
+
+    protected fun showError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 }

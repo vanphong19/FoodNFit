@@ -94,7 +94,7 @@
             app:layout_constraintStart_toEndOf="@id/cardImage"
             app:layout_constraintTop_toBottomOf="@id/tvCalories"
             app:layout_constraintEnd_toStartOf="@id/btnEdit"
-            tools:text="P: 31g | C: 0g | F: 4g" />
+             />
 
         <!-- Edit Button -->
         <ImageView
@@ -107,7 +107,10 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toStartOf="@id/btnDelete"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="Edit food" />
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:duplicateParentState="false"
+            />
 
         <!-- Delete Button -->
         <ImageView
@@ -120,8 +123,10 @@
             app:tint="@color/error"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="Delete food" />
+            android:contentDescription="Delete food"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:duplicateParentState="false"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </com.google.android.material.card.MaterialCardView>

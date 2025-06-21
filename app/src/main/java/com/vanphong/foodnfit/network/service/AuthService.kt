@@ -1,13 +1,13 @@
 package com.vanphong.foodnfit.network.service
 
-import com.vanphong.foodnfit.Model.OtpVerificationRequest
-import com.vanphong.foodnfit.Model.RegisterRequest
-import com.vanphong.foodnfit.Model.ResendOtpRequest
-import com.vanphong.foodnfit.Model.LoginRequest
-import com.vanphong.foodnfit.Model.AuthResponse
-import com.vanphong.foodnfit.Model.ChangePasswordRequest
-import com.vanphong.foodnfit.Model.RefreshTokenRequest
-import com.vanphong.foodnfit.Model.ResetPasswordRequest
+import com.vanphong.foodnfit.model.OtpVerificationRequest
+import com.vanphong.foodnfit.model.RegisterRequest
+import com.vanphong.foodnfit.model.ResendOtpRequest
+import com.vanphong.foodnfit.model.LoginRequest
+import com.vanphong.foodnfit.model.AuthResponse
+import com.vanphong.foodnfit.model.ChangePasswordRequest
+import com.vanphong.foodnfit.model.RefreshTokenRequest
+import com.vanphong.foodnfit.model.ResetPasswordRequest
 
 
 import retrofit2.Response

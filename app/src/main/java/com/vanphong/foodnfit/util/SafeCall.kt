@@ -60,4 +60,18 @@ suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): Result<T> {
         Result.failure(e)
     }
 }
+inline fun safeCallUnit(apiCall: () -> Response<*>): Result<Unit> {
+    return try {
+        val response = apiCall()
+        if (response.isSuccessful) {
+            Result.success(Unit)
+        } else {
+            val errorMsg = response.errorBody()?.string() ?: "Lỗi không xác định từ server"
+            Result.failure(Exception(errorMsg))
+        }
+    } catch (e: Exception) {
+        Result.failure(e)
+    }
+}
+
 

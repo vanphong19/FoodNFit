@@ -1,22 +1,22 @@
 package com.vanphong.foodnfit.adapter
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vanphong.foodnfit.Model.FoodItem
+import com.bumptech.glide.Glide
+import com.vanphong.foodnfit.model.FoodItem
 import com.vanphong.foodnfit.R
+import com.vanphong.foodnfit.model.FoodItemResponse
 import de.hdodenhof.circleimageview.CircleImageView
 
-class FoodAdapter(private var isGridView: Boolean, private val onAddFoodClick: (FoodItem) -> Unit) :
-    ListAdapter<FoodItem, RecyclerView.ViewHolder>(FoodDiffCallback()) {
+class FoodAdapter(private var isGridView: Boolean, private val onAddFoodClick: (FoodItemResponse) -> Unit,
+                  private val onItemClick: (FoodItemResponse) -> Unit) :
+    ListAdapter<FoodItemResponse, RecyclerView.ViewHolder>(FoodDiffCallback()) {
 
     companion object {
         private const val VIEW_TYPE_GRID = 0
@@ -59,19 +59,29 @@ class FoodAdapter(private var isGridView: Boolean, private val onAddFoodClick: (
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val food = getItem(position)
-        val recipeCalo = "${food.servingSize} - ${food.calories} kcal"
+        // Dùng %.0f để làm tròn calo thành số nguyên khi hiển thị
+        val recipeCalo = "${food.servingSizeEn} - ${"%.0f".format(food.calories)} kcal"
+
+        holder.itemView.setOnClickListener {
+            onItemClick(food)
+        }
 
         when (holder) {
             is FoodGridViewHolder -> {
-                holder.tvFoodName.text = food.name
+                // Sử dụng thuộc tính từ FoodItemResponse
+                holder.tvFoodName.text = food.nameEn
                 holder.tvSizeCalo.text = recipeCalo
-                holder.imgFood.setImageResource(R.drawable.thit_bo) // TODO: load image from URL later
+                Glide.with(holder.itemView.context)
+                    .load(food.imageUrl)
+                    .placeholder(R.drawable.ic_placeholder)
+                    .error(R.drawable.ic_placeholder)
+                    .into(holder.imgFood)
                 holder.btnAddFood.setOnClickListener {
                     onAddFoodClick(food)
                 }
             }
             is FoodListViewHolder -> {
-                holder.tvFoodName.text = food.name
+                holder.tvFoodName.text = food.nameEn
                 holder.tvSizeCalo.text = recipeCalo
                 holder.btnAddFood.setOnClickListener{
                     onAddFoodClick(food)
@@ -85,12 +95,12 @@ class FoodAdapter(private var isGridView: Boolean, private val onAddFoodClick: (
         notifyDataSetChanged() // bắt buộc reload lại layout
     }
 }
-class FoodDiffCallback: DiffUtil.ItemCallback<FoodItem>(){
-    override fun areItemsTheSame(oldItem: FoodItem, newItem: FoodItem): Boolean {
+class FoodDiffCallback: DiffUtil.ItemCallback<FoodItemResponse>(){
+    override fun areItemsTheSame(oldItem: FoodItemResponse, newItem: FoodItemResponse): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: FoodItem, newItem: FoodItem): Boolean {
+    override fun areContentsTheSame(oldItem: FoodItemResponse, newItem: FoodItemResponse): Boolean {
         return oldItem == newItem
     }
 

@@ -1,14 +1,13 @@
 package com.vanphong.foodnfit.repository
 
-import com.vanphong.foodnfit.Model.AuthResponse
-import com.vanphong.foodnfit.Model.ChangePasswordRequest
-import com.vanphong.foodnfit.Model.LoginRequest
-import com.vanphong.foodnfit.Model.OtpVerificationRequest
-import com.vanphong.foodnfit.Model.RefreshTokenRequest
-import com.vanphong.foodnfit.Model.RegisterRequest
-import com.vanphong.foodnfit.Model.ResendOtpRequest
-import com.vanphong.foodnfit.Model.ResetPasswordRequest
-import com.vanphong.foodnfit.network.RetrofitClient
+import com.vanphong.foodnfit.model.AuthResponse
+import com.vanphong.foodnfit.model.ChangePasswordRequest
+import com.vanphong.foodnfit.model.LoginRequest
+import com.vanphong.foodnfit.model.OtpVerificationRequest
+import com.vanphong.foodnfit.model.RefreshTokenRequest
+import com.vanphong.foodnfit.model.RegisterRequest
+import com.vanphong.foodnfit.model.ResendOtpRequest
+import com.vanphong.foodnfit.model.ResetPasswordRequest
 import com.vanphong.foodnfit.network.service.AuthService
 import com.vanphong.foodnfit.util.safeCall
 import com.vanphong.foodnfit.util.safeCallString
@@ -42,7 +41,7 @@ class AuthRepository(private val api: AuthService) {
     }
 
     suspend fun changePassword(token: String, request: ChangePasswordRequest): Result<String> = safeCallString {
-        api.changePassword(token.withBearer(), request)
+        api.changePassword("Bearer $token", request)
     }
 
     suspend fun forgotPassword(request: ResendOtpRequest): Result<String> = safeCallString {

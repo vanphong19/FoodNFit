@@ -40,12 +40,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!-- Calendar Section: No changes needed here -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/btn_back_calendar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -53,19 +55,19 @@
                         android:text="@string/backward"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:id="@+id/btn_back_calendar"/>
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_monthYear"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:id="@+id/tv_monthYear"
                         android:textAlignment="center"
                         android:textSize="22sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <Button
+                        android:id="@+id/btn_next_calendar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -73,7 +75,6 @@
                         android:text="@string/forward"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="24sp"
-                        android:id="@+id/btn_next_calendar"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -82,69 +83,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginHorizontal="20dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/sun"
-                        android:textSize="16sp"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/darker_gray"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/mon"
-                        android:textSize="16sp"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/darker_gray"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/tue"
-                        android:textSize="16sp"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/darker_gray"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/wed"
-                        android:textSize="16sp"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/darker_gray"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/thu"
-                        android:textSize="16sp"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/darker_gray"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/fri"
-                        android:textSize="16sp"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/darker_gray"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/sat"
-                        android:textSize="16sp"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/darker_gray"/>
+                    <!-- Weekday headers -->
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/sun" android:textSize="16sp" android:textAlignment="center" android:textColor="@android:color/darker_gray"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/mon" android:textSize="16sp" android:textAlignment="center" android:textColor="@android:color/darker_gray"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/tue" android:textSize="16sp" android:textAlignment="center" android:textColor="@android:color/darker_gray"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/wed" android:textSize="16sp" android:textAlignment="center" android:textColor="@android:color/darker_gray"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/thu" android:textSize="16sp" android:textAlignment="center" android:textColor="@android:color/darker_gray"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/fri" android:textSize="16sp" android:textAlignment="center" android:textColor="@android:color/darker_gray"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/sat" android:textSize="16sp" android:textAlignment="center" android:textColor="@android:color/darker_gray"/>
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -152,7 +98,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"/>
-
             </LinearLayout>
 
             <androidx.core.widget.NestedScrollView
@@ -188,118 +133,23 @@
                                 android:paddingHorizontal="20dp"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
-                                android:text="1000 kcal"
+                                android:text='@{String.format("%.0f kcal", exerciseViewModel.totalCaloriesBurnt)}'
+                                tools:text="1000 kcal"
                                 android:background="@drawable/bg_tv_kcal_statistic"/>
-                            
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="5dp"
-                                android:gravity="center">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textStyle="bold"
-                                    android:text="may 18"/>
-                                
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="3dp"
-                                    android:text="- 2 activities"/>
-                            </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:textStyle="bold"
+                                android:text="@{exerciseViewModel.planInfoString}" />
 
                             <com.github.mikephil.charting.charts.LineChart
+                                android:id="@+id/line_chart"
                                 android:layout_width="match_parent"
                                 android:layout_height="300dp"
                                 android:layout_marginTop="5dp"/>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="16dp"
-                        android:elevation="8dp"
-                        android:layout_marginVertical="12dp"
-                        android:layout_marginHorizontal="5dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="16dp"
-                            android:background="#90EEEEEE">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/calories_gained"
-                                    android:textStyle="bold"
-                                    android:textSize="18sp"/>
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="2dp">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="24sp"
-                                        android:textStyle="bold"
-                                        android:text="100"/>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="2dp"
-                                        android:text="@string/kcal"/>
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/calories_burnt"
-                                    android:textStyle="bold"
-                                    android:textSize="18sp"/>
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="2dp">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="24sp"
-                                        android:textStyle="bold"
-                                        android:text="-100"/>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="2dp"
-                                        android:text="@string/kcal"/>
-                                </LinearLayout>
-                            </LinearLayout>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -309,6 +159,7 @@
                         android:layout_marginBottom="12dp"
                         android:textSize="20sp"
                         android:textStyle="bold"
+                        android:layout_marginTop="16dp"
                         android:text="@string/activity_log"/>
 
                     <androidx.recyclerview.widget.RecyclerView

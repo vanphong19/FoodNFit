@@ -1,23 +1,25 @@
 package com.vanphong.foodnfit.admin.fragment
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.vanphong.foodnfit.Model.User
 import com.vanphong.foodnfit.R
 import com.vanphong.foodnfit.admin.activity.AccountActivity
 import com.vanphong.foodnfit.admin.activity.AccountInfoActivity
+import com.vanphong.foodnfit.admin.activity.AddEditAccountActivity
 import com.vanphong.foodnfit.admin.adapter.AccountAdapter
 import com.vanphong.foodnfit.admin.viewModel.AccountViewModel
+import com.vanphong.foodnfit.admin.viewModel.AddEditAccountViewModel
 import com.vanphong.foodnfit.databinding.FragmentAdminAccountBinding
 
 class AdminAccountFragment : Fragment() {
@@ -26,6 +28,15 @@ class AdminAccountFragment : Fragment() {
     private val viewModel: AccountViewModel by viewModels()
     private lateinit var chipGroupGender: ChipGroup
     private lateinit var chipGroupStatus: ChipGroup
+
+    private val accountInfoLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){ result ->
+        if (result.resultCode == Activity.RESULT_OK){
+            viewModel.refreshList()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,13 +63,18 @@ class AdminAccountFragment : Fragment() {
             viewModel.refreshList()
             binding.swipeRefresh.isRefreshing = false
         }
+
+        binding.btnAddAccount.setOnClickListener {
+            val intent = Intent(requireContext(), AddEditAccountActivity::class.java)
+            accountInfoLauncher.launch(intent)
+        }
         return binding.root
     }
     private fun setRvAccount() {
         accountAdapter = AccountAdapter{userId ->
             val intent = Intent(requireContext(), AccountInfoActivity::class.java)
             intent.putExtra("user_id", userId)
-            startActivity(intent)
+            accountInfoLauncher.launch(intent)
         }
 
         binding.rvAccounts.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -169,6 +185,6 @@ class AdminAccountFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        setRvAccount()
+        viewModel.refreshList()
     }
 }

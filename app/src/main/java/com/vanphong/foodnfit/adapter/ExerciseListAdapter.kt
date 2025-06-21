@@ -1,36 +1,25 @@
 package com.vanphong.foodnfit.adapter
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.NumberPicker
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vanphong.foodnfit.Model.Exercises
 import com.vanphong.foodnfit.R
 import com.vanphong.foodnfit.interfaces.OnExerciseAddListener
-import java.math.BigDecimal
-import java.math.RoundingMode
+import com.vanphong.foodnfit.interfaces.OnExerciseListener
+import com.vanphong.foodnfit.model.SelectableExercise
 
-class ExerciseListAdapter(private val listener: OnExerciseAddListener): ListAdapter<Exercises, ExerciseListAdapter.ExerciseListViewHolder>(ExerciseListDiffCallback()) {
-    class ExerciseListViewHolder(private val itemView: View): RecyclerView.ViewHolder(itemView){
-        val rlAddExercise: RelativeLayout = itemView.findViewById(R.id.rl_addExercise)
+class ExerciseListAdapter(private val listener: OnExerciseListener) :
+    ListAdapter<SelectableExercise, ExerciseListAdapter.ExerciseListViewHolder>(SelectableExerciseDiffCallback()) {
+
+    class ExerciseListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+        val rootLayout: RelativeLayout = itemView.findViewById(R.id.rl_addExercise) // Tham chiếu đến layout gốc
         val imgExercise: ImageView = itemView.findViewById(R.id.img_add_exercise)
         val tvExerciseName: TextView = itemView.findViewById(R.id.tvExerciseName)
         val lnMinuteKcal: LinearLayout = itemView.findViewById(R.id.ln_minute_kcal)
@@ -49,186 +38,54 @@ class ExerciseListAdapter(private val listener: OnExerciseAddListener): ListAdap
     }
 
     override fun onBindViewHolder(holder: ExerciseListViewHolder, position: Int) {
-        val exercise = getItem(position)
+        val selectableExercise = getItem(position)
+        val exercise = selectableExercise.exercise
 
+        // Bind dữ liệu như cũ
         holder.imgExercise.setImageResource(R.drawable.football)
         holder.tvExerciseName.text = exercise.name
 
         if (exercise.minutes == null) {
             holder.lnMinuteKcal.visibility = View.GONE
             holder.lnSetRep.visibility = View.VISIBLE
-
             holder.tvReps.text = exercise.reps.toString()
             holder.tvSets.text = exercise.sets.toString()
             holder.tvKcalBurnt.text = exercise.caloriesBurnt.toString()
         } else {
             holder.lnSetRep.visibility = View.GONE
             holder.lnMinuteKcal.visibility = View.VISIBLE
-
             holder.minutePractice.text = exercise.minutes.toString()
             holder.tv_kcalBurnt.text = exercise.caloriesBurnt.toString()
         }
 
-        holder.btnAddExercise.setOnClickListener {
-            if(exercise.minutes != null){
-                showMinuteDialog(holder.btnAddExercise.context,exercise)
+        // Cập nhật trạng thái của item
+        if (selectableExercise.isSelected) {
+            holder.btnAddExercise.setImageResource(R.drawable.ic_check)
+            holder.rootLayout.isEnabled = false // Vô hiệu hóa click trên toàn bộ item
+            holder.rootLayout.alpha = 0.6f // Làm mờ item để cho biết đã được chọn
+        } else {
+            holder.btnAddExercise.setImageResource(R.drawable.ic_plus_gray)
+            holder.rootLayout.isEnabled = true
+            holder.rootLayout.alpha = 1.0f
+        }
+
+        // Gán listener cho toàn bộ item view
+        holder.rootLayout.setOnClickListener {
+            // Chỉ gọi listener nếu item chưa được chọn
+            if (!selectableExercise.isSelected) {
+                listener.onExerciseAdded(exercise)
             }
-            else{
-                showSetRepDialog(holder.btnAddExercise.context, exercise)
-            }
         }
     }
-
-    private fun showMinuteDialog(context: Context, exercise: Exercises) {
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.layout_choose_time_dialog, null)
-
-        val dialog = AlertDialog.Builder(context)
-            .setView(dialogView)
-            .setCancelable(false)
-            .create()
-
-        // Yêu cầu không tiêu đề
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-
-        // Cấu hình kích thước và vị trí cửa sổ
-        dialog.setOnShowListener {
-            val window = dialog.window ?: return@setOnShowListener
-            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
-            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            val windowAttributes = window.attributes
-            windowAttributes.gravity = Gravity.BOTTOM
-            window.attributes = windowAttributes
-        }
-
-        // Ánh xạ view trong dialog
-        val tvExerciseName = dialogView.findViewById<TextView>(R.id.tvExerciseName)
-        val minutePractice = dialogView.findViewById<TextView>(R.id.minute_practice)
-        val tvKcalBurnt = dialogView.findViewById<TextView>(R.id.tv_kcalBurnt)
-        val npHour = dialogView.findViewById<NumberPicker>(R.id.npHour)
-        val npMinute = dialogView.findViewById<NumberPicker>(R.id.npMinute)
-        val btnAdd = dialogView.findViewById<Button>(R.id.btnAddActivity)
-        val btnCancel = dialogView.findViewById<TextView>(R.id.btnCancel)
-
-        // Gán dữ liệu
-        tvExerciseName.text = exercise.name
-        npHour.minValue = 0
-        npHour.maxValue = 5
-        npMinute.minValue = 0
-        npMinute.maxValue = 59
-
-        fun updateCalculations() {
-            val totalMinutes = npHour.value * 60 + npMinute.value
-            // Giả sử rằng exercise.minutes luôn có giá trị (dùng !! nếu chắc chắn không null)
-            val rawCaloriesBurnt = (exercise.caloriesBurnt / (exercise.minutes ?: 1)) * totalMinutes
-            val caloriesBurnt = BigDecimal(rawCaloriesBurnt.toDouble())
-                .setScale(2, RoundingMode.HALF_UP)
-                .toFloat()
-
-            minutePractice.text = totalMinutes.toString()
-            tvKcalBurnt.text = caloriesBurnt.toString()
-        }
-
-        // Cập nhật ban đầu
-        updateCalculations()
-
-        // Lắng nghe sự thay đổi của npHour và npMinute
-        npHour.setOnValueChangedListener { _, _, _ ->
-            updateCalculations()
-        }
-
-        npMinute.setOnValueChangedListener { _, _, _ ->
-            updateCalculations()
-        }
-
-        btnCancel.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        btnAdd.setOnClickListener {
-            val totalMinutes = npHour.value * 60 + npMinute.value
-            listener.onAddExerciseByMinute(exercise, totalMinutes)  // Gọi callback
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }
-
-    private fun showSetRepDialog(context: Context, exercise: Exercises){
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.layout_set_rep_dialog, null)
-
-        val dialog = AlertDialog.Builder(context)
-            .setView(dialogView)
-            .setCancelable(false)
-            .create()
-
-        // Yêu cầu không tiêu đề
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-
-        // Cấu hình kích thước và vị trí cửa sổ
-        dialog.setOnShowListener {
-            val window = dialog.window ?: return@setOnShowListener
-            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
-            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            val windowAttributes = window.attributes
-            windowAttributes.gravity = Gravity.BOTTOM
-            window.attributes = windowAttributes
-        }
-
-        // Ánh xạ view trong dialog
-        val tvExerciseName = dialogView.findViewById<TextView>(R.id.tvExerciseName)
-        val tvSet = dialogView.findViewById<TextView>(R.id.tvSets)
-        val tvRep = dialogView.findViewById<TextView>(R.id.tvReps)
-        val tvCLBurnt = dialogView.findViewById<TextView>(R.id.tvKcalBurnt)
-        val npSet = dialogView.findViewById<NumberPicker>(R.id.npSet)
-        val npRep = dialogView.findViewById<NumberPicker>(R.id.npRep)
-        val btnAdd = dialogView.findViewById<Button>(R.id.btnAddActivity)
-        val btnCancel = dialogView.findViewById<TextView>(R.id.btnCancel)
-
-        // Gán dữ liệu
-        tvExerciseName.text = exercise.name
-        npSet.minValue = 1
-        npSet.maxValue = 60
-        npRep.minValue = 1
-        npRep.maxValue = 60
-
-        fun updateCalculations() {
-            tvSet.text = npSet.value.toString()
-            tvRep.text = npRep.value.toString()
-        }
-
-        // Cập nhật ban đầu
-        updateCalculations()
-
-        // Lắng nghe sự thay đổi của npHour và npMinute
-        npSet.setOnValueChangedListener { _, _, _ ->
-            updateCalculations()
-        }
-
-        npRep.setOnValueChangedListener { _, _, _ ->
-            updateCalculations()
-        }
-
-        btnCancel.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        btnAdd.setOnClickListener {
-            val set = npSet.value
-            val rep = npRep.value
-            listener.onAddExerciseBySetRep(exercise, set, rep)  // Gọi callback
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }
+    // Không cần các hàm show...Dialog nữa!
 }
-class ExerciseListDiffCallback: DiffUtil.ItemCallback<Exercises>(){
-    override fun areItemsTheSame(oldItem: Exercises, newItem: Exercises): Boolean {
-        return oldItem.id == newItem.id
-    }
 
-    override fun areContentsTheSame(oldItem: Exercises, newItem: Exercises): Boolean {
+// DiffCallback không thay đổi
+class SelectableExerciseDiffCallback : DiffUtil.ItemCallback<SelectableExercise>() {
+    override fun areItemsTheSame(oldItem: SelectableExercise, newItem: SelectableExercise): Boolean {
+        return oldItem.exercise.id == newItem.exercise.id
+    }
+    override fun areContentsTheSame(oldItem: SelectableExercise, newItem: SelectableExercise): Boolean {
         return oldItem == newItem
     }
-
 }

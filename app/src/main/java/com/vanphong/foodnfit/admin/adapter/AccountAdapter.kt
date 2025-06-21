@@ -10,14 +10,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.vanphong.foodnfit.Model.User
-import com.vanphong.foodnfit.Model.UserResponse
+import com.vanphong.foodnfit.model.UserResponse
 import com.vanphong.foodnfit.R
 import de.hdodenhof.circleimageview.CircleImageView
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
-import java.util.UUID
 
 class AccountAdapter(private val onItemClick:(String) -> Unit): ListAdapter<UserResponse, AccountAdapter.AccountViewHolder>(AccountDiffCallback()) {
     class AccountViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

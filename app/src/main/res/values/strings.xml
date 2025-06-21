@@ -42,6 +42,7 @@
     <string name="logging_menu">Logging</string>
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
+    <string name="scan">Scan</string>
     <!--    setup-->
     <string name="what_name">What is your name?</string>
     <string name="your_birth">Your date of birth?</string>
@@ -64,17 +65,21 @@
     <string name="permission">Permission</string>
     <string name="notification_reminder">Reminder</string>
     <string name="security_title">Security</string>
-    <string name="reset_password">Reset password</string>
+    <string name="change_password">Change password</string>
     <string name="feedback_title">Feedback</string>
     <string name="vietnamese">Vietnamese</string>
     <string name="english">English</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="enter_current_and_new_password">Please enter your current and new password</string>
     <!--    person-->
     <string name="account">Account</string>
     <string name="help">Help</string>
     <string name="your_info">Your information</string>
     <string name="your_goal_info">Your Goal</string>
     <string name="food_goal">Food Goal</string>
-    <string name="exercise_food">Exercise Goal</string>
+    <string name="exercise_goal">Exercise Goal</string>
     <string name="age">Age</string>
     <string name="height">Height</string>
     <string name="weight">Weight</string>
@@ -135,7 +140,9 @@
     <string name="all_meal">All meal</string>
     <string name="zero">0</string>
     <string name="food">Foods</string>
+    <string name="food_name">Food name</string>
     <string name="add_meal">Add meal</string>
+    <string name="meal_log_title">%s Log</string>
     <!--    calendar-->
     <string name="sun">SUN</string>
     <string name="mon">MON</string>
@@ -157,6 +164,7 @@
     <string name="yes">Yes</string>
     <string name="no">No, thanks</string>
     <string name="add_exercise">Add exercise</string>
+    <string name="update_exercise">Update exercise</string>
     <string name="description">Description: </string>
     <string name="type">Type: </string>
     <string name="level">Level: </string>
@@ -170,6 +178,59 @@
     <string name="stay_active">Stay active – today’s workout is waiting!</string>
     <string name="information">Information</string>
     <string name="activity_log">Activity log</string>
+    <string-array name="exercise_categories">
+        <item>Gym</item>
+        <item>Cardio</item>
+        <item>Strength Training</item>
+        <item>Weightlifting</item>
+        <item>Bodyweight</item>
+        <item>HIIT</item>
+        <item>CrossFit</item>
+        <item>Powerlifting</item>
+        <item>Calisthenics</item>
+        <item>Resistance Band Training</item>
+        <item>Pilates</item>
+        <item>Yoga</item>
+        <item>Stretching</item>
+        <item>Mobility Training</item>
+        <item>Flexibility</item>
+        <item>Core Training</item>
+        <item>Abdominal Workout</item>
+        <item>Back Workout</item>
+        <item>Leg Day</item>
+        <item>Upper Body Workout</item>
+        <item>Full Body Workout</item>
+        <item>Functional Training</item>
+        <item>Endurance Training</item>
+        <item>Balance</item>
+        <item>Rehabilitation</item>
+        <item>Warm-up</item>
+        <item>Cool-down</item>
+        <item>Running</item>
+        <item>Cycling</item>
+        <item>Swimming</item>
+        <item>Hiking</item>
+        <item>Rowing</item>
+        <item>Martial Arts</item>
+        <item>Boxing</item>
+        <item>Kickboxing</item>
+        <item>Dance Fitness</item>
+        <item>Zumba</item>
+        <item>Aerobics</item>
+        <item>Tabata</item>
+    </string-array>
+    <string-array name="activity_levels">
+        <item>Sedentary (Little or no exercise)</item>
+        <item>Lightly Active (Light exercise 1–3 days/week)</item>
+        <item>Moderately Active (Moderate exercise 3–5 days/week)</item>
+        <item>Very Active (Hard exercise 6–7 days/week)</item>
+        <item>Extra Active (Very intense exercise or physical job)</item>
+    </string-array>
+    <string-array name="meal_goal">
+        <item>lose</item>
+        <item>maintain</item>
+        <item>gain</item>
+    </string-array>
     <!--    statistic-->
     <string name="weight_chart">Weight chart</string>
     <string name="exercise_chart">Exercise Chart</string>
@@ -190,6 +251,23 @@
     <string name="workout_log">Workout log</string>
     <string name="favourite_exercise">Favorite exercises</string>
     <string name="exercises">Exercises</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string-array name="months_full">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    <string name="no_data_for_this_month">Không có dữ liệu cho tháng này</string>
     <!--    notification-->
     <string name="view_notification">View previous notifications</string>
     <!--    onboarding-->
@@ -235,6 +313,13 @@
     <string name="calo_info">Calories information</string>
     <string name="unit">Unit</string>
     <string name="instructions">Instructions</string>
+    <string name="create_exercise_success">Exercise created successfully</string>
+    <string name="create_exercise_failed">Failed to create exercise</string>
+    <string name="update_exercise_success">Exercise updated successfully</string>
+    <string name="update_exercise_failed">Failed to update exercise</string>
+    <string name="remove_exercise_success">Exercise removed successfully</string>
+    <string name="remove_exercise_failed">Failed to remove exercise</string>
+    <string name="delete_exercise_messssage">Are you sure you want to delete the exercise?</string>
     <!--    admin-account-->
     <string name="all">All</string>
     <string name="blocked">Blocked</string>
@@ -252,6 +337,7 @@
     <string name="updater">Updater: </string>
     <string name="update_history">Update history</string>
     <string name="processing">Processing…</string>
+    <string name="loading">Loading data…</string>
     <!--    feedback-->
     <string name="question_general">What do you want to tell us?</string>
     <string name="rbtn_question">Question</string>
@@ -279,13 +365,35 @@
     <string name="edit_food">Edit food</string>
     <string name="serving">Serving size</string>
     <string name="food_type">Food type</string>
-    <string name="save">Save</string>
+    <string name="save_food">Save food</string>
+    <string name="update_food">Update food</string>
+    <string name="create_food_failed">Failed to create food</string>
+    <string name="update_food_failed">Failed to update food</string>
+    <string name="create_food_success">Food added successfully</string>
+    <string name="update_food_success">Food updated successfully</string>
+    <string name="remove_food_success">Remove successfully</string>
+    <string name="remove_food_failed">Failed to remove food</string>
+    <string name="confirm_delete">Confirm</string>
+    <string name="delete_message">Are you sure you want to delete the food "%1$s"?</string>
+    <string name="cancel">Hủy</string>
+    <string name="nutritional_info">Nutritional Information</string>
+    <string name="empty_name">Please enter food name</string>
+    <string name="empty_calories">Please enter calories</string>
+    <string name="empty_protein">Please enter protein amount</string>
+    <string name="empty_carbs">Please enter carbohydrate amount</string>
+    <string name="empty_fat">Please enter fat amount</string>
+    <string name="empty_serving_size">Please enter serving size</string>
+    <string name="empty_food_type">Please select food type</string>
+    <string name="empty_ingredients">Please enter ingredients</string>
+    <string name="empty_recipe">Please enter recipe</string>
+    <string name="empty_image">Please upload image before saving</string>
     <!--    notification-->
     <string name="permission_deny">Permission denied. Notifications will be turned off.</string>
     <string name="permission_denied_title">Permission Denied</string>
     <string name="permission_denied_message">To receive notifications, please enable the permission in App Settings.</string>
     <string name="open_settings_button">Open Settings</string>
     <string name="cancel_button">Cancel</string>
+    <string name="save">Save</string>
     <string name="confirm_disable_title">Confirm Disable Notifications</string>
     <string name="confirm_disable_message">Are you sure you want to disable notifications? You can change this in the App Settings.</string>
     <!--    step-->
@@ -299,5 +407,15 @@
     <string name="ignore">Ignore</string>
     <string name="permission_granted_msg">Step tracking permission granted</string>
     <string name="permission_denied_msg">You have denied step tracking permission. Some features may not work.</string>
-
+    <!--    admin-account-->
+    <string name="create_account_success">Account created successfully</string>
+    <string name="create_account_failed">Failed to create account</string>
+    <string name="update_account_success">Account updated successfully</string>
+    <string name="update_account_failed">Failed to update account</string>
+    <string name="remove_account_success">Account removed successfully</string>
+    <string name="remove_account_failed">Failed to remove account</string>
+    <string name="add_account">Add account</string>
+    <string name="update_account">Update account</string>
+    <string name="save_account">Save account</string>
+    <string name="change_avatar">Change avatar</string>
 </resources>

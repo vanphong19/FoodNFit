@@ -36,11 +36,62 @@
     <color name="nav_header">#00FF99</color>
     <color name="status_bar">#1976D2</color>
     <color name="green_500">#4CAF50</color>
-    <color name="text_primary">#212121</color>
-    <color name="text_secondary">#666666</color>
+
     <color name="text_tertiary">#999999</color>
     <color name="divider">#E0E0E0</color>
     <color name="card_background">#FFFFFF</color>
     <color name="active_status">#4CAF50</color>
     <color name="error">#F44336</color>
+    <color name="primary_color">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="accent_color">#FF4081</color>
+
+    <!-- Màu nền -->
+    <color name="background_color">#FAFAFA</color>
+    <color name="surface_color">#FFFFFF</color>
+
+    <!-- Màu text -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+
+    <!-- Màu trạng thái -->
+    <color name="error_color">#F44336</color>
+    <color name="success_color">#4CAF50</color>
+    <color name="warning_color">#FF9800</color>
+
+    <!-- Màu divider -->
+    <color name="divider_color">#BDBDBD</color>
+
+    <color name="pie_color_1">#FFC107</color>
+    <color name="pie_color_2">#FF5722</color>
+    <color name="pie_color_3">#4CAF50</color>
+    <color name="pie_color_4">#03A9F4</color>
+    <color name="pie_color_5">#9C27B0</color>
+    <color name="primary">#2196F3</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="hint_text">#BDBDBD</color>
+    <color name="border_color">#E0E0E0</color>
+    <color name="gray_light">#F5F5F5</color>
+    <color name="transparent">#00000000</color>
+
+
+    <color name="primary_light">#A5B4FC</color>
+
+    <!-- Accent Colors -->
+    <color name="accent">#F59E0B</color>
+    <color name="success">#10B981</color>
+    <color name="warning">#F59E0B</color>
+
+    <!-- Background Colors -->
+    <color name="background_light">#F9FAFB</color>
+    <color name="background_dark">#1F2937</color>
+    <color name="surface">#F3F4F6</color>
+
+
+    <color name="card_border">#E5E7EB</color>
+
+    <color name="message_bg">#F8FAFC</color>
+    <color name="message_border">#E2E8F0</color>
+
 </resources>

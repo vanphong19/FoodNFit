@@ -40,6 +40,7 @@ android {
     buildFeatures{
         dataBinding = true
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -93,8 +94,11 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation(platform("com.google.firebase:firebase-bom:33.14.0"))
     implementation("com.google.firebase:firebase-messaging")
-    implementation("com.google.android.gms:play-services-fitness:21.2.0")
     implementation ("androidx.work:work-runtime:2.7.0")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
-    implementation ("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.android.gms:play-services-fitness:21.1.0")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
 }

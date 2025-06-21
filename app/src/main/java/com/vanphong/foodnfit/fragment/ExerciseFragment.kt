@@ -1,6 +1,8 @@
 package com.vanphong.foodnfit.fragment
 
-import android.annotation.SuppressLint
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,12 +14,17 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
@@ -27,245 +34,170 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vanphong.foodnfit.Model.WorkoutExercises
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.vanphong.foodnfit.model.WorkoutExercises
 import com.vanphong.foodnfit.R
 import com.vanphong.foodnfit.activity.ExerciseInformationActivity
 import com.vanphong.foodnfit.activity.ExerciseListActivity
 import com.vanphong.foodnfit.adapter.CalendarAdapter
 import com.vanphong.foodnfit.adapter.ExerciseAdapter
 import com.vanphong.foodnfit.databinding.FragmentExerciseBinding
+import com.vanphong.foodnfit.model.DailyCaloriesExerciseDto
+import com.vanphong.foodnfit.model.ReminderRequest
 import com.vanphong.foodnfit.util.CalendarUtils
+import com.vanphong.foodnfit.util.DayAxisValueFormatter
+import com.vanphong.foodnfit.util.DialogUtils
 import com.vanphong.foodnfit.viewModel.ExerciseViewModel
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Calendar
 import java.util.Locale
 
 
-class ExerciseFragment : Fragment(), CalendarAdapter.OnItemListener {
+class ExerciseFragment : Fragment() { // Removed CalendarAdapter.OnItemListener, it's unused
     private var _binding: FragmentExerciseBinding? = null
     private val binding get() = _binding!!
     private lateinit var calendarAdapter: CalendarAdapter
     private lateinit var exerciseAdapter: ExerciseAdapter
     private val viewModel: ExerciseViewModel by viewModels()
+    private lateinit var chooseFoodLauncher: ActivityResultLauncher<Intent>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        chooseFoodLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                Log.d("FoodFragment", "Received RESULT_OK from ChooseFoodActivity. Reloading data.")
+                viewModel.fetchDataForDate(CalendarUtils.selectedDate)
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentExerciseBinding.inflate(layoutInflater)
-        binding.lifecycleOwner = this
-        binding.exerciseViewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner // Set lifecycle owner for LiveData binding
+        binding.exerciseViewModel = viewModel // Bind viewModel to layout
+
+        // Setup UI components
         previousWeekAction()
         nextWeekAction()
-        setWeekView()
+        setWeekView() // Initial view setup
         setUpMenu()
         setExerciseAdapter()
-        navigateExerciseList()
-        navigateExerciseInfo()
-        return binding.root
+        observeNavigation()
+        observeChartData()
 
+        viewModel.createResult.observe(viewLifecycleOwner) { result ->
+            result.onSuccess {
+                Toast.makeText(requireContext(), "Reminder created successfully!", Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                Toast.makeText(requireContext(), "Failed to create reminder: ${it.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        return binding.root
     }
 
-    private fun navigateExerciseInfo() {
+    private fun observeChartData() {
+        viewModel.exerciseChartData.observe(viewLifecycleOwner) { chartData ->
+            if (chartData != null && chartData.entries.isNotEmpty()) {
+                // Truyền dữ liệu đã được xử lý sẵn vào hàm vẽ
+                setupLineChart(chartData.entries, chartData.labels)
+                binding.lineChart.visibility = View.VISIBLE
+            } else {
+                binding.lineChart.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun setupLineChart(entries: List<Entry>, labels: List<String>) {
+        val dataSet = LineDataSet(entries, "Calories Per Exercise")
+
+        // === Các tùy chỉnh giao diện có thể giữ nguyên ===
+        dataSet.color = Color.parseColor("#FF9966")
+        dataSet.valueTextColor = Color.BLACK
+        dataSet.setCircleColor(Color.parseColor("#FF9966"))
+        dataSet.lineWidth = 2f
+        dataSet.valueTextSize = 10f
+        dataSet.setDrawValues(true)
+
+        val lineData = LineData(dataSet)
+        binding.lineChart.data = lineData
+
+        // === Cấu hình trục X để hiển thị TÊN BÀI TẬP ===
+        val xAxis = binding.lineChart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.setDrawGridLines(false)
+        xAxis.granularity = 1f
+        xAxis.labelRotationAngle = -45f
+        xAxis.valueFormatter = DayAxisValueFormatter(labels)
+
+        // ... các cấu hình khác ...
+        binding.lineChart.axisRight.isEnabled = false
+        binding.lineChart.description.isEnabled = false
+        binding.lineChart.legend.isEnabled = false
+        binding.lineChart.setTouchEnabled(true)
+        binding.lineChart.isDragEnabled = true
+        binding.lineChart.setScaleEnabled(true)
+
+        binding.lineChart.invalidate()
+    }
+
+    private fun observeNavigation() {
         viewModel.navigateExerciseInfo.observe(viewLifecycleOwner) { exerciseId ->
             exerciseId?.let {
+                Log.d("idahbfkjadfkj", it.toString())
                 val intent = Intent(requireContext(), ExerciseInformationActivity::class.java)
-                intent.putExtra("exercise_id", it)
+                intent.putExtra(ExerciseInformationActivity.EXTRA_EXERCISE_ID, it)
                 startActivity(intent)
                 viewModel.completeNavigateExerciseInfo()
             }
         }
-    }
 
-    private fun navigateExerciseList() {
-        viewModel.navigateExerciseList.observe(requireActivity(), Observer {navigateExerciseList ->
-            if(navigateExerciseList){
+        viewModel.navigateExerciseList.observe(viewLifecycleOwner) { navigate ->
+            if (navigate == true) { // Check for true to avoid multiple navigations
                 val intent = Intent(requireContext(), ExerciseListActivity::class.java)
-                startActivity(intent)
+                chooseFoodLauncher.launch(intent)
                 viewModel.completeNavigateExerciseList()
             }
-        })
+        }
+        viewModel.isLoading.observe(viewLifecycleOwner){
+            if(it){
+                DialogUtils.showLoadingDialog(requireActivity(), getString(R.string.loading))
+            }
+            else{
+                DialogUtils.hideLoadingDialog()
+            }
+        }
     }
+
 
     private fun setExerciseAdapter(){
         exerciseAdapter = ExerciseAdapter(
-            onClick = {exerciseId ->
+            onClick = { exerciseId ->
                 viewModel.onClickNavigateExerciseInfo(exerciseId)
             },
-            onLongClick = {position ->
+            onLongClick = { position ->
                 showConfirmDialog(position)
             }
         )
-        viewModel.addExerciseList.observe(viewLifecycleOwner){addList ->
+
+        // Observe the list from ViewModel and submit it to the adapter
+        viewModel.addExerciseList.observe(viewLifecycleOwner){ addList ->
             exerciseAdapter.submitList(addList)
         }
-        viewModel.setAddExerciseList(getData())
+
         binding.rvAddExercise.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvAddExercise.adapter = exerciseAdapter
-    }
-
-    private fun getData(): List<WorkoutExercises> {
-        return listOf(
-            WorkoutExercises(
-                id = 1,
-                exerciseId = 1,
-                name = "Jumping Jacks",
-                imageUrl = "https://example.com/images/jumping_jacks.png",
-                sets = null,
-                reps = null,
-                restTimeSeconds = null,
-                minute = 10,
-                caloriesBurnt = 80f,
-                startTime = null,
-                endTime = null,
-                planId = 101,
-                type = "Cardio",
-                isCompleted = false
-            ),
-            WorkoutExercises(
-                id = 2,
-                exerciseId = 2,
-                name = "Push-ups",
-                imageUrl = "https://example.com/images/pushups.png",
-                sets = 3,
-                reps = 15,
-                restTimeSeconds = 60,
-                minute = null,
-                caloriesBurnt = 45f,
-                startTime = null,
-                endTime = null,
-                planId = 101,
-                type = "Strength",
-                isCompleted = true
-            ),
-            WorkoutExercises(
-                id = 3,
-                exerciseId = 3,
-                name = "Plank",
-                imageUrl = "https://example.com/images/plank.png",
-                sets = null,
-                reps = null,
-                restTimeSeconds = null,
-                minute = 5,
-                caloriesBurnt = 20f,
-                startTime = null,
-                endTime = null,
-                planId = 101,
-                type = "Core",
-                isCompleted = true
-            ),
-            WorkoutExercises(
-                id = 4,
-                exerciseId = 4,
-                name = "Barbell Squats",
-                imageUrl = "https://example.com/images/barbell_squats.png",
-                sets = 4,
-                reps = 10,
-                restTimeSeconds = 90,
-                minute = null,
-                caloriesBurnt = 60f,
-                startTime = null,
-                endTime = null,
-                planId = 102,
-                type = "Strength",
-                isCompleted = false
-            ),
-            WorkoutExercises(
-                id = 5,
-                exerciseId = 5,
-                name = "Mountain Climbers",
-                imageUrl = "https://example.com/images/mountain_climbers.png",
-                sets = null,
-                reps = null,
-                restTimeSeconds = null,
-                minute = 8,
-                caloriesBurnt = 72f,
-                startTime = null,
-                endTime = null,
-                planId = 102,
-                type = "Cardio",
-                isCompleted = true
-            ),
-            WorkoutExercises(
-                id = 6,
-                exerciseId = 6,
-                name = "Bicep Curls",
-                imageUrl = "https://example.com/images/bicep_curls.png",
-                sets = 3,
-                reps = 12,
-                restTimeSeconds = 45,
-                minute = null,
-                caloriesBurnt = 30f,
-                startTime = null,
-                endTime = null,
-                planId = 103,
-                type = "Strength",
-                isCompleted = false
-            ),
-            WorkoutExercises(
-                id = 7,
-                exerciseId = 7,
-                name = "Burpees",
-                imageUrl = "https://example.com/images/burpees.png",
-                sets = null,
-                reps = null,
-                restTimeSeconds = null,
-                minute = 7,
-                caloriesBurnt = 84f,
-                startTime = null,
-                endTime = null,
-                planId = 103,
-                type = "Cardio",
-                isCompleted = false
-            ),
-            WorkoutExercises(
-                id = 8,
-                exerciseId = 8,
-                name = "Crunches",
-                imageUrl = "https://example.com/images/crunches.png",
-                sets = 4,
-                reps = 20,
-                restTimeSeconds = 30,
-                minute = null,
-                caloriesBurnt = 32f,
-                startTime = null,
-                endTime = null,
-                planId = 104,
-                type = "Core",
-                isCompleted = true
-            ),
-            WorkoutExercises(
-                id = 9,
-                exerciseId = 9,
-                name = "Lunges",
-                imageUrl = "https://example.com/images/lunges.png",
-                sets = 3,
-                reps = 12,
-                restTimeSeconds = 60,
-                minute = null,
-                caloriesBurnt = 40f,
-                startTime = null,
-                endTime = null,
-                planId = 104,
-                type = "Strength",
-                isCompleted = false
-            ),
-            WorkoutExercises(
-                id = 10,
-                exerciseId = 10,
-                name = "Stationary Bike",
-                imageUrl = "https://example.com/images/stationary_bike.png",
-                sets = null,
-                reps = null,
-                restTimeSeconds = null,
-                minute = 20,
-                caloriesBurnt = 200f,
-                startTime = null,
-                endTime = null,
-                planId = 105,
-                type = "Cardio",
-                isCompleted = true
-            )
-        )
     }
 
     private fun showConfirmDialog(position: Int){
@@ -291,12 +223,8 @@ class ExerciseFragment : Fragment(), CalendarAdapter.OnItemListener {
         val btnCancel = dialogView.findViewById<Button>(R.id.btn_cancel)
 
         btnConfirm.setOnClickListener {
-            val updateList = viewModel.addExerciseList.value?.toMutableList()
-            updateList?.let {
-                val item = it[position]
-                it[position] = item.copy(isCompleted = true)
-                viewModel.setAddExerciseList(it)
-            }
+            // **CORRECTED:** Call the ViewModel function to handle the logic
+            viewModel.markExerciseAsCompleted(position)
             dialog.dismiss()
         }
 
@@ -306,6 +234,7 @@ class ExerciseFragment : Fragment(), CalendarAdapter.OnItemListener {
 
         dialog.show()
     }
+
     private fun setUpMenu(){
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbarExercise)
 
@@ -318,6 +247,7 @@ class ExerciseFragment : Fragment(), CalendarAdapter.OnItemListener {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when(menuItem.itemId){
                     R.id.exercise_reminder ->{
+                        showCreateReminderDialog()
                         true
                     }
                     else -> false
@@ -325,6 +255,7 @@ class ExerciseFragment : Fragment(), CalendarAdapter.OnItemListener {
             }
         },viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
+
     private fun setWeekView(){
         val selectedDate = CalendarUtils.selectedDate
         binding.tvMonthYear.text = CalendarUtils.monthYearFromDate(selectedDate)
@@ -335,24 +266,120 @@ class ExerciseFragment : Fragment(), CalendarAdapter.OnItemListener {
             override fun onItemClick(position: Int, dayText: String, date: LocalDate?) {
                 if (date != null) {
                     CalendarUtils.selectedDate = date
-                    setWeekView()
+                    setWeekView() // Re-render the week view and fetch new data
                 }
             }
         })
 
-        binding.rvCalendar.layoutManager = GridLayoutManager(requireContext(), 7, LinearLayoutManager.VERTICAL, false)
+        binding.rvCalendar.layoutManager = GridLayoutManager(requireContext(), 7)
         binding.rvCalendar.adapter = calendarAdapter
+
+        // **KEY CHANGE**: Fetch data for the newly selected date
+        viewModel.fetchDataForDate(selectedDate)
     }
+
+    private fun showCreateReminderDialog() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_reminder, null)
+        val dialog = android.app.AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setCancelable(false)
+            .create()
+
+        val etReminderType = dialogView.findViewById<EditText>(R.id.spinner_reminder_type)
+        val etMessage = dialogView.findViewById<EditText>(R.id.et_message)
+        val etDate = dialogView.findViewById<EditText>(R.id.et_date)
+        val etTime = dialogView.findViewById<EditText>(R.id.et_time)
+        val btnCancel = dialogView.findViewById<Button>(R.id.btn_cancel)
+        val btnCreate = dialogView.findViewById<Button>(R.id.btn_create)
+
+        etDate.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            DatePickerDialog(
+                requireContext(),
+                { _, year, month, day ->
+                    etDate.setText(String.format("%02d/%02d/%04d", day, month + 1, year))
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+
+        etTime.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            TimePickerDialog(
+                requireContext(),
+                { _, hour, minute ->
+                    etTime.setText(String.format("%02d:%02d", hour, minute))
+                },
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                true
+            ).show()
+        }
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogView.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                v.performClick() // 👈 Gọi để tránh warning
+                val currentFocus = dialog.currentFocus ?: v
+                v.context.hideKeyboard(currentFocus)
+                v.clearFocus()
+            }
+            false
+        }
+
+        btnCreate.setOnClickListener {
+            val type = etReminderType.text.toString()
+            val message = etMessage.text.toString()
+            val date = etDate.text.toString()
+            val time = etTime.text.toString()
+
+            if (type.isBlank() || message.isBlank() || date.isBlank() || time.isBlank()) {
+                Toast.makeText(requireContext(), "Please fill in all required fields.", Toast.LENGTH_SHORT).show()
+            } else {
+                val inputFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                val outputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+                val dateTimeStr = "$date $time"
+
+                try {
+                    val parsedDate = inputFormat.parse(dateTimeStr)
+                    val formattedTime = outputFormat.format(parsedDate!!)
+
+                    val request = ReminderRequest(
+                        reminderType = type,
+                        message = message,
+                        scheduledTime = formattedTime,
+                        frequency = "custom"
+                    )
+
+                    viewModel.createReminder(request)
+
+                    dialog.dismiss()
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), "Invalid date/time format", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+
+        dialog.show()
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        imm?.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
 
     private fun previousWeekAction(){
         binding.btnBackCalendar.setOnClickListener {
             CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1)
             setWeekView()
         }
-    }
-    private fun formatDateVietnamese(date: LocalDate): String {
-        val formatter = DateTimeFormatter.ofPattern("EEEE, d 'tháng' M", Locale("vi", "VN"))
-        return date.format(formatter)
     }
 
     private fun nextWeekAction(){
@@ -362,10 +389,8 @@ class ExerciseFragment : Fragment(), CalendarAdapter.OnItemListener {
         }
     }
 
-    override fun onItemClick(position: Int, dayText: String, date: LocalDate?) {
-        if(dayText != ""){
-            val message = "Selected Date " + dayText + " " + CalendarUtils.monthYearFromDate(CalendarUtils.selectedDate)
-            Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null // Important to avoid memory leaks
     }
 }

@@ -1,15 +1,21 @@
 package com.vanphong.foodnfit.admin.viewModel
 
+import android.annotation.SuppressLint
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vanphong.foodnfit.Model.HistoryResponse
+import com.vanphong.foodnfit.R
+import com.vanphong.foodnfit.model.HistoryResponse
 import com.vanphong.foodnfit.repository.UserRepository
 import kotlinx.coroutines.launch
 
-class AccountInfoViewModel : ViewModel() {
+class AccountInfoViewModel(application: Application): AndroidViewModel(application) {
+    @SuppressLint("StaticFieldLeak")
+    private val context = getApplication<Application>().applicationContext
 
     private val _avatar = MutableLiveData<String?>()
     val avatar: LiveData<String?> get() = _avatar
@@ -37,21 +43,27 @@ class AccountInfoViewModel : ViewModel() {
 
     // Hàm load dữ liệu theo ID
     fun getAccountById(accountId: String) {
+        _isLoading.value = true
         viewModelScope.launch {
-            val result = userRepository.getUserById(accountId)
+            try {
+                val result = userRepository.getUserById(accountId)
 
-            result.onSuccess { account ->
-                _avatar.value = account.avatarUrl
-                _fullname.value = account.fullname
-                _email.value = account.email
-                _gender.value = account.gender
-                _birthday.value = account.birthday
-                _accountHistory.value = account.history
-                _blocked.value = account.blocked
+                result.onSuccess { account ->
+                    _avatar.value = account.avatarUrl
+                    _fullname.value = account.fullname
+                    _email.value = account.email
+                    _gender.value = account.gender
+                    _birthday.value = account.birthday
+                    _accountHistory.value = account.history
+                    _blocked.value = account.blocked
+                }
+
+                result.onFailure { e ->
+                    Log.e("AccountInfoViewModel", "Lỗi khi load account: ${e.message}")
+                }
             }
-
-            result.onFailure { e ->
-                Log.e("AccountInfoViewModel", "Lỗi khi load account: ${e.message}")
+            finally {
+                _isLoading.value = false
             }
         }
         Log.d("history", accountHistory.toString())
@@ -62,6 +74,9 @@ class AccountInfoViewModel : ViewModel() {
 
     private val _lockAccountResult = MutableLiveData<Result<Boolean>>()
     val lockAccountResult: LiveData<Result<Boolean>> get() = _lockAccountResult
+
+    private val _notify = MutableLiveData<String?>()
+    val notify: LiveData<String?> get() = _notify
 
     fun lockAccount(userId: String) {
         _isLoading.value = true
@@ -83,6 +98,18 @@ class AccountInfoViewModel : ViewModel() {
                 _lockAccountResult.value = Result.failure(e)
             } finally {
                 _isLoading.value = false
+            }
+        }
+    }
+
+    fun remove(userId: String){
+        viewModelScope.launch {
+            val result = userRepository.deleteUser(userId)
+            result.onSuccess {
+                _notify.postValue(context.getString(R.string.remove_account_success))
+            }
+            .onFailure {
+                _notify.postValue(null)
             }
         }
     }

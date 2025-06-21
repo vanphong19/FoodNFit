@@ -5,8 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vanphong.foodnfit.Model.User
-import com.vanphong.foodnfit.Model.UserResponse
+import com.vanphong.foodnfit.model.UserResponse
 import com.vanphong.foodnfit.repository.UserRepository
 import kotlinx.coroutines.launch
 

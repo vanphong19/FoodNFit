@@ -7,11 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vanphong.foodnfit.Model.HistoryResponse
-import com.vanphong.foodnfit.Model.UserResponseById
+import com.vanphong.foodnfit.model.HistoryResponse
 import com.vanphong.foodnfit.R
 import com.vanphong.foodnfit.util.DateUtils
-import java.time.format.DateTimeFormatter
 
 class UserHistoryAdapter: ListAdapter<HistoryResponse, UserHistoryAdapter.UserHistoryViewHolder>(UserHistoryDiffCallback()) {
     class UserHistoryViewHolder(private val itemView: View): RecyclerView.ViewHolder(itemView) {

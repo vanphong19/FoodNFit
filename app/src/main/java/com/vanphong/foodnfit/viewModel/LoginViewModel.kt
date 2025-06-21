@@ -3,14 +3,11 @@ package com.vanphong.foodnfit.viewModel
 import android.app.Application
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
-import androidx.databinding.InverseMethod
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vanphong.foodnfit.Model.LoginRequest
+import com.vanphong.foodnfit.model.LoginRequest
 import com.vanphong.foodnfit.network.RetrofitClient
 import com.vanphong.foodnfit.repository.AuthRepository
 import com.vanphong.foodnfit.util.isEmailValid
@@ -94,7 +91,7 @@ class LoginViewModel(application: Application): AndroidViewModel(application) {
             val request = LoginRequest(emailValue, passwordValue)
             val result = repository.login(request)
             result.onSuccess { authResponse ->
-                saveTokens(authResponse.accessToken, authResponse.refreshToken, authResponse.role)
+                saveTokens(authResponse.accessToken, authResponse.refreshToken, authResponse.role, authResponse.userId)
                 _loginSuccess.postValue(true)
                 _loginError.postValue(null)
                 _navigateMain.postValue(true)
@@ -106,12 +103,13 @@ class LoginViewModel(application: Application): AndroidViewModel(application) {
     }
 
 
-    private fun saveTokens(accessToken: String, refreshToken: String, role: String) {
+    private fun saveTokens(accessToken: String, refreshToken: String, role: String, userID: String) {
         val prefs = getApplication<Application>().getSharedPreferences("auth", Context.MODE_PRIVATE)
         prefs.edit()
             .putString("access_token", accessToken)
             .putString("refresh_token", refreshToken)
             .putString("role", role)
+            .putString("userId", userID)
             .apply()
     }
     fun onNavigationComplete() {

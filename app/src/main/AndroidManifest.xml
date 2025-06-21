@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.vanphong.foodnfit">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -11,7 +15,10 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".MyApplication"
@@ -26,14 +33,26 @@
         android:theme="@style/Theme.FoodNFit"
         tools:targetApi="31">
         <activity
-            android:name=".admin.activity.AddEditFoodActivity"
+            android:name=".activity.ReminderInfoActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.activity.AddEditAccountActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.FoodScannerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".admin.activity.AddEditFoodActivity"
+            android:exported="true" />
         <activity
             android:name=".admin.activity.FoodDetailAdminActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.ForgetPasswordActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <service
             android:name=".MyFirebaseMessagingService"
@@ -42,16 +61,17 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-<!--        <service-->
-<!--            android:name=".util.StepTrackingService"-->
-<!--            android:exported="false"-->
-<!--            android:foregroundServiceType="health" />-->
+        <service
+            android:name=".util.StepsTrackingService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="health" />
 
         <receiver
             android:name=".util.BootReceiver"
             android:enabled="true"
             android:exported="true">
-            <intent-filter>
+            <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
@@ -70,10 +90,10 @@
             android:exported="true" />
         <activity
             android:name=".admin.activity.FoodActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".admin.activity.AccountInfoActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".admin.activity.AccountActivity"
             android:exported="false" />
@@ -85,9 +105,6 @@
             android:exported="true" />
         <activity
             android:name=".activity.UpdateInfoActivity"
-            android:exported="true" />
-        <activity
-            android:name=".activity.ScanFoodActivity"
             android:exported="true" />
         <activity
             android:name=".activity.ExerciseInformationActivity"

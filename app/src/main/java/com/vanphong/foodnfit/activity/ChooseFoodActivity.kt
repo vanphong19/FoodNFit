@@ -1,73 +1,155 @@
 package com.vanphong.foodnfit.activity
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
+import androidx.appcompat.widget.SearchView // Sử dụng SearchView của androidx
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.vanphong.foodnfit.BaseActivity
-import com.vanphong.foodnfit.Model.FoodItem
 import com.vanphong.foodnfit.R
 import com.vanphong.foodnfit.adapter.ChooseFoodAdapter
 import com.vanphong.foodnfit.adapter.FoodAdapter
 import com.vanphong.foodnfit.component.GridSpacingItemDecoration
 import com.vanphong.foodnfit.databinding.ActivityChooseFoodBinding
+import com.vanphong.foodnfit.model.FoodItemResponse // Import đúng model
+import com.vanphong.foodnfit.viewModel.ChooseFoodViewModel
 import com.vanphong.foodnfit.viewModel.FoodViewModel
 
 class ChooseFoodActivity : BaseActivity() {
     private var _binding: ActivityChooseFoodBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: FoodViewModel by viewModels()
+    private val viewModel: ChooseFoodViewModel by viewModels()
     private var isGridLayout = false
     private lateinit var foodAdapter: FoodAdapter
     private lateinit var chooseFoodAdapter: ChooseFoodAdapter
+    private var mealType: String = "Breakfast" // Mặc định, nên được truyền từ Intent
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityChooseFoodBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        mealType = intent.getStringExtra("MEAL_TYPE") ?: "BREAKFAST"
+
         binding.lifecycleOwner = this
         binding.foodViewModel = viewModel
+
+        setupUI()
+        setupRecyclerViews()
+        setupObservers()
+
+        viewModel.loadInitialData()
+    }
+
+    private fun setupUI() {
+        setSupportActionBar(binding.toolbarFood)
+        binding.toolbarFood.title = mealType
+
         val sharePrefs = getSharedPreferences("food_preferences", Context.MODE_PRIVATE)
         isGridLayout = sharePrefs.getBoolean("isGridLayout", false)
 
-        foodAdapter = FoodAdapter(isGridLayout){foodItem ->
-            Log.d("click","1")
-            viewModel.addFoodToMeal(foodItem)
+        binding.searchFood.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.search(query) // Gọi hàm search mới
+                binding.searchFood.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.search(newText) // Gọi hàm search mới
+                return true
+            }
+        })
+
+        // Listener cho nút "Add Meal"
+        binding.btnAddMeal.setOnClickListener { // Đảm bảo nút này có id là btn_add_meal trong layout
+            viewModel.saveSelectedMeal(mealType)
         }
+    }
+
+    private fun setupRecyclerViews() {
+        foodAdapter = FoodAdapter(
+            isGridView = isGridLayout,
+            onAddFoodClick = { foodItem ->
+                viewModel.addFoodToMeal(foodItem)
+            },
+            onItemClick = { foodItem ->
+                val intent = Intent(this, FoodDetailActivity::class.java)
+                intent.putExtra("FOOD_ID", foodItem.id)
+                startActivity(intent)
+            }
+        )
 
         binding.rcvFoodList.adapter = foodAdapter
 
-        chooseFoodAdapter = ChooseFoodAdapter{selectedFoodItem ->  
-            viewModel.removeFoodFromMeal(selectedFoodItem.foodItem)
+        chooseFoodAdapter = ChooseFoodAdapter { selectedFoodItem ->
+            viewModel.removeFoodFromMeal(selectedFoodItem)
         }
         binding.rvFoodChoose.adapter = chooseFoodAdapter
-        setLayoutManager()
 
-        setSupportActionBar(binding.toolbarFood)
+        binding.rcvFoodList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager
+                if (layoutManager != null && dy > 0) {
+                    val visibleItemCount = layoutManager.childCount
+                    val totalItemCount = layoutManager.itemCount
+                    val firstVisibleItemPosition = when (layoutManager) {
+                        is LinearLayoutManager -> layoutManager.findFirstVisibleItemPosition()
+                        is GridLayoutManager -> layoutManager.findFirstVisibleItemPosition()
+                        else -> 0
+                    }
+
+                    // Điều kiện load more (ngưỡng 5 item)
+                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount - 5 && totalItemCount > 0) {
+                        // Gọi hàm loadNextPage rõ ràng hơn
+                        viewModel.loadNextPage()
+                    }
+                }
+            }
+        })
+
+        setLayoutManager()
+    }
+
+    private fun setupObservers() {
+        // Observe danh sách món ăn từ API
         viewModel.allFoods.observe(this) { allFoods ->
             foodAdapter.submitList(allFoods)
         }
 
+        // Observe danh sách món ăn đã chọn
         viewModel.selectedMeals.observe(this) { selectedMeals ->
-            chooseFoodAdapter.submitList(selectedMeals)
+            chooseFoodAdapter.submitList(selectedMeals.toList()) // toList() để tạo list mới, kích hoạt DiffUtil
+            binding.rvFoodChoose.visibility = if (selectedMeals.isEmpty()) View.GONE else View.VISIBLE
         }
 
-        setData()
+        viewModel.error.observe(this) { error ->
+            error?.let {
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+                viewModel.clearError() // Xóa lỗi sau khi hiển thị
+            }
+        }
+
+        viewModel.saveSuccess.observe(this) { success ->
+            if (success) {
+                Toast.makeText(this, "$mealType saved successfully!", Toast.LENGTH_SHORT).show()
+                viewModel.onSaveComplete()
+                setResult(RESULT_OK)
+                finish()
+            }
+        }
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
         menu?.findItem(R.id.app_bar_view)?.setIcon(
@@ -101,8 +183,8 @@ class ChooseFoodActivity : BaseActivity() {
 
     private fun setLayoutManager() {
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.recycler_spacing)
-        binding.rcvFoodList.itemDecorationCount.let {
-            if (it > 0) binding.rcvFoodList.removeItemDecorationAt(0)
+        if (binding.rcvFoodList.itemDecorationCount > 0) {
+            binding.rcvFoodList.removeItemDecorationAt(0)
         }
 
         if (isGridLayout) {
@@ -113,65 +195,5 @@ class ChooseFoodActivity : BaseActivity() {
         }
 
         binding.rvFoodChoose.layoutManager = LinearLayoutManager(this)
-    }
-
-
-    private fun setData() {
-        val foodList = listOf(
-            FoodItem(
-                id = 1,
-                name = "Gà xào rau",
-                calories = 200f,
-                carbs = 30f,
-                protein = 10f,
-                fat = 5f,
-                imageUrl = null,
-                servingSize = "100g",
-                recipe = "Xào gà với rau củ theo khẩu vị Việt Nam. Thêm dầu hào, nước tương và gia vị cơ bản. Xào chín và thưởng thức với cơm.",
-                foodTypeId = 2,
-                isActive = true
-            ),
-            FoodItem(
-                id = 2,
-                name = "Cơm chiên trứng",
-                calories = 350f,
-                carbs = 45f,
-                protein = 8f,
-                fat = 12f,
-                imageUrl = null,
-                servingSize = "150g",
-                recipe = "Cơm nguội xào với trứng, hành lá, nước mắm và tiêu. Có thể thêm xúc xích hoặc lạp xưởng cho đậm đà.",
-                foodTypeId = 1,
-                isActive = true
-            ),
-            FoodItem(
-                id = 3,
-                name = "Salad cá ngừ",
-                calories = 180f,
-                carbs = 10f,
-                protein = 15f,
-                fat = 8f,
-                imageUrl = null,
-                servingSize = "120g",
-                recipe = "Cá ngừ trộn cùng xà lách, cà chua, dưa leo và sốt mè rang hoặc dầu oliu. Món ăn nhẹ nhàng và tốt cho sức khỏe.",
-                foodTypeId = 3,
-                isActive = true
-            ),
-            FoodItem(
-                id = 4,
-                name = "Mì xào bò",
-                calories = 400f,
-                carbs = 50f,
-                protein = 20f,
-                fat = 15f,
-                imageUrl = null,
-                servingSize = "180g",
-                recipe = "Thịt bò xào với mì và rau cải, nêm nếm với xì dầu, tỏi và tiêu. Món ăn đậm đà, dễ làm.",
-                foodTypeId = 2,
-                isActive = true
-            )
-        )
-
-        viewModel.setAllFoods(foodList)
     }
 }

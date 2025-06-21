@@ -1,10 +1,13 @@
 package com.vanphong.foodnfit.admin.activity
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.impl.Observable.Observer
@@ -16,6 +19,7 @@ import com.vanphong.foodnfit.R
 import com.vanphong.foodnfit.admin.adapter.UserHistoryAdapter
 import com.vanphong.foodnfit.admin.viewModel.AccountInfoViewModel
 import com.vanphong.foodnfit.databinding.ActivityAccountInfoBinding
+import com.vanphong.foodnfit.util.DialogUtils
 
 class AccountInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAccountInfoBinding
@@ -23,6 +27,14 @@ class AccountInfoActivity : AppCompatActivity() {
     private lateinit var userHistoryAdapter: UserHistoryAdapter
     private var loadingDialog: AlertDialog? = null
     private var userId: String? = null
+
+    private val accountInfoLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){ result ->
+        if (result.resultCode == Activity.RESULT_OK){
+            viewModel.getAccountById(userId!!)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +91,26 @@ class AccountInfoActivity : AppCompatActivity() {
         viewModel.birthday.observe(this) { birthday ->
             binding.tvBirthday.text = birthday ?: "Không rõ"
         }
+
+        viewModel.isLoading.observe(this){loading ->
+            if(loading){
+                DialogUtils.showLoadingDialog(this, getString(R.string.loading))
+            }
+            else{
+                DialogUtils.hideLoadingDialog()
+            }
+        }
+
+        viewModel.notify.observe(this){message ->
+            if(message != null){
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                setResult(RESULT_OK)
+                finish()
+            }
+            else{
+                Toast.makeText(this, getString(R.string.remove_account_failed), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setupListeners() {
@@ -86,6 +118,16 @@ class AccountInfoActivity : AppCompatActivity() {
             userId?.let {
                 viewModel.lockAccount(it)
             }
+        }
+        binding.btnDelete.setOnClickListener {
+            userId?.let {
+                viewModel.remove(it)
+            }
+        }
+        binding.btnUpdate.setOnClickListener {
+            val intent = Intent(this, AddEditAccountActivity::class.java)
+            intent.putExtra("user_id", userId)
+            accountInfoLauncher.launch(intent)
         }
     }
 

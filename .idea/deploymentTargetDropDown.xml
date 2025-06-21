@@ -2,16 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AddEditExerciseActivity">
+      <entry key="AddEditAccountActivity">
+        <State />
+      </entry>
+      <entry key="AddEditFoodActivity">
         <State />
       </entry>
       <entry key="AdminActivity">
         <State />
       </entry>
-      <entry key="ScanFoodActivity">
+      <entry key="FeedbackActivity">
         <State />
       </entry>
-      <entry key="VerifyActivity">
+      <entry key="FoodScannerActivity">
         <State />
       </entry>
       <entry key="app">

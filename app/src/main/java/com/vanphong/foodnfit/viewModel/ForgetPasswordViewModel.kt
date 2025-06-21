@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.vanphong.foodnfit.Model.ResendOtpRequest
-import com.vanphong.foodnfit.Model.ResetPasswordRequest
+import com.vanphong.foodnfit.model.ResendOtpRequest
+import com.vanphong.foodnfit.model.ResetPasswordRequest
 import com.vanphong.foodnfit.network.RetrofitClient
 import com.vanphong.foodnfit.repository.AuthRepository
 import com.vanphong.foodnfit.util.isEmailValid

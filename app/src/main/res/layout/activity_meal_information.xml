@@ -19,16 +19,16 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="?attr/actionBarSize"
-                app:title="@string/breakfast"
-                app:titleCentered="true" />
+                app:titleCentered="true"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                tools:title="Breakfast" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -110,7 +110,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="567"
+                                    android:id="@+id/tv_meal_total_calories"
                                     android:textSize="28sp"
                                     android:textStyle="bold" />
 
@@ -136,18 +136,18 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:text="16%"
+                                    android:id="@+id/tv_calories_percent"
                                     android:textSize="15sp" />
                             </RelativeLayout>
 
                             <ProgressBar
+                                android:id="@+id/progress_calories"
                                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:max="100"
                                 android:min="0"
-                                android:progress="30"
                                 android:progressBackgroundTint="#90EE90"
                                 android:progressTint="@color/color_calories" />
                         </LinearLayout>
@@ -168,7 +168,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="30"
+                                    android:id="@+id/tv_meal_carbs"
                                     android:textSize="28sp"
                                     android:textStyle="bold" />
 
@@ -194,7 +194,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:text="16%"
+                                    android:id="@+id/tv_carbs_percent"
                                     android:textSize="15sp" />
                             </RelativeLayout>
 
@@ -205,7 +205,7 @@
                                 android:layout_marginTop="5dp"
                                 android:max="100"
                                 android:min="0"
-                                android:progress="20"
+                                android:id="@+id/progress_carbs"
                                 android:progressBackgroundTint="#FA8072"
                                 android:progressTint="@color/color_carbs" />
                         </LinearLayout>
@@ -227,7 +227,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="30"
+                                    android:id="@+id/tv_meal_fat"
                                     android:textSize="28sp"
                                     android:textStyle="bold" />
 
@@ -253,7 +253,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:text="16%"
+                                    android:id="@+id/tv_fat_percent"
                                     android:textSize="15sp" />
                             </RelativeLayout>
 
@@ -264,7 +264,7 @@
                                 android:layout_marginTop="5dp"
                                 android:max="100"
                                 android:min="0"
-                                android:progress="60"
+                                android:id="@+id/progress_fat"
                                 android:progressBackgroundTint="#FF69B4"
                                 android:progressTint="@color/color_fat" />
                         </LinearLayout>
@@ -286,7 +286,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="30"
+                                    android:id="@+id/tv_meal_protein"
                                     android:textSize="28sp"
                                     android:textStyle="bold" />
 
@@ -312,7 +312,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:text="16%"
+                                    android:id="@+id/tv_protein_percent"
                                     android:textSize="15sp" />
                             </RelativeLayout>
 
@@ -323,7 +323,7 @@
                                 android:layout_marginTop="5dp"
                                 android:max="100"
                                 android:min="0"
-                                android:progress="19"
+                                android:id="@+id/progress_protein"
                                 android:progressBackgroundTint="#AB82FF"
                                 android:progressTint="@color/color_protein" />
                         </LinearLayout>
@@ -352,7 +352,7 @@
                         android:gravity="center"
                         android:paddingHorizontal="48dp"
                         android:paddingVertical="8dp"
-                        android:text="3"
+                        android:id="@+id/tv_meal_item_count"
                         android:textColor="@color/white"
                         android:textSize="28sp" />
                 </RelativeLayout>
@@ -361,7 +361,8 @@
                     android:id="@+id/rv_food_log"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp" />
+                    android:layout_marginVertical="28dp"
+                    />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

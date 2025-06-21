@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000">
+
+        <!-- Camera Preview -->
+        <androidx.camera.view.PreviewView
+            android:id="@+id/viewFinder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Scanning Frame Overlay -->
+        <FrameLayout
+            android:id="@+id/scanningFrame"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/scanning_frame_bg" />
+
+            <!-- Scanning corners -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="top|start"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_scan_corner"
+                app:tint="#4CAF50" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="8dp"
+                android:rotation="90"
+                android:src="@drawable/ic_scan_corner"
+                app:tint="#4CAF50" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="bottom|start"
+                android:layout_margin="8dp"
+                android:rotation="270"
+                android:src="@drawable/ic_scan_corner"
+                app:tint="#4CAF50" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="8dp"
+                android:rotation="180"
+                android:src="@drawable/ic_scan_corner"
+                app:tint="#4CAF50" />
+
+        </FrameLayout>
+
+        <!-- Top Controls -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/circle_button_bg"
+                android:src="@drawable/ic_arrow_back"
+                app:backgroundTint="#80000000"
+                app:tint="#FFFFFF"
+                android:scaleType="centerCrop"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/btnFlash"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/circle_button_bg"
+                android:src="@drawable/ic_flash_off"
+                app:backgroundTint="#80000000"
+                app:tint="#FFFFFF"
+                android:scaleType="centerCrop"/>
+
+            <ImageButton
+                android:id="@+id/btnToggleScanner"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/circle_button_bg"
+                android:src="@drawable/ic_scanner"
+                app:backgroundTint="#80000000"
+                android:scaleType="centerCrop"/>
+
+        </LinearLayout>
+
+        <!-- Status Text -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="320dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="16dp"
+                android:indeterminateTint="#4CAF50"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvScanningStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/status_text_bg"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12dp"
+                android:text="Nhấn nút chụp để phân tích món ăn"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <!-- Bottom Controls -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="32dp">
+
+            <!-- Gallery Button -->
+            <ImageButton
+                android:id="@+id/btnGallery"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/circle_button_bg"
+                android:src="@drawable/ic_photo_library"
+                app:backgroundTint="#40FFFFFF"
+                app:tint="#FFFFFF" />
+
+            <!-- Capture Button -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnCapture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:src="@drawable/ic_camera"
+                app:backgroundTint="#4CAF50"
+                app:fabSize="normal"
+                app:tint="#FFFFFF" />
+
+            <!-- Settings Button -->
+            <ImageButton
+                android:id="@+id/btnSettings"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/circle_button_bg"
+                android:src="@drawable/ic_settings"
+                app:backgroundTint="#40FFFFFF"
+                app:tint="#FFFFFF" />
+
+        </LinearLayout>
+
+        <!-- Capture Flash Overlay -->
+        <View
+            android:id="@+id/captureOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:background="#FFFFFF" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

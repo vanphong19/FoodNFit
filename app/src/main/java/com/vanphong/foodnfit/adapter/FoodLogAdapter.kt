@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vanphong.foodnfit.Model.FoodLog
+import com.vanphong.foodnfit.model.FoodLog
 import com.vanphong.foodnfit.R
 
 class FoodLogAdapter: ListAdapter<FoodLog, FoodLogAdapter.FoodLogViewHolder>(FoodLogDiffCallback()) {
@@ -34,7 +34,7 @@ class FoodLogAdapter: ListAdapter<FoodLog, FoodLogAdapter.FoodLogViewHolder>(Foo
 
         val detail = foodLog.details
         Log.d("FoodLog", "Detail list size: ${detail.size}")
-        holder.detailAdapter.submitList(detail)
+        //holder.detailAdapter.submitList(detail)
     }
 }
 class FoodLogDiffCallback: DiffUtil.ItemCallback<FoodLog>(){

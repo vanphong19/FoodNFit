@@ -1,11 +1,11 @@
 package com.vanphong.foodnfit.network.service
 
-import com.vanphong.foodnfit.Model.PageResponse
-import com.vanphong.foodnfit.Model.User
-import com.vanphong.foodnfit.Model.UserRequest
-import com.vanphong.foodnfit.Model.UserResponse
-import com.vanphong.foodnfit.Model.UserResponseById
-import okhttp3.ResponseBody
+import com.vanphong.foodnfit.model.PageResponse
+import com.vanphong.foodnfit.model.UserDailyStatsDto
+import com.vanphong.foodnfit.model.UserRequest
+import com.vanphong.foodnfit.model.UserResponse
+import com.vanphong.foodnfit.model.UserResponseById
+import com.vanphong.foodnfit.model.UserUpdateRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -38,7 +38,7 @@ interface UserService {
     suspend fun getUserById(@Path("id") id: String): Response<UserResponseById>
 
     @PUT("user/update/{id}")
-    suspend fun updateUser(@Path("id") id: String, @Body request: UserRequest): Response<UserResponse>
+    suspend fun updateUser(@Path("id") id: String, @Body request: UserUpdateRequest): Response<UserResponse>
 
     @DELETE("user/remove/{id}")
     suspend fun deleteUser(@Path("id") id: String): Response<UserResponse>
@@ -49,4 +49,6 @@ interface UserService {
     @GET("user/count-last-month")
     suspend fun countUsersLastMonth(): Response<Long>
 
+    @GET("user/stats-today")
+    suspend fun getUserStatsToday(): Response<UserDailyStatsDto>
 }

@@ -9,7 +9,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.vanphong.foodnfit.Model.UserProfiles
+import com.vanphong.foodnfit.model.UserProfiles
 import com.vanphong.foodnfit.R
 
 @BindingAdapter("weightLineChart")

@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.vanphong.foodnfit.BaseActivity
-import com.vanphong.foodnfit.Model.OnboardingItem
+import com.vanphong.foodnfit.model.OnboardingItem
 import com.vanphong.foodnfit.R
 import com.vanphong.foodnfit.adapter.OnboardingAdapter
 import com.vanphong.foodnfit.databinding.ActivityOnboardingBinding

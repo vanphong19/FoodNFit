@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    tools:context=".activity.ChooseFoodActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="foodViewModel"
-            type="com.vanphong.foodnfit.viewModel.FoodViewModel" />
+            type="com.vanphong.foodnfit.viewModel.ChooseFoodViewModel" />
     </data>
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        tools:context=".activity.ChooseFoodActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -22,91 +22,103 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar_food"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="?attr/actionBarSize"
-                app:title="@string/food_menu"
-                app:titleCentered="false"
                 app:iconifiedByDefault="false"
-                android:id="@+id/toolbar_food"/>
+                app:title="@string/food_menu"
+                app:titleCentered="false" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <SearchView
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchFood"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="5dp"
             android:visibility="gone"
-            android:id="@+id/searchFood"/>
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+            app:queryHint="Search food..." />
 
-        <androidx.core.widget.NestedScrollView
+        <!-- Phần Selected Meals -->
+        <TextView
+            android:id="@+id/tv_selected_meal_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/selected_meal"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tv_meal_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchFood" />
+
+        <TextView
+            android:id="@+id/tv_meal_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_text_meal"
+            android:gravity="center"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="8dp"
+            android:text="@{foodViewModel.mealCount != null ? foodViewModel.mealCount.toString() : @string/zero}"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_selected_meal_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_selected_meal_title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_food_choose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp">
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="12dp"
+            android:maxHeight="150dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_selected_meal_title" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_add_meal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/blue_pastel"
+            android:text="@string/add_meal"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_food_choose" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+        <!-- Phần All Meals -->
+        <TextView
+            android:id="@+id/tv_all_meal_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/all_meal"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_add_meal" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="@string/selected_meal"
-                        android:textSize="24sp"
-                        android:layout_centerVertical="true"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_food_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_all_meal_title"
+            tools:listitem="@layout/item_food" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/bg_text_meal"
-                        android:gravity="center"
-                        android:paddingHorizontal="40dp"
-                        android:paddingVertical="8dp"
-                        android:text="@{foodViewModel.mealCount != null ? foodViewModel.mealCount.toString() : @string/zero}"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </RelativeLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rv_food_choose"
-                    android:layout_marginTop="12dp"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_gravity="end"
-                    android:text="@string/add_meal"
-                    android:backgroundTint="@color/blue_pastel"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/all_meal"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"
-                    android:textSize="24sp"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rcv_food_list"
-                    android:layout_marginTop="12dp"/>
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
 </layout>

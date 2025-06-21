@@ -1,13 +1,15 @@
 package com.vanphong.foodnfit.repository
 
-import com.vanphong.foodnfit.Model.ExerciseRequest
-import com.vanphong.foodnfit.Model.Exercises
+import com.vanphong.foodnfit.model.ExerciseRequest
+import com.vanphong.foodnfit.model.Exercises
+import com.vanphong.foodnfit.model.FoodItemResponse
+import com.vanphong.foodnfit.model.PageResponse
 import com.vanphong.foodnfit.network.RetrofitClient
 import com.vanphong.foodnfit.network.service.UploadResponse
 import com.vanphong.foodnfit.util.safeCall
+import com.vanphong.foodnfit.util.safeCallString
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Response
 import java.io.File
@@ -22,17 +24,19 @@ class ExerciseRepository {
         return uploadApi.uploadImage(body)
     }
 
-    suspend fun createExercise(request: ExerciseRequest): Response<Exercises>{
-        return api.createExercise(request)
+    suspend fun createExercise(request: ExerciseRequest): Result<Exercises> = safeCall {
+        api.createExercise(request)
     }
 
-    suspend fun getAll(): List<Exercises>?{
-        val response = api.getAll()
-        return if(response.isSuccessful) {
-            response.body()
-        }
-        else{
-            null
+    suspend fun getAllExercises(
+        search: String? = "",
+        page: Int = 0,
+        size: Int = 10,
+        sortBy: String = "id",
+        sortDir: String = "asc"
+    ): Result<PageResponse<Exercises>> {
+        return safeCall {
+            api.getAllExercises(search, page, size, sortBy, sortDir)
         }
     }
 
@@ -50,5 +54,11 @@ class ExerciseRepository {
     }
     suspend fun countExerciseThisMonth():Result<Long> = safeCall {
         api.countExerciseThisMonth()
+    }
+    suspend fun update(id: Int, request: ExerciseRequest): Result<Exercises> = safeCall {
+        api.update(id, request)
+    }
+    suspend fun remove(id: Int): Result<String> = safeCallString {
+        api.remove(id)
     }
 }

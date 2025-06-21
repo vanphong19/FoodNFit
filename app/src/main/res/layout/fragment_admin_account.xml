@@ -15,38 +15,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Header với title và nút thêm -->
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="4dp"
-            app:elevation="4dp">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/status_bar"
-                app:title="@string/title_account_management"
-                app:titleTextColor="@android:color/white">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnAddAccount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="36dp"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="16dp"
-                    android:text="@string/button_add_account"
-                    android:textSize="12sp"
-                    app:cornerRadius="18dp"
-                    app:icon="@drawable/ic_plus_white"
-                    app:iconSize="16dp"
-                    style="@style/Widget.Material3.Button.TonalButton" />
-
-            </androidx.appcompat.widget.Toolbar>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
         <!-- Thanh tìm kiếm và bộ lọc -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,23 +24,44 @@
             android:background="@android:color/white"
             android:elevation="2dp">
             <!-- Thanh search -->
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etSearch"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_search"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:text="@{accountViewModel.search}"
-                    android:afterTextChanged="@{(text) -> accountViewModel.setSearch(text)}"/>
+                    android:layout_weight="3"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_search"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:text="@{accountViewModel.search}"
+                        android:afterTextChanged="@{(text) -> accountViewModel.setSearch(text)}"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/button_add_account"
+                    android:textSize="12sp"
+                    app:cornerRadius="18dp"
+                    app:icon="@drawable/ic_plus_white"
+                    app:iconSize="16dp"
+                    style="@style/Widget.Material3.Button.TonalButton" />
+
+            </LinearLayout>
 
             <!-- Bộ lọc -->
             <LinearLayout

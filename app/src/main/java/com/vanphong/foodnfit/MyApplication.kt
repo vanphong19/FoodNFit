@@ -20,7 +20,6 @@ class MyApplication:Application() {
             }
         }
 
-        // Khởi tạo repository với service đã có
         authRepository = AuthRepository(RetrofitClient.authService)
     }
 }

@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vanphong.foodnfit.Model.FoodItem
 import com.vanphong.foodnfit.R
 
 class RecipeAdapter: ListAdapter<String, RecipeAdapter.RecipeViewHolder>(RecipeDiffCallback()) {

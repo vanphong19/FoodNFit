@@ -1,7 +1,7 @@
 package com.vanphong.foodnfit.interfaces
 
-import com.vanphong.foodnfit.Model.Exercises
-import com.vanphong.foodnfit.Model.WorkoutExercises
+import com.vanphong.foodnfit.model.Exercises
+import com.vanphong.foodnfit.model.WorkoutExercises
 
 interface OnExerciseAddListener {
     fun onAddExerciseByMinute(exercise: Exercises, minutes: Int)

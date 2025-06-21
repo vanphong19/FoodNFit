@@ -6,4 +6,10 @@
         android:id="@+id/meal_reminder"
         android:icon="@drawable/ic_food_reminder"
         app:showAsAction="ifRoom"/>
+
+    <item android:title="@string/scan"
+        android:id="@+id/scan"
+        android:icon="@drawable/ic_scanner"
+        app:iconTint="@color/status_bar"
+        app:showAsAction="ifRoom"/>
 </menu>

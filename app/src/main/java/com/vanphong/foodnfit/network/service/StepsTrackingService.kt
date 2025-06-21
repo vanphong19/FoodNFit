@@ -1,8 +1,9 @@
 package com.vanphong.foodnfit.network.service
 
-import com.vanphong.foodnfit.Model.FcmTokenRequest
-import com.vanphong.foodnfit.Model.StepsTracking
-import com.vanphong.foodnfit.Model.StepsTrackingRequest
+import com.vanphong.foodnfit.model.HourlyStepSummary
+import com.vanphong.foodnfit.model.StepSummary
+import com.vanphong.foodnfit.model.StepsTracking
+import com.vanphong.foodnfit.model.StepsTrackingRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -14,4 +15,9 @@ interface StepsTrackingService {
 
     @GET("steps/getAll")
     suspend fun getAll(): Response<List<StepsTracking>>
+
+    @GET("steps/today-summary")
+    suspend fun getTodaySummary(): Response<StepSummary>
+    @GET("steps/hourly")
+    suspend fun getHourlySummary(): Response<List<HourlyStepSummary>>
 }

@@ -22,7 +22,8 @@ fun setText(view: TextInputEditText, value: String?) {
     }
 }
 
-@InverseBindingAdapter(attribute = "android:text")
+
+@InverseBindingAdapter(attribute = "android:text", event = "android:textAttrChanged")
 fun getText(view: TextInputEditText): String {
     return view.text.toString()
 }
@@ -52,9 +53,9 @@ fun afterTextChanged(editText: TextInputEditText, listener: (CharSequence?) -> U
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
     })
 }
-@BindingAdapter("app:visibleIfNotNull")
-fun setVisibleIfNotNull(view: View, value: Any?) {
-    view.visibility = if (value != null) View.VISIBLE else View.GONE
+@BindingAdapter("app:visibleIfNotZero")
+fun setVisibleIfNotZero(view: View, value: Number?) {
+    view.visibility = if (value != null && value.toInt() != 0) View.VISIBLE else View.GONE
 }
 
 @BindingAdapter("imageUrlGlide")

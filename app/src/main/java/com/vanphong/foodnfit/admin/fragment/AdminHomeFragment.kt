@@ -1,6 +1,7 @@
 package com.vanphong.foodnfit.admin.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.vanphong.foodnfit.R
+import com.vanphong.foodnfit.admin.activity.AddEditExerciseActivity
+import com.vanphong.foodnfit.admin.activity.AddEditFoodActivity
 import com.vanphong.foodnfit.databinding.FragmentAdminHomeBinding
 import com.vanphong.foodnfit.network.RetrofitClient
 import com.vanphong.foodnfit.repository.ExerciseRepository
@@ -42,6 +45,18 @@ class AdminHomeFragment : Fragment() {
         fetchFoodCount()
         fetchExerciseCount()
         fetchFeedbackCount()
+        binding.btnAddFood.setOnClickListener {
+            val intent = Intent(requireContext(), AddEditFoodActivity::class.java)
+            intent.putExtra("food_id", 0)
+            intent.putExtra("title", getString(R.string.add_food))
+            startActivity(intent)
+        }
+        binding.btnAddExercise.setOnClickListener {
+            val intent = Intent(requireContext(), AddEditExerciseActivity::class.java)
+            intent.putExtra("exercise_id", 0)
+            intent.putExtra("title", getString(R.string.add_exercise))
+            startActivity(intent)
+        }
         return binding.root
     }
 

@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="bmiViewModel"
-            type="com.vanphong.foodnfit.viewModel.BMIViewModel" />
+            name="homeViewModel"
+            type="com.vanphong.foodnfit.viewModel.HomeViewModel" />
     </data>
 
     <LinearLayout
@@ -26,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:minHeight="?attr/actionBarSize"
                 app:title="@string/app_name"
-                app:titleCentered="true" />
+                app:titleCentered="true"
+                android:id="@+id/toolbarHome"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -61,7 +62,8 @@
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
                             app:cardCornerRadius="15dp"
                             android:elevation="10dp">
 
@@ -81,17 +83,18 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
                                     android:layout_below="@id/rl_height"
-                                    android:layout_marginHorizontal="10dp">
+                                    android:layout_marginHorizontal="10dp"
+                                    android:layout_marginTop="5dp">
 
                                     <TextView
                                         android:layout_width="45dp"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/height"/>
+                                        android:layout_height="match_parent"
+                                        android:text="@string/height" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="170 cm"
+                                        android:id="@+id/tvHeight"
                                         android:layout_marginStart="20dp"/>
                                 </LinearLayout>
                             </RelativeLayout>
@@ -99,7 +102,8 @@
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
                             app:cardCornerRadius="15dp"
                             android:elevation="10dp"
                             android:layout_marginTop="10dp"
@@ -121,6 +125,7 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
                                     android:layout_below="@id/rl_weight"
+                                    android:layout_marginTop="5dp"
                                     android:layout_marginHorizontal="10dp">
 
                                     <TextView
@@ -131,7 +136,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="61 kg"
+                                        android:id="@+id/tvWeight"
                                         android:layout_marginStart="20dp"/>
                                 </LinearLayout>
                             </RelativeLayout>
@@ -169,14 +174,13 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="24.9"
                                     android:textSize="20sp"
                                     android:textStyle="bold"
                                     android:layout_centerVertical="true"
                                     android:id="@+id/tv_bmi"/>
 
                                 <androidx.cardview.widget.CardView
-                                    android:layout_width="120dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
                                     app:cardCornerRadius="15dp"
@@ -191,7 +195,8 @@
                                         android:padding="6dp"
                                         android:textSize="16sp"
                                         android:focusable="false"
-                                        android:gravity="center"/>
+                                        android:gravity="center"
+                                        android:id="@+id/tvBmiText"/>
                                 </androidx.cardview.widget.CardView>
                             </RelativeLayout>
 
@@ -207,8 +212,7 @@
                                     android:id="@+id/indicator_guideline"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    app:layout_constraintGuide_percent="0.3" /> <!-- Vị trí ban đầu (sẽ cập nhật bằng code) -->
+                                    android:orientation="vertical" /> <!-- Vị trí ban đầu (sẽ cập nhật bằng code) -->
 
                                 <!-- Chỉ báo hình tròn (TextView được tạo kiểu) -->
                                 <TextView
@@ -282,12 +286,12 @@
                                 android:layout_gravity="center_vertical">
 
                                 <TextView
+                                    android:id="@+id/tvCaloriesIn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="300"
+                                    android:layout_gravity="center"
                                     android:textSize="24sp"
-                                    android:textStyle="bold"
-                                    android:layout_gravity="center"/>
+                                    android:textStyle="bold" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -306,11 +310,10 @@
 
                                 <com.mikhaellopez.circularprogressbar.CircularProgressBar
                                     android:id="@+id/caloProgressBar"
-                                    android:layout_width="140dp"
-                                    android:layout_height="140dp"
+                                    android:layout_width="130dp"
+                                    android:layout_height="130dp"
                                     app:cpb_background_progressbar_color="#EFEFEF"
                                     app:cpb_background_progressbar_width="10dp"
-                                    app:cpb_progress="30"
                                     app:cpb_progress_direction="to_right"
                                     app:cpb_progress_max="100"
                                     app:cpb_progressbar_color="@color/blue_pastel"
@@ -330,9 +333,9 @@
                                     app:layout_constraintEnd_toEndOf="@id/caloProgressBar">
 
                                     <TextView
+                                        android:id="@+id/tvTDEE"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="2100"
                                         android:textSize="24sp"
                                         android:textStyle="bold"
                                         android:layout_marginTop="8dp"
@@ -355,9 +358,9 @@
                                 android:layout_gravity="center_vertical">
 
                                 <TextView
+                                    android:id="@+id/tvCaloriesOut"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="300"
                                     android:textSize="24sp"
                                     android:textStyle="bold"
                                     android:layout_gravity="center"/>
@@ -400,18 +403,19 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                                    android:progress="60"
                                     android:min="0"
                                     android:max="100"
+                                    android:progress="44"
                                     android:progressTint="@color/color_carbs"
-                                    android:progressBackgroundTint="#99FF33"/>
+                                    android:progressBackgroundTint="#99FF33"
+                                    android:id="@+id/pgbCarbs"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:textSize="18sp"
-                                    android:text="40/100"/>
+                                    android:id="@+id/tvCarbs"/>
                             </LinearLayout>
 
                             <LinearLayout
@@ -433,9 +437,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                                    android:progress="60"
+                                    android:id="@+id/pgbProtein"
                                     android:min="0"
                                     android:max="100"
+                                    android:progress="23"
                                     android:progressTint="@color/color_protein"
                                     android:progressBackgroundTint="#AB82FF"/>
 
@@ -444,7 +449,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:textSize="18sp"
-                                    android:text="40/100"/>
+                                    android:id="@+id/tvProtein"/>
                             </LinearLayout>
 
                             <LinearLayout
@@ -467,9 +472,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                                    android:progress="60"
+                                    android:id="@+id/pgbFat"
                                     android:min="0"
                                     android:max="100"
+                                    android:progress="34"
                                     android:progressTint="@color/color_fat"
                                     android:progressBackgroundTint="#FF69B4"/>
 
@@ -478,7 +484,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:textSize="18sp"
-                                    android:text="40/100"/>
+                                    android:id="@+id/tvFat"/>
                             </LinearLayout>
                         </GridLayout>
                     </LinearLayout>
@@ -534,13 +540,14 @@
                                     android:textStyle="bold"
                                     android:textSize="22sp"
                                     android:layout_gravity="center"
-                                    android:text="@string/step"/>
+                                    android:text="@string/step"
+                                    android:minLines="2"/>
                             </LinearLayout>
 
                             <com.mikhaellopez.circularprogressbar.CircularProgressBar
                                 android:id="@+id/stepProgressBar"
-                                android:layout_width="140dp"
-                                android:layout_height="140dp"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
                                 app:layout_constraintTop_toBottomOf="@id/ln_footsteps"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -551,7 +558,6 @@
                                 app:cpb_progressbar_width="15dp"
                                 app:cpb_round_border="true"
                                 app:cpb_progress_max="100"
-                                app:cpb_progress="30"
                                 android:layout_marginTop="5dp"/>
 
                             <LinearLayout
@@ -574,19 +580,20 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="100"
                                     android:textSize="20sp"
                                     android:textStyle="bold"
                                     android:layout_marginTop="8dp"
-                                    android:layout_gravity="center"/>
+                                    android:layout_gravity="center"
+                                    android:id="@+id/tvSteps"/>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="/2000"
-                                    android:textSize="16sp" />
+                                    android:textSize="16sp"
+                                    android:id="@+id/tvStepsTarget"/>
                             </LinearLayout>
 
                             <Button
+                                android:id="@+id/btnStepDetail"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="@string/detail"
@@ -633,13 +640,14 @@
                                     android:textStyle="bold"
                                     android:textSize="22sp"
                                     android:layout_gravity="center"
+                                    android:minLines="2"
                                     android:text="@string/drink_water"/>
                             </LinearLayout>
 
                             <com.mikhaellopez.circularprogressbar.CircularProgressBar
                                 android:id="@+id/waterProgressBar"
-                                android:layout_width="140dp"
-                                android:layout_height="140dp"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
                                 app:layout_constraintTop_toBottomOf="@id/ln_water_glass"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -649,8 +657,7 @@
                                 app:cpb_progressbar_color="@color/blue_pastel"
                                 app:cpb_progressbar_width="15dp"
                                 app:cpb_round_border="true"
-                                app:cpb_progress_max="100"
-                                app:cpb_progress="30"
+                                app:cpb_progress_max="8"
                                 android:layout_marginTop="5dp"/>
 
                             <LinearLayout
@@ -673,11 +680,11 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="0"
                                     android:textSize="20sp"
                                     android:textStyle="bold"
                                     android:layout_marginTop="8dp"
-                                    android:layout_gravity="center"/>
+                                    android:layout_gravity="center"
+                                    android:id="@+id/tvCups"/>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"

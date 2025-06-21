@@ -1,235 +1,270 @@
 package com.vanphong.foodnfit.fragment.statistic
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vanphong.foodnfit.Model.DailyCalories
-import com.vanphong.foodnfit.Model.FoodLog
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.vanphong.foodnfit.R
 import com.vanphong.foodnfit.adapter.CaloriesStatisticAdapter
+
 import com.vanphong.foodnfit.databinding.FragmentCaloriesBinding
+import com.vanphong.foodnfit.model.DailyCalorieDataDto
+import com.vanphong.foodnfit.model.MealTypeSummaryDto
+import com.vanphong.foodnfit.model.WeeklyNutritionResponse
+import com.vanphong.foodnfit.util.DialogUtils
 import com.vanphong.foodnfit.viewModel.CaloriesStatisticViewModel
+import java.time.DayOfWeek
+import java.time.Instant
 import java.time.LocalDate
-import java.util.UUID
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.time.temporal.TemporalAdjusters
+import kotlin.math.roundToInt
 
 class CaloriesFragment : Fragment() {
     private var _binding: FragmentCaloriesBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CaloriesStatisticViewModel by viewModels()
     private lateinit var caloriesStatisticAdapter: CaloriesStatisticAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCaloriesBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
-        binding.caloriesViewModel = viewModel
-
-        caloriesStatisticAdapter = CaloriesStatisticAdapter()
-        viewModel.dailyCaloriesList.observe(requireActivity()){dataList ->
-            caloriesStatisticAdapter.submitList(dataList)
-        }
-
-        val data = getData()
-        binding.rvLogs.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvLogs.adapter = caloriesStatisticAdapter
-
-        viewModel.setDailyCaloriesList(data)
-
         return binding.root
     }
 
-    private fun getData(): List<DailyCalories> {
-        val userId = UUID.randomUUID()
-        return listOf(
-            DailyCalories(
-                todayMeal = listOf(
-                    FoodLog(
-                        1,
-                        userId,
-                        350.0,
-                        LocalDate.now().minusDays(4),
-                        15.0,
-                        10.0,
-                        45.0,
-                        "Breakfast",
-                        listOf()
-                    ),
-                    FoodLog(
-                        2,
-                        userId,
-                        600.0,
-                        LocalDate.now().minusDays(4),
-                        25.0,
-                        20.0,
-                        80.0,
-                        "Lunch",
-                        listOf()
-                    ),
-                    FoodLog(
-                        3,
-                        userId,
-                        450.0,
-                        LocalDate.now().minusDays(4),
-                        20.0,
-                        15.0,
-                        60.0,
-                        "Dinner",
-                        listOf()
-                    )
-                )
-            ),
-            DailyCalories(
-                todayMeal = listOf(
-                    FoodLog(
-                        4,
-                        userId,
-                        300.0,
-                        LocalDate.now().minusDays(3),
-                        10.0,
-                        8.0,
-                        40.0,
-                        "Breakfast",
-                        listOf()
-                    ),
-                    FoodLog(
-                        5,
-                        userId,
-                        650.0,
-                        LocalDate.now().minusDays(3),
-                        30.0,
-                        25.0,
-                        90.0,
-                        "Lunch",
-                        listOf()
-                    ),
-                    FoodLog(
-                        6,
-                        userId,
-                        500.0,
-                        LocalDate.now().minusDays(3),
-                        22.0,
-                        18.0,
-                        65.0,
-                        "Dinner",
-                        listOf()
-                    )
-                )
-            ),
-            DailyCalories(
-                todayMeal = listOf(
-                    FoodLog(
-                        7,
-                        userId,
-                        320.0,
-                        LocalDate.now().minusDays(2),
-                        12.0,
-                        9.0,
-                        42.0,
-                        "Breakfast",
-                        listOf()
-                    ),
-                    FoodLog(
-                        8,
-                        userId,
-                        700.0,
-                        LocalDate.now().minusDays(2),
-                        35.0,
-                        30.0,
-                        100.0,
-                        "Lunch",
-                        listOf()
-                    ),
-                    FoodLog(
-                        9,
-                        userId,
-                        480.0,
-                        LocalDate.now().minusDays(2),
-                        20.0,
-                        16.0,
-                        60.0,
-                        "Dinner",
-                        listOf()
-                    )
-                )
-            ),
-            DailyCalories(
-                todayMeal = listOf(
-                    FoodLog(
-                        10,
-                        userId,
-                        330.0,
-                        LocalDate.now().minusDays(1),
-                        14.0,
-                        9.0,
-                        41.0,
-                        "Breakfast",
-                        listOf()
-                    ),
-                    FoodLog(
-                        11,
-                        userId,
-                        640.0,
-                        LocalDate.now().minusDays(1),
-                        28.0,
-                        22.0,
-                        85.0,
-                        "Lunch",
-                        listOf()
-                    ),
-                    FoodLog(
-                        12,
-                        userId,
-                        510.0,
-                        LocalDate.now().minusDays(1),
-                        23.0,
-                        19.0,
-                        70.0,
-                        "Dinner",
-                        listOf()
-                    )
-                )
-            ),
-            DailyCalories(
-                todayMeal = listOf(
-                    FoodLog(
-                        13,
-                        userId,
-                        340.0,
-                        LocalDate.now(),
-                        13.0,
-                        10.0,
-                        43.0,
-                        "Breakfast",
-                        listOf()
-                    ),
-                    FoodLog(
-                        14,
-                        userId,
-                        670.0,
-                        LocalDate.now(),
-                        32.0,
-                        27.0,
-                        95.0,
-                        "Lunch",
-                        listOf()
-                    ),
-                    FoodLog(
-                        15,
-                        userId,
-                        490.0,
-                        LocalDate.now(),
-                        21.0,
-                        17.0,
-                        62.0,
-                        "Dinner",
-                        listOf()
-                    )
-                )
-            )
-        )
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.caloriesViewModel = viewModel
+
+        setupRecyclerView()
+        setupClickListeners()
+        observeViewModel()
+    }
+
+    private fun setupRecyclerView() {
+        caloriesStatisticAdapter = CaloriesStatisticAdapter()
+        binding.rvLogs.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvLogs.adapter = caloriesStatisticAdapter
+    }
+
+    private fun setupClickListeners() {
+        binding.btnPreviousWeek.setOnClickListener {
+            viewModel.onPreviousWeekClicked()
+        }
+        binding.btnNextWeek.setOnClickListener {
+            viewModel.onNextWeekClicked()
+        }
+        binding.tvWeekDisplay.setOnClickListener {
+            showDatePicker()
+        }
+    }
+
+    // Trong file CaloriesFragment.kt
+
+    private fun observeViewModel() {
+        viewModel.selectedDate.observe(viewLifecycleOwner) { date ->
+            updateWeekDisplay(date)
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                DialogUtils.showLoadingDialog(requireActivity(), getString(R.string.loading))
+            } else {
+                DialogUtils.hideLoadingDialog()
+            }
+        }
+
+        viewModel.weeklyNutritionData.observe(viewLifecycleOwner) { data ->
+            data?.let {
+                updateUi(it)
+            }
+        }
+
+        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+                binding.tvTotalWeeklyCalories.text = "Error"
+                resetUi()
+            }
+        }
+
+        viewModel.isEmpty.observe(viewLifecycleOwner) { isEmpty ->
+            if (isEmpty) {
+                resetUi() // Dọn dẹp giao diện
+            }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun resetUi() {
+        Log.d("CaloriesFragment", "Resetting UI to initial state.")
+        binding.tvTotalWeeklyCalories.text = "0 kcal"
+
+        // Reset thông tin các bữa ăn
+        binding.tvCaloBreakfast.text = "0"
+        binding.tvPercentBreakfast.text = "0%"
+        binding.progressBreakfast.progress = 0
+
+        binding.tvCaloLunch.text = "0"
+        binding.tvPercentLunch.text = "0%"
+        binding.progressLunch.progress = 0
+
+        binding.tvCaloDinner.text = "0"
+        binding.tvPercentDinner.text = "0%"
+        binding.progressDinner.progress = 0
+
+        binding.tvCaloSnack.text = "0"
+        binding.tvPercentSnack.text = "0%"
+        binding.progressSnack.progress = 0
+
+        // Xóa dữ liệu của biểu đồ
+        binding.lineChart.clear()
+        binding.lineChart.invalidate()
+
+        // Xóa dữ liệu của RecyclerView
+        caloriesStatisticAdapter.submitList(emptyList())
+    }
+
+    private fun updateUi(data: WeeklyNutritionResponse) {
+        // Cập nhật tổng calories tuần
+        binding.tvTotalWeeklyCalories.text = "${data.totalWeeklyCalories.roundToInt()} kcal"
+
+        // Cập nhật thông tin các bữa ăn
+        updateMealSummaries(data.mealSummaries)
+
+        // Cập nhật RecyclerView logs
+        caloriesStatisticAdapter.submitList(data.dailyCalorieChartData)
+
+        // Cập nhật biểu đồ LineChart
+        setupLineChart(data.dailyCalorieChartData)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun updateMealSummaries(summaries: List<MealTypeSummaryDto>) {
+        summaries.forEach { summary ->
+            when (summary.mealType.uppercase()) {
+                "BREAKFAST" -> {
+                    binding.tvCaloBreakfast.text = summary.totalCalories.roundToInt().toString()
+                    binding.tvPercentBreakfast.text = "${summary.percentage.roundToInt()}%"
+                    binding.progressBreakfast.progress = summary.percentage.roundToInt()
+                }
+                "LUNCH" -> {
+                    binding.tvCaloLunch.text = summary.totalCalories.roundToInt().toString()
+                    binding.tvPercentLunch.text = "${summary.percentage.roundToInt()}%"
+                    binding.progressLunch.progress = summary.percentage.roundToInt()
+                }
+                "DINNER" -> {
+                    binding.tvCaloDinner.text = summary.totalCalories.roundToInt().toString()
+                    binding.tvPercentDinner.text = "${summary.percentage.roundToInt()}%"
+                    binding.progressDinner.progress = summary.percentage.roundToInt()
+                }
+                "SNACK" -> {
+                    binding.tvCaloSnack.text = summary.totalCalories.roundToInt().toString()
+                    binding.tvPercentSnack.text = "${summary.percentage.roundToInt()}%"
+                    binding.progressSnack.progress = summary.percentage.roundToInt()
+                }
+            }
+        }
+    }
+
+    private fun setupLineChart(dailyData: List<DailyCalorieDataDto>) {
+        val entries = dailyData.mapIndexed { index, data ->
+            Entry(index.toFloat(), data.totalCalories.toFloat())
+        }
+
+        val dataSet = LineDataSet(entries, "Daily Calories").apply {
+            color = ContextCompat.getColor(requireContext(), android.R.color.holo_red_dark)
+            valueTextColor = Color.BLACK
+            lineWidth = 2f
+            setCircleColor(color)
+            circleRadius = 4f
+            setDrawCircleHole(false)
+            setDrawValues(false) // Không hiển thị giá trị trên các điểm
+            mode = LineDataSet.Mode.CUBIC_BEZIER // Bo tròn đường kẻ
+        }
+
+        val lineData = LineData(dataSet)
+        binding.lineChart.apply {
+            data = lineData
+            description.isEnabled = false
+            legend.isEnabled = false
+            axisRight.isEnabled = false
+
+            xAxis.apply {
+                position = XAxis.XAxisPosition.BOTTOM
+                granularity = 1f
+                setDrawGridLines(false)
+                valueFormatter = object : ValueFormatter() {
+                    private val days = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+                    override fun getAxisLabel(value: Float, axis: com.github.mikephil.charting.components.AxisBase?): String {
+                        return days.getOrNull(value.toInt()) ?: ""
+                    }
+                }
+            }
+            invalidate() // Refresh chart
+        }
+    }
+
+    private fun updateWeekDisplay(date: LocalDate) {
+        val startOfWeek = date.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+        val endOfWeek = date.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY))
+        val formatter = DateTimeFormatter.ofPattern("MMM dd")
+        val weekText = if (startOfWeek.year == endOfWeek.year) {
+            "${startOfWeek.format(formatter)} - ${endOfWeek.format(formatter)}, ${startOfWeek.year}"
+        } else {
+            "${startOfWeek.format(DateTimeFormatter.ofPattern("MMM dd, yyyy"))} - ${endOfWeek.format(DateTimeFormatter.ofPattern("MMM dd, yyyy"))}"
+        }
+        binding.tvWeekDisplay.text = weekText
+    }
+
+    private fun showDatePicker() {
+        val selectedDateInMillis = viewModel.selectedDate.value
+            ?.atStartOfDay(ZoneId.systemDefault())
+            ?.toInstant()
+            ?.toEpochMilli()
+            ?: Instant.now().toEpochMilli()
+
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("Select date")
+            .setSelection(selectedDateInMillis)
+            .build()
+
+        datePicker.addOnPositiveButtonClickListener { selection ->
+            val selectedLocalDate = Instant.ofEpochMilli(selection)
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate()
+            viewModel.onDateSelected(selectedLocalDate)
+        }
+
+        datePicker.show(parentFragmentManager, "DATE_PICKER")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshToCurrentDate()
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

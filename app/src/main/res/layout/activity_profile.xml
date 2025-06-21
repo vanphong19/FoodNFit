@@ -5,6 +5,12 @@
     android:id="@+id/main"
     tools:context=".activity.ProfileActivity">
 
+    <data>
+        <variable
+            name="profileViewModel"
+            type="com.vanphong.foodnfit.viewModel.ProfileViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,14 +72,14 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Đỗ Văn Phong"
+                                android:text="@{profileViewModel.name}"
                                 android:textStyle="bold"
                                 android:textSize="20sp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="abc@gmail.com"
+                                android:text="@{profileViewModel.email}"
                                 android:layout_marginTop="2dp"
                                 />
                         </LinearLayout>
@@ -140,7 +146,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Giảm cân"
+                                android:text="@{profileViewModel.mealGoal}"
                                 android:layout_marginTop="2dp"
                                 />
                         </LinearLayout>
@@ -178,7 +184,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/exercise_food"
+                                android:text="@string/exercise_goal"
                                 android:textStyle="bold"
                                 android:textSize="20sp"/>
 
@@ -186,7 +192,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
-                                android:text="Tăng cơ" />
+                                android:text="@{profileViewModel.exerciseGoal}" />
                         </LinearLayout>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
@@ -251,7 +257,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="35 yo"
+                                android:text="@{profileViewModel.age}"
                                 android:layout_marginTop="2dp"
                                 />
                         </LinearLayout>
@@ -296,7 +302,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="170 cm"
+                                android:text="@{profileViewModel.height}"
                                 android:layout_marginTop="2dp"
                                 />
                         </LinearLayout>
@@ -341,7 +347,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="62 kg"
+                                android:text="@{profileViewModel.weight}"
                                 android:layout_marginTop="2dp"
                                 />
                         </LinearLayout>
@@ -385,9 +391,9 @@
                                 android:textSize="20sp"/>
 
                             <TextView
+                                android:id="@+id/textGender"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/male"
                                 android:layout_marginTop="2dp"
                                 />
                         </LinearLayout>

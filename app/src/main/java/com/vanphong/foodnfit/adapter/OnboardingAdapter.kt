@@ -4,9 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.vanphong.foodnfit.Model.OnboardingItem
+import com.vanphong.foodnfit.model.OnboardingItem
 import com.vanphong.foodnfit.R
 
 class OnboardingAdapter(private val items: List<OnboardingItem>) :

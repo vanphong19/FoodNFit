@@ -1,12 +1,11 @@
 package com.vanphong.foodnfit.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vanphong.foodnfit.Model.OtpVerificationRequest
-import com.vanphong.foodnfit.Model.ResendOtpRequest
+import com.vanphong.foodnfit.model.OtpVerificationRequest
+import com.vanphong.foodnfit.model.ResendOtpRequest
 import com.vanphong.foodnfit.network.RetrofitClient
 import com.vanphong.foodnfit.repository.AuthRepository
 import kotlinx.coroutines.launch

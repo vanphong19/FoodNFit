@@ -3,7 +3,7 @@ package com.vanphong.foodnfit.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vanphong.foodnfit.Model.UserProfiles
+import com.vanphong.foodnfit.model.UserProfiles
 
 class StatisticViewModel: ViewModel() {
     private val _weightData = MutableLiveData<List<UserProfiles>>()

@@ -7,10 +7,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vanphong.foodnfit.Model.WorkoutPlan
+import com.vanphong.foodnfit.model.WorkoutPlan
 import com.vanphong.foodnfit.R
+import com.vanphong.foodnfit.model.DailyCaloriesExerciseDto
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import kotlin.math.roundToInt
 
-class WorkoutLogAdapter: ListAdapter<WorkoutPlan, WorkoutLogAdapter.WorkoutLogViewHolder>(WorkoutLogDiffCallback()) {
+class WorkoutLogAdapter: ListAdapter<DailyCaloriesExerciseDto, WorkoutLogAdapter.WorkoutLogViewHolder>(WorkoutLogDiffCallback()) {
     class WorkoutLogViewHolder(private val itemView: View): RecyclerView.ViewHolder(itemView) {
         val tvWorkoutDate: TextView = itemView.findViewById(R.id.tvWorkoutDate)
         val tvExerciseCount: TextView = itemView.findViewById(R.id.tvExerciseCount)
@@ -25,17 +29,20 @@ class WorkoutLogAdapter: ListAdapter<WorkoutPlan, WorkoutLogAdapter.WorkoutLogVi
     override fun onBindViewHolder(holder: WorkoutLogViewHolder, position: Int) {
         val workout = getItem(position)
 
-        holder.tvWorkoutDate.text = workout.date.toString()
+        val date = LocalDate.parse(workout.date)
+        val formatter = DateTimeFormatter.ofPattern("EEE, dd MMM")
+        holder.tvWorkoutDate.text = date.format(formatter)
+
         holder.tvExerciseCount.text = workout.exerciseCount.toString()
-        holder.tvExerciseBurnt.text = workout.caloriesBurnt.toString()
+        holder.tvExerciseBurnt.text = workout.totalCalories.roundToInt().toString()
     }
 }
-class WorkoutLogDiffCallback: DiffUtil.ItemCallback<WorkoutPlan>(){
-    override fun areItemsTheSame(oldItem: WorkoutPlan, newItem: WorkoutPlan): Boolean {
-        return oldItem.id == newItem.id
+class WorkoutLogDiffCallback: DiffUtil.ItemCallback<DailyCaloriesExerciseDto>(){
+    override fun areItemsTheSame(oldItem: DailyCaloriesExerciseDto, newItem: DailyCaloriesExerciseDto): Boolean {
+        return oldItem.date == newItem.date
     }
 
-    override fun areContentsTheSame(oldItem: WorkoutPlan, newItem: WorkoutPlan): Boolean {
+    override fun areContentsTheSame(oldItem: DailyCaloriesExerciseDto, newItem: DailyCaloriesExerciseDto): Boolean {
         return oldItem == newItem
     }
 }

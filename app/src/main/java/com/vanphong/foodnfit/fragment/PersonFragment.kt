@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.vanphong.foodnfit.R
+import com.vanphong.foodnfit.activity.FeedbackActivity
 import com.vanphong.foodnfit.activity.ProfileActivity
 import com.vanphong.foodnfit.activity.SettingActivity
 import com.vanphong.foodnfit.activity.SignInActivity
@@ -35,6 +36,11 @@ class PersonFragment : Fragment() {
         // Giả sử bạn có nút logout trong layout với id logoutButton
         binding.logoutButton.setOnClickListener {
             viewModel.onClickLogout(requireContext())
+        }
+
+        binding.layoutFeedback.setOnClickListener {
+            val intent = Intent(requireContext(), FeedbackActivity::class.java)
+            startActivity(intent)
         }
 
         return binding.root

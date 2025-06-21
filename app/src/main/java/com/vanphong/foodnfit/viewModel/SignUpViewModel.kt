@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.vanphong.foodnfit.Model.RegisterRequest
+import com.vanphong.foodnfit.model.RegisterRequest
 import com.vanphong.foodnfit.network.RetrofitClient
 import com.vanphong.foodnfit.repository.AuthRepository
 import com.vanphong.foodnfit.util.isEmailValid

@@ -222,7 +222,7 @@
                                     android:layout_height="wrap_content"
                                     android:textStyle="bold"
                                     android:textSize="24sp"
-                                    android:text="1698"/>
+                                    android:id="@+id/tv_current_calories"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -235,7 +235,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="of 2598 kcal"
+                                android:id="@+id/tv_target_calories"
                                 android:layout_marginTop="2dp"/>
                         </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -266,7 +266,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="134 g"
+                                android:id="@+id/tv_protein_amount"
                                 android:textSize="20sp"
                                 android:textStyle="bold"/>
 
@@ -282,7 +282,7 @@
                                 android:layout_marginTop="5dp"
                                 android:max="100"
                                 android:min="0"
-                                android:progress="19"
+                                android:id="@+id/protein_progress"
                                 android:progressBackgroundTint="#AB82FF"
                                 android:progressTint="@color/color_protein" />
                         </LinearLayout>
@@ -298,7 +298,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="134 g"
+                                android:id="@+id/tv_fat_amount"
                                 android:textSize="20sp"
                                 android:textStyle="bold"/>
 
@@ -314,7 +314,7 @@
                                 android:layout_marginTop="5dp"
                                 android:max="100"
                                 android:min="0"
-                                android:progress="60"
+                                android:id="@+id/fat_progress"
                                 android:progressBackgroundTint="#FF69B4"
                                 android:progressTint="@color/color_fat" />
                         </LinearLayout>
@@ -330,7 +330,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="134 g"
+                                android:id="@+id/tv_carbs_amount"
                                 android:textSize="20sp"
                                 android:textStyle="bold"/>
 
@@ -346,7 +346,7 @@
                                 android:layout_marginTop="5dp"
                                 android:max="100"
                                 android:min="0"
-                                android:progress="20"
+                                android:id="@+id/carbs_progress"
                                 android:progressBackgroundTint="#99FF33"
                                 android:progressTint="@color/color_carbs" />
                         </LinearLayout>
@@ -375,7 +375,7 @@
                         android:padding="32dp"
                         android:background="#99EEEEEE"
                         android:id="@+id/breakfast"
-                        android:onClick="@{() -> foodViewModel.onClickNavigateChooseFood()}">
+                        android:onClick="@{() -> foodViewModel.onClickNavigateChooseFood(`BREAKFAST`)}">
 
                         <ImageView
                             android:layout_width="52dp"
@@ -400,7 +400,6 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="3 Food - 582 Kcal"
                                 android:textSize="18sp"
                                 android:id="@+id/tv_food_breakfast_count"/>
                         </LinearLayout>
@@ -412,7 +411,7 @@
                             android:layout_centerVertical="true"
                             android:layout_alignParentEnd="true"
                             android:src="@drawable/right_arrow_green"
-                            android:onClick="@{() -> foodViewModel.onClickNavigateFoodDetail()}"/>
+                            android:onClick="@{() -> foodViewModel.onBreakfastDetailClicked()}"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -430,7 +429,7 @@
                         android:padding="32dp"
                         android:background="#99EEEEEE"
                         android:id="@+id/lunch"
-                        android:onClick="@{() -> foodViewModel.onClickNavigateChooseFood()}">
+                        android:onClick="@{() -> foodViewModel.onClickNavigateChooseFood(`LUNCH`)}">
 
                         <ImageView
                             android:layout_width="52dp"
@@ -457,7 +456,6 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0 Food - 0 Kcal"
                                 android:textSize="18sp"
                                 android:id="@+id/tv_food_lunch_count"/>
                         </LinearLayout>
@@ -469,7 +467,7 @@
                             android:layout_centerVertical="true"
                             android:layout_alignParentEnd="true"
                             android:src="@drawable/right_arrow_green"
-                            android:onClick="@{() -> foodViewModel.onClickNavigateFoodDetail()}"/>
+                            android:onClick="@{() -> foodViewModel.onLunchDetailClicked()}"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -487,7 +485,7 @@
                         android:padding="32dp"
                         android:background="#99EEEEEE"
                         android:id="@+id/dinner"
-                        android:onClick="@{() -> foodViewModel.onClickNavigateChooseFood()}">
+                        android:onClick="@{() -> foodViewModel.onClickNavigateChooseFood(`DINNER`)}">
 
                         <ImageView
                             android:layout_width="52dp"
@@ -514,7 +512,6 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2 Food - 1000 Kcal"
                                 android:textSize="18sp"
                                 android:id="@+id/tv_food_dinner_count"/>
                         </LinearLayout>
@@ -526,7 +523,7 @@
                             android:layout_centerVertical="true"
                             android:layout_alignParentEnd="true"
                             android:src="@drawable/right_arrow_green"
-                            android:onClick="@{() -> foodViewModel.onClickNavigateFoodDetail()}"/>
+                            android:onClick="@{() -> foodViewModel.onDinnerDetailClicked()}"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -545,7 +542,7 @@
                         android:padding="32dp"
                         android:background="#99EEEEEE"
                         android:id="@+id/snack"
-                        android:onClick="@{() -> foodViewModel.onClickNavigateChooseFood()}">
+                        android:onClick="@{() -> foodViewModel.onClickNavigateChooseFood(`SNACK`)}">
 
                         <ImageView
                             android:layout_width="52dp"
@@ -572,7 +569,6 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2 Food - 1000 Kcal"
                                 android:textSize="18sp"
                                 android:id="@+id/tv_food_snack_count"/>
                         </LinearLayout>
@@ -584,7 +580,7 @@
                             android:layout_centerVertical="true"
                             android:layout_alignParentEnd="true"
                             android:src="@drawable/right_arrow_green"
-                            android:onClick="@{() -> foodViewModel.onClickNavigateFoodDetail()}"/>
+                            android:onClick="@{() -> foodViewModel.onSnackDetailClicked()}"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
